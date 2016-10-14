@@ -1,0 +1,85 @@
+﻿@model Alvo.ViewModels.CandidatoProcessoSeletivoViewModel
+@{
+    ViewBag.Modulo = "Avaliação";
+    ViewBag.Title = "Distribuição";
+}
+<p>&nbsp;</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.Label("Processo Seletivo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProcessoSeletivo.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdProcessoSeletivo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Candidato", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Candidato.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Candidato.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tema do Projeto", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TemaProjeto, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TemaProjeto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Descrição do tema", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.DescricaoTema, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DescricaoTema, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="group background-cinza">
+            <div class="group">
+                <div class="row">
+                    <div class="col-md-5 col-sm-5">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div>
+                                @Html.Label("Área de Concentracao", htmlAttributes: new { @class = "control-label " })
+                                @*@Html.DropDownList("AreasConcentracao", null, "Selecione", new { @class = "js-example-basic-single js-states form-control select2-hidden-accessible"})<br />*@
+                                @Html.DropDownList("AreasConcentracao", null, "Selecione", new { @class = "js-example-basic-single js-states form-control" })<br />
+
+                                @*@Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-sm-5">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div>
+                                @Html.Label("Área de Concentracao", htmlAttributes: new { @class = "control-label " })
+                                @*@Html.DropDownList("Professores", null, "Selecione", new { @class = "js-example-basic-single js-states form-control select2-hidden-accessible"})<br />*@
+                                @Html.DropDownList("Professores", null, "Selecione", new { @class = "js-example-basic-single js-states form-control" })<br />
+
+                                @*@Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            @Html.ActionLink("Voltar", "Distribuicao", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

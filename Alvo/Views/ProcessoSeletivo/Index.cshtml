@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Alvo.ViewModels.ProcessoSeletivoViewModel>
+
+@{
+    ViewBag.Modulo = "Processo Seletivo";
+    ViewBag.Title = "Pesquisa";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="group background-cinza">
+        <div class="row ">
+            <div class="col-md-5 col-sm-5">
+                @Html.Label("Combo: ", htmlAttributes: new { @class = "control-label " })
+                @Html.RadioButton("IdTodos", "0", false, new { @Id = "COmbo", @class = "radio-inline" }) @Html.Raw("Todos ")
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Pesquisar" class="btn btn-primary" />
+            @Html.ActionLink("Novo", "Create", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+<table id="dvData" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Raw("Título")
+            </th>
+            <th>
+                @Html.Raw("Número Edital")
+            </th>
+            <th>
+                @Html.Raw("DataInicio")
+            </th>
+            <th>
+                @Html.Raw("Data Fim")
+            </th>
+            <th>
+                @Html.Raw("Liberado")
+            </th>
+            <th>
+                @Html.Raw("Ativo")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroEdital)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataFim)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Liberado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit", title = "Editar" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-search", title = "Detalhes" }) |
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-remove-circle", title = "Excluir" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

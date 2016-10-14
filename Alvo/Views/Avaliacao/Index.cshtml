@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Alvo.ViewModels.CandidatoProcessoSeletivoViewModel>
+
+@{
+    ViewBag.Modulo = "Avaliação";
+    ViewBag.Title = "Pesquisa";
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <input type="submit" value="Pesquisar" class="btn btn-primary" />
+        @Html.ActionLink("Novo", "Create", "", new { @class = "btn btn-primary" })
+    </div>
+</div>
+<p>&nbsp;</p>
+<table id="dvData" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.Raw("Processo Seletivo")
+            </th>
+            <th>
+                @Html.Raw("Candidato")
+            </th>
+            <th>
+                @Html.Raw("Tema do Projeto")
+            </th>
+            <th>
+                @Html.Raw("Área de Concentração")
+            </th>
+            <th>
+                @Html.Raw("Professor")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Candidato.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemaProjeto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreaConcentracao.Nome)
+                </td>
+                <td>
+                    @Html.Raw("Nome Do professor")
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit", title = "Editar" }) |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,54 @@
+﻿@model Alvo.ViewModels.CandidatoViewModel
+
+@{
+    ViewBag.Modulo = "Candidato";
+    ViewBag.Title = "Excluir";}
+
+<h3>Você tem certeza que deseja excluir este candidato?</h3>
+<div>
+    <h4>CandidatoViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataNascimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RG)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

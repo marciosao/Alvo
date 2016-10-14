@@ -1,0 +1,58 @@
+﻿@model Alvo.ViewModels.QuestaoViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QuestaoViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdTipoQuestao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdTipoQuestao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdCategoriaQuestao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdCategoriaQuestao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdQuestionario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdQuestionario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorBarema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorBarema)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

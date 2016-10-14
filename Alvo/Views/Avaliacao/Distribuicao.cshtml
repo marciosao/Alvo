@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Alvo.ViewModels.CandidatoProcessoSeletivoViewModel>
+
+@{
+    ViewBag.Modulo = "Avaliação";
+    ViewBag.Title = "Distribuição";
+}
+<p>&nbsp;</p>
+<table id="dvData" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("ProcessoSeletivo")
+            </th>
+            <th>
+                @Html.DisplayName("Candidato")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Candidato.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "EditDistribuicao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-transfer", title = "Selecionar Professor, Área de Atuação" }) |
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-search", title = "Detalhes" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

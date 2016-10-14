@@ -1,0 +1,5 @@
+C:\inetpub\wwwroot\Alvo\Dominio\bin\Debug\Dominio.dll
+C:\inetpub\wwwroot\Alvo\Dominio\bin\Debug\Dominio.pdb
+C:\inetpub\wwwroot\Alvo\Dominio\obj\Debug\Dominio.dll
+C:\inetpub\wwwroot\Alvo\Dominio\obj\Debug\Dominio.pdb
+C:\inetpub\wwwroot\Alvo\Dominio\obj\Debug\Dominio.csprojResolveAssemblyReference.cache

@@ -1,0 +1,51 @@
+﻿@model Alvo.ViewModels.CandidatoViewModel
+
+@{
+    ViewBag.Modulo = "Candidato";
+    ViewBag.Title = "Novo/Importação";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CPF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CPF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataNascimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RG)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        @Html.ActionLink("Alterar", "Edit", "", new { @class = "btn btn-primary", id = Model.Id })
+        @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+    </div>
+</div>

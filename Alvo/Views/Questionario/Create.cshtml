@@ -1,0 +1,54 @@
+﻿@model Alvo.ViewModels.QuestionarioViewModel
+
+@{
+    ViewBag.Modulo = "Questionário";
+    ViewBag.Title = "Novo";
+}
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <fieldset id="fdsQuestionario">
+            <div class="group">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div>
+                                @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("Ativo", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.Ativo)
+                                @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset id="fdsQuestoes">
+            <legend>Questões</legend>
+                @Html.Partial("~/Views/Questao/_PartialCreateQuestao.cshtml")
+        </fieldset>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/Views/Questao/questao.js"></script>
+}
