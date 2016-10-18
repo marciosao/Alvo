@@ -203,6 +203,7 @@ CREATE TABLE Candidato
 	RG VARCHAR(12),
 	OrgaoExpedidor VARCHAR(15),
 	CotaNegros BOOL,
+	CotaIndigena BOOL,
 	LinguaEstrangeira VARCHAR(50),
 	Endereco VARCHAR(100),
 	Bairro VARCHAR(50),

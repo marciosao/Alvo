@@ -15,12 +15,14 @@ namespace Aplicacao
     {
         private readonly ICandidatoServico _candidatoServico;
         private readonly ICandidatoProcessoSeletivoServico _candidatoProcessoSeletivoServico;
+        private readonly IAreaConcentracaoServico _areaConcentracaoServico;
 
-        public CandidatoAppServico(ICandidatoServico candidatoServico, ICandidatoProcessoSeletivoServico candidatoProcessoSeletivoServico)
+        public CandidatoAppServico(ICandidatoServico candidatoServico, ICandidatoProcessoSeletivoServico candidatoProcessoSeletivoServico, IAreaConcentracaoServico areaConcentracaoServico)
             : base(candidatoServico)
         {
             _candidatoServico = candidatoServico;
             _candidatoProcessoSeletivoServico = candidatoProcessoSeletivoServico;
+            _areaConcentracaoServico = areaConcentracaoServico;
         }
 
         public void ImportarCandidatos(int pIdProcessoSeletivo, string pCaminhoArquivo)
@@ -36,6 +38,7 @@ namespace Aplicacao
                 {
                     //Verificando se já existe um candidado com o mesmo cpf para o processo seletivo. Se existir o candidato não deverá ser importado
                     var lCandidatoExistente = this.ObtemCandidatoPorProcessoCPF(pIdProcessoSeletivo, item.CPF);
+                    ////////var lAreaConcentracao = ObtemAreaConcentracaoPorNome();
 
                     if (lCandidatoExistente == null)
                     {
@@ -76,8 +79,33 @@ namespace Aplicacao
 
                     lCandidato.Nome = item.ItemArray[0].ToString().Trim();
                     lCandidato.CPF = item.ItemArray[1].ToString().Trim();
-                    lCandidato.DataNascimento = DateTime.Parse(item.ItemArray[2].ToString().Trim()).Date;
-                    lCandidato.RG = item.ItemArray[3].ToString().Trim();
+                    lCandidato.RG = item.ItemArray[2].ToString().Trim();
+                    lCandidato.OrgaoExpedidor = item.ItemArray[3].ToString().Trim();
+                    lCandidato.DataNascimento = DateTime.Parse(item.ItemArray[4].ToString().Trim()).Date;
+                    lCandidato.CotaNegros =  (item.ItemArray[5].ToString().Trim().Equals("Sim")?true:false);
+                    lCandidato.CotaIndigena = (item.ItemArray[6].ToString().Trim().Equals("Sim") ? true : false);
+                    lCandidato.LinguaEstrangeira = item.ItemArray[7].ToString().Trim();
+
+                    CandidatoProcessoSeletivo lCandidatoProcessoSeletivo = new CandidatoProcessoSeletivo();
+                    lCandidatoProcessoSeletivo.AreaConcentracao = _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(item.ItemArray[8].ToString().Trim());
+
+                    if (lCandidatoProcessoSeletivo.AreaConcentracao != null)
+                    {
+                        lCandidato.CandidatoProcessoSeletivo.Add(lCandidatoProcessoSeletivo);
+                    }
+
+                    lCandidato.Endereco = item.ItemArray[9].ToString().Trim();
+                    lCandidato.Bairro = item.ItemArray[10].ToString().Trim();
+                    lCandidato.Cidade = item.ItemArray[11].ToString().Trim();
+                    lCandidato.Estado = item.ItemArray[12].ToString().Trim();
+                    lCandidato.CEP = item.ItemArray[13].ToString().Trim();
+                    lCandidato.Email = item.ItemArray[14].ToString().Trim();
+                    lCandidato.Telefone = item.ItemArray[15].ToString().Trim();
+                    lCandidato.Celular = item.ItemArray[16].ToString().Trim();
+                    lCandidato.NecessidadesEspeciais = (item.ItemArray[17].ToString().Trim().Equals("Sim") ? true : false);
+                    lCandidato.TipoNecessidade = item.ItemArray[18].ToString().Trim();
+                    lCandidato.Curso = item.ItemArray[19].ToString().Trim();
+                    lCandidato.Instituicao = item.ItemArray[20].ToString().Trim();
 
                     lListaCandidatos.Add(lCandidato);
                 }

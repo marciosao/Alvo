@@ -17,6 +17,7 @@ namespace Dominio.Entidades
         public string RG { get; set; }
         public string OrgaoExpedidor { get; set; }
         public bool CotaNegros { get; set; }
+        public bool CotaIndigena { get; set; }
         public string LinguaEstrangeira { get; set; }
         public string Endereco { get; set; }
         public string Bairro { get; set; }

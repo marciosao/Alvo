@@ -30,6 +30,7 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.RG).HasColumnName("RG");
             this.Property(t => t.OrgaoExpedidor).HasColumnName("OrgaoExpedidor");
             this.Property(t => t.CotaNegros).HasColumnName("CotaNegros");
+            this.Property(t => t.CotaIndigena).HasColumnName("CotaIndigena");
             this.Property(t => t.LinguaEstrangeira).HasColumnName("LinguaEstrangeira");
             this.Property(t => t.Endereco).HasColumnName("Endereco");
             this.Property(t => t.Bairro).HasColumnName("Bairro");

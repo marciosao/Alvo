@@ -34,8 +34,12 @@ namespace Alvo.ViewModels
         [StringLength(15)]
         public string OrgaoExpedidor { get; set; }
 
-        [DisplayName("Cota de Negros")]
+        [DisplayName("Cota Negros")]
         public bool CotaNegros { get; set; }
+
+        [DisplayName("Cota Indigena")]
+        public bool CotaIndigena { get; set; }
+
 
         [DisplayName("Língua Estrangeiro")]
         [StringLength(50)]
