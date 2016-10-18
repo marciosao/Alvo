@@ -39,7 +39,7 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.Email).HasColumnName("Email");
             this.Property(t => t.Telefone).HasColumnName("Telefone");
             this.Property(t => t.Celular).HasColumnName("Celular");
-            this.Property(t => t.NecessidadesEspeciais).HasColumnName("NecessidadesEspeciais ");
+            this.Property(t => t.NecessidadesEspeciais).HasColumnName("NecessidadesEspeciais");
             this.Property(t => t.TipoNecessidade).HasColumnName("TipoNecessidade"); 
             this.Property(t => t.Curso).HasColumnName("Curso");
             this.Property(t => t.Instituicao).HasColumnName("Instituicao");
