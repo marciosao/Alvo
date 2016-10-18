@@ -16,8 +16,6 @@ DROP TABLE IF EXISTS Questao
 ;
 DROP TABLE IF EXISTS Questionario
 ;
-DROP TABLE IF EXISTS Professor
-;
 DROP TABLE IF EXISTS Avaliacao
 ;
 DROP TABLE IF EXISTS AreaConcentracao
@@ -139,23 +137,15 @@ CREATE TABLE Questionario
 ;
 
 
-CREATE TABLE Professor
-(
-	Id INTEGER NOT NULL AUTO_INCREMENT,
-	Nome VARCHAR(50),
-	Matricula VARCHAR(50),
-	PRIMARY KEY (Id)
-) 
-;
-
-
 CREATE TABLE Avaliacao
 (
 	Id INTEGER NOT NULL AUTO_INCREMENT,
 	IdCandidatoProcessoSeletivo INTEGER,
 	IdProfessor INTEGER,
-	Nota DECIMAL(10),
+	NotaFinal DECIMAL(10),
 	DataAvaliacao DATE,
+	Aprovado BOOL,
+	Concluida BOOL,
 	PRIMARY KEY (Id),
 	KEY (IdProfessor)
 ) 
@@ -209,8 +199,23 @@ CREATE TABLE Candidato
 	Id INTEGER NOT NULL AUTO_INCREMENT,
 	Nome VARCHAR(70),
 	CPF VARCHAR(14),
-	DataNascimento VARCHAR(14),
+	DataNascimento DATE,
 	RG VARCHAR(12),
+	OrgaoExpedidor VARCHAR(15),
+	CotaNegros BOOL,
+	LinguaEstrangeira VARCHAR(50),
+	Endereco VARCHAR(100),
+	Bairro VARCHAR(50),
+	Cidade VARCHAR(50),
+	Estado VARCHAR(2),
+	CEP VARCHAR(9),
+	Email VARCHAR(100),
+	Telefone VARCHAR(12),
+	Celular VARCHAR(12),
+	NecessidadesEspeciais BOOL,
+	TipoNecessidade VARCHAR(20),
+	Curso VARCHAR(100),
+	Instituicao VARCHAR(100),
 	PRIMARY KEY (Id)
 ) 
 ;
@@ -253,6 +258,7 @@ CREATE TABLE Usuario
 	Id INTEGER NOT NULL AUTO_INCREMENT,
 	IdPerfil INTEGER,
 	Nome VARCHAR(70),
+	Matricula VARCHAR(50),
 	CPF VARCHAR(12),
 	Email VARCHAR(100),
 	Telefone1 VARCHAR(12),
@@ -309,8 +315,8 @@ ALTER TABLE Questao ADD CONSTRAINT FK_Questao_TipoQuestao
 	FOREIGN KEY (IdTipoQuestao) REFERENCES TipoQuestao (Id)
 ;
 
-ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_Professor 
-	FOREIGN KEY (IdProfessor) REFERENCES Professor (Id)
+ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_UsuarioProfessor 
+	FOREIGN KEY (IdProfessor) REFERENCES Usuario (Id)
 ;
 
 ALTER TABLE CandidatoProcessoSeletivo ADD CONSTRAINT FK_CandiProcSel_AreaConce 
