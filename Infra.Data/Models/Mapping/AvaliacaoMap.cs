@@ -23,7 +23,7 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.Concluido).HasColumnName("Concluido");
 
             // Relationships
-            this.HasOptional(t => t.Professor)
+            this.HasOptional(t => t.Usuario)
                 .WithMany(t => t.Avaliacao)
                 .HasForeignKey(d => d.IdProfessor);
 

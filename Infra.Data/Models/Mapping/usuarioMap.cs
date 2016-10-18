@@ -35,6 +35,7 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.IdPerfil).HasColumnName("IdPerfil");
             this.Property(t => t.Nome).HasColumnName("Nome");
+            this.Property(t => t.Matricula).HasColumnName("Matricula");
             this.Property(t => t.CPF).HasColumnName("CPF");
             this.Property(t => t.Email).HasColumnName("Email");
             this.Property(t => t.Telefone1).HasColumnName("Telefone1");
