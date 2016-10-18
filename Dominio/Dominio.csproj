@@ -52,7 +52,6 @@
     <Compile Include="Entidades\Perfil.cs" />
     <Compile Include="Entidades\PerfilMenu.cs" />
     <Compile Include="Entidades\ProcessoSeletivo.cs" />
-    <Compile Include="Entidades\Professor.cs" />
     <Compile Include="Entidades\Questao.cs" />
     <Compile Include="Entidades\Questionario.cs" />
     <Compile Include="Entidades\RespostaQuestao.cs" />
@@ -71,7 +70,6 @@
     <Compile Include="Interfaces\Repositorios\IPerfilMenuRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IPerfilRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IProcessoSeletivoRepositorio.cs" />
-    <Compile Include="Interfaces\Repositorios\IProfessorRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IQuestaoRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IQuestionarioRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IRepositorioBase.cs" />
@@ -91,7 +89,6 @@
     <Compile Include="Interfaces\Servicos\IPerfilMenuServico.cs" />
     <Compile Include="Interfaces\Servicos\IPerfilServico.cs" />
     <Compile Include="Interfaces\Servicos\IProcessoSeletivoServico.cs" />
-    <Compile Include="Interfaces\Servicos\IProfessorServico.cs" />
     <Compile Include="Interfaces\Servicos\IQuestaoServico.cs" />
     <Compile Include="Interfaces\Servicos\IQuestionarioServico.cs" />
     <Compile Include="Interfaces\Servicos\IRespostaQuestaoServico.cs" />
@@ -112,7 +109,6 @@
     <Compile Include="Servicos\PerfilMenuServico.cs" />
     <Compile Include="Servicos\PerfilServico.cs" />
     <Compile Include="Servicos\ProcessoSeletivoServico.cs" />
-    <Compile Include="Servicos\ProfessorServico.cs" />
     <Compile Include="Servicos\QuestaoServico.cs" />
     <Compile Include="Servicos\QuestionarioServico.cs" />
     <Compile Include="Servicos\RespostaQuestaoServico.cs" />

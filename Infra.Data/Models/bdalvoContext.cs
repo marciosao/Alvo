@@ -29,7 +29,6 @@ namespace Infra.Data.Models
         public DbSet<Perfil> Perfil { get; set; }
         public DbSet<PerfilMenu> PerfilMenu { get; set; }
         public DbSet<ProcessoSeletivo> ProcessoSeletivo { get; set; }
-        public DbSet<Professor> Professor { get; set; }
         public DbSet<Questao> Questao { get; set; }
         public DbSet<Questionario> Questionario { get; set; }
         public DbSet<RespostaQuestao> RespostaQuestao { get; set; }
@@ -51,7 +50,6 @@ namespace Infra.Data.Models
             modelBuilder.Configurations.Add(new PerfilMap());
             modelBuilder.Configurations.Add(new PerfilMenuMap());
             modelBuilder.Configurations.Add(new ProcessoSeletivoMap());
-            modelBuilder.Configurations.Add(new ProfessorMap());
             modelBuilder.Configurations.Add(new QuestaoMap());
             modelBuilder.Configurations.Add(new QuestionarioMap());
             modelBuilder.Configurations.Add(new RespostaQuestaoMap());

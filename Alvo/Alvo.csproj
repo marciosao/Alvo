@@ -186,7 +186,6 @@
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PerfilMenuController.cs" />
     <Compile Include="Controllers\ProcessoSeletivoController.cs" />
-    <Compile Include="Controllers\ProfessorController.cs" />
     <Compile Include="Controllers\QuestaoController.cs" />
     <Compile Include="Controllers\QuestionarioController.cs" />
     <Compile Include="Controllers\RespostaQuestaoController.cs" />
@@ -209,7 +208,6 @@
     <Compile Include="ViewModels\PerfilViewModel.cs" />
     <Compile Include="ViewModels\PerfilMenuViewModel.cs" />
     <Compile Include="ViewModels\ProcessoSeletivoViewModel.cs" />
-    <Compile Include="ViewModels\ProfessorViewModel.cs" />
     <Compile Include="ViewModels\QuestaoViewModel.cs" />
     <Compile Include="ViewModels\QuestionarioViewModel.cs" />
     <Compile Include="ViewModels\RespostaQuestaoViewModel.cs" />
@@ -309,11 +307,6 @@
     <Content Include="Views\ProcessoSeletivo\Create.cshtml" />
     <Content Include="Views\ProcessoSeletivo\Edit.cshtml" />
     <Content Include="Views\ProcessoSeletivo\Delete.cshtml" />
-    <Content Include="Views\Professor\Index.cshtml" />
-    <Content Include="Views\Professor\Edit.cshtml" />
-    <Content Include="Views\Professor\Create.cshtml" />
-    <Content Include="Views\Professor\Details.cshtml" />
-    <Content Include="Views\Professor\Delete.cshtml" />
     <Content Include="Views\Perfil\Index.cshtml" />
     <Content Include="Views\Perfil\Create.cshtml" />
     <Content Include="Views\Perfil\Details.cshtml" />

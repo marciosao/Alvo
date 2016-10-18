@@ -29,7 +29,6 @@ namespace Alvo.AutoMapper
             Mapper.CreateMap<PerfilViewModel, Perfil>();
             Mapper.CreateMap<PerfilMenuViewModel, PerfilMenu>();
             Mapper.CreateMap<ProcessoSeletivoViewModel, ProcessoSeletivo>();
-            Mapper.CreateMap<ProfessorViewModel, Professor>();
             Mapper.CreateMap<QuestaoViewModel, Questao>();
             Mapper.CreateMap<QuestionarioViewModel, Questionario>();
             Mapper.CreateMap<RespostaQuestaoViewModel, RespostaQuestao>();
