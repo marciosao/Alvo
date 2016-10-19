@@ -200,7 +200,7 @@ CREATE TABLE Candidato
 	Nome VARCHAR(70),
 	CPF VARCHAR(14),
 	DataNascimento DATE,
-	RG VARCHAR(12),
+	RG VARCHAR(14),
 	OrgaoExpedidor VARCHAR(15),
 	CotaNegros BOOL,
 	CotaIndigena BOOL,

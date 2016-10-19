@@ -26,8 +26,41 @@ namespace Aplicacao.Util
         {
             new ValidaCsv {Id = 0,  Desc = "Nome",NomeExibicao="NOME", tamanho=70,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA (Não se aplica)"},
             new ValidaCsv {Id = 1,  Desc = "Cpf",NomeExibicao="CPF", tamanho = 14,tipo = "fixo",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
-            new ValidaCsv {Id = 2,  Desc = "DataNascimento",NomeExibicao="DATA DE NASCIMENTO", tamanho= 10,tipo = "fixo",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "Formato dd/mm/aaaa"},
-            new ValidaCsv {Id = 3,  Desc = "Rg",NomeExibicao="RG", tamanho = 12,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 2,  Desc = "Rg",NomeExibicao="RG", tamanho = 12,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 3,  Desc = "OrgaoExpedidor",NomeExibicao="ORGAO EXPEDIDOR", tamanho= 15,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 4,  Desc = "DataNascimento",NomeExibicao="DATA DE NASCIMENTO", tamanho= 10,tipo = "fixo",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "Formato dd/mm/aaaa"},
+
+            //boleano
+            new ValidaCsv {Id = 5,  Desc = "CotaNegros",NomeExibicao="COTA NEGROS", tamanho= 3,tipo = "fixo",obrigatorio = true,TipoExibicao = "Numérico",regra= "1-Sim;|2-Não"},
+            new ValidaCsv {Id = 6,  Desc = "CotaIndigena",NomeExibicao="COTA INDIGENAS", tamanho= 3,tipo = "fixo",obrigatorio = true,TipoExibicao = "Numérico",regra= "1-Sim;|2-Não"},
+            
+            new ValidaCsv {Id = 7,  Desc = "LinguaEstrangeira",NomeExibicao="LINGUA ESTRANGEIRA", tamanho= 50,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            
+            //inteiro/objeto
+            new ValidaCsv {Id = 8,  Desc = "IdAreaConcentracao",NomeExibicao="LINHA PESQUISA", tamanho= 50,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+
+            new ValidaCsv {Id = 9,  Desc = "Endereco",NomeExibicao="ENDERECO", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 10,  Desc = "Bairro",NomeExibicao="BAIRRO", tamanho= 50,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 11,  Desc = "Cidade",NomeExibicao="CIDADE", tamanho= 50,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 12,  Desc = "Estado",NomeExibicao="ESTADO", tamanho= 2,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 13,  Desc = "CEP",NomeExibicao="CEP", tamanho= 9,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 14,  Desc = "Email",NomeExibicao="E-MAIL", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 15,  Desc = "Telefone",NomeExibicao="TELEFONE", tamanho= 12,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 16,  Desc = "Celular",NomeExibicao="CELULAR", tamanho= 12,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            
+            //boleano
+            new ValidaCsv {Id = 17,  Desc = "NecessidadesEspeciais",NomeExibicao="NECESSIDADES ESPECIAIS", tamanho= 3,tipo = "fixo",obrigatorio = true,TipoExibicao = "Numérico",regra= "1-Sim;|2-Não"},
+
+            new ValidaCsv {Id = 18,  Desc = "TipoNecessidade",NomeExibicao="TIPO NECESSIDADES ESPECIAIS", tamanho= 20,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 19,  Desc = "Curso",NomeExibicao="CURSO", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 20,  Desc = "Instituicao",NomeExibicao="INSTITUICAO", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+
+
+
+
+
+            //new ValidaCsv {Id = 3,  Desc = "DataNascimento",NomeExibicao="DATA DE NASCIMENTO", tamanho= 10,tipo = "fixo",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "Formato dd/mm/aaaa"},
+            
         };
     }
 }
