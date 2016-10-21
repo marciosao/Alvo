@@ -1,6 +1,7 @@
 ﻿using Dominio.Entidades;                                            
 using Dominio.Interfaces.Repositorios;                             
-using Dominio.Interfaces.Servicos;                                 
+using Dominio.Interfaces.Servicos;
+using System.Collections.Generic;
                                                                                    
 namespace Dominio.Servicos                                         
 {                                                                                  
@@ -15,9 +16,15 @@ namespace Dominio.Servicos
         }
 
 
-        public System.Collections.Generic.IEnumerable<CandidatoProcessoSeletivo> ObtemTodosSemAvaliacao()
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemTodosSemAvaliacao()
         {
             return _candidatoProcessoSeletivoRepositorio.ObtemTodosSemAvaliacao();
+        }
+
+
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor)
+        {
+            return _candidatoProcessoSeletivoRepositorio.ObtemAvaliacoesPorProfessor(pIdProfessor);
         }
     }                                                                              
 }                                                                                  

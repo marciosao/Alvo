@@ -13,13 +13,13 @@ namespace Alvo.Controllers
     public class AvaliacaoController : Controller
     {
         private readonly IAvaliacaoAppServico _avaliacaoAppServico;
-        private readonly IProfessorAppServico _professorAppServico;
+        private readonly IUsuarioAppServico _usuarioAppServico;
         private readonly ICandidatoProcessoSeletivoAppServico _candidatoProcessoSeletivoAppServico;
         private readonly IAreaConcentracaoAppServico _areaConcentracaoAppServico;
-        public AvaliacaoController(IAvaliacaoAppServico avaliacaoAppServico, IProfessorAppServico professorAppServico, ICandidatoProcessoSeletivoAppServico candidatoProcessoSeletivoAppServico, IAreaConcentracaoAppServico areaConcentracaoAppServico)
+        public AvaliacaoController(IAvaliacaoAppServico avaliacaoAppServico, IUsuarioAppServico usuarioAppServico, ICandidatoProcessoSeletivoAppServico candidatoProcessoSeletivoAppServico, IAreaConcentracaoAppServico areaConcentracaoAppServico)
         {
             _avaliacaoAppServico = avaliacaoAppServico;
-            _professorAppServico = professorAppServico;
+            _usuarioAppServico = usuarioAppServico;
             _candidatoProcessoSeletivoAppServico = candidatoProcessoSeletivoAppServico;
             _areaConcentracaoAppServico = areaConcentracaoAppServico;
         }
@@ -27,7 +27,11 @@ namespace Alvo.Controllers
         // GET: Avaliacao
         public ActionResult Index()
         {
-            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemTodos());
+            // variável para teste..  pegar o usuário logado no sistema
+            int lUsuario = 3;
+            
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario));
+            
             return View(candidatoProcessoSeletivoViewModel);
         }
 
@@ -43,19 +47,22 @@ namespace Alvo.Controllers
             var candidatoProcessoSeletivo = _candidatoProcessoSeletivoAppServico.ObtemPorId(id);
             var candidatoProcessoSeletivoViewModel = Mapper.Map<CandidatoProcessoSeletivo, CandidatoProcessoSeletivoViewModel>(candidatoProcessoSeletivo);
 
-            ViewBag.AreasConcentracao = new SelectList(_areaConcentracaoAppServico.ObtemTodos(), "Id", "Nome");
-            ViewBag.Professores = new SelectList(_professorAppServico.ObtemTodos(), "Id", "Nome");
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome");//Usuario com perfil de Professor
 
             return View(candidatoProcessoSeletivoViewModel);
         }
 
         [HttpPost]
-        public ActionResult EditDistribuicao(FormCollection formulario)
+        public ActionResult EditDistribuicao(CandidatoProcessoSeletivoViewModel pCandidatoProcessoSeletivo, FormCollection formulario)
         {
-            int area = int.Parse(ViewBag.AreasConcentracao);
-            int prof = int.Parse(ViewBag.Professores);
-            return View("Distribuicao");
+            int lIdProfessor = Convert.ToInt32(formulario["IdProfessor"]);
 
+            if (ModelState.IsValid)
+            {
+                _candidatoProcessoSeletivoAppServico.DistribuiAvaliacaoResponsavel(pCandidatoProcessoSeletivo.Id, lIdProfessor);
+            }
+
+            return RedirectToAction("Distribuicao");
         }
 
         // GET: Avaliacao/Details/5
@@ -70,7 +77,7 @@ namespace Alvo.Controllers
         // GET: Avaliacao/Create
         public ActionResult Create()
         {
-            ViewBag.IdProfessor = new SelectList(_professorAppServico.ObtemTodos(), "Id", "Nome");
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemTodos(), "Id", "Nome");
 
             return View();
         }
@@ -89,7 +96,7 @@ namespace Alvo.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdProfessor = new SelectList(_professorAppServico.ObtemTodos(), "Id", "Nome");
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemTodos(), "Id", "Nome");
 
             return View(pAvaliacao);
         }
@@ -100,7 +107,7 @@ namespace Alvo.Controllers
             var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
-            ViewBag.IdProfessor = new SelectList(_professorAppServico.ObtemTodos(), "Id", "Nome");
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemTodos(), "Id", "Nome");
 
             return View(lAvaliacaoViewModel);
         }
@@ -117,7 +124,7 @@ namespace Alvo.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdProfessor = new SelectList(_professorAppServico.ObtemTodos(), "Id", "Nome");
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemTodos(), "Id", "Nome");
 
             return View(pAvaliacaoViewModel);
 

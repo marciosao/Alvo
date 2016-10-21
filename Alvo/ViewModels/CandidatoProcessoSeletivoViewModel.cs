@@ -1,10 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Alvo.ViewModels
 {
     public class CandidatoProcessoSeletivoViewModel
     {
+        public CandidatoProcessoSeletivoViewModel()
+        {
+            this.Avaliacao = new List<AvaliacaoViewModel>();
+        }
         public int Id { get; set; }
         public int? IdProcessoSeletivo { get; set; }
         public int? IdCandidato { get; set; }
@@ -14,5 +19,7 @@ namespace Alvo.ViewModels
         public virtual AreaConcentracaoViewModel AreaConcentracao { get; set; }
         public virtual CandidatoViewModel Candidato { get; set; }
         public virtual ProcessoSeletivoViewModel ProcessoSeletivo { get; set; }
-    }
+
+        public virtual ICollection<AvaliacaoViewModel> Avaliacao { get; set; }
+     }
 }

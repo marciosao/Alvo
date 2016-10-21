@@ -71,7 +71,6 @@
     <Compile Include="Interfaces\IPerfilAppServico.cs" />
     <Compile Include="Interfaces\IPerfilMenuAppServico.cs" />
     <Compile Include="Interfaces\IProcessoSeletivoAppServico.cs" />
-    <Compile Include="Interfaces\IProfessorAppServico.cs" />
     <Compile Include="Interfaces\IQuestaoAppServico.cs" />
     <Compile Include="Interfaces\IQuestionarioAppServico.cs" />
     <Compile Include="Interfaces\IRespostaQuestaoAppServico.cs" />
@@ -82,7 +81,6 @@
     <Compile Include="PerfilAppServico.cs" />
     <Compile Include="PerfilMenuAppServico.cs" />
     <Compile Include="ProcessoSeletivoAppServico.cs" />
-    <Compile Include="ProfessorAppServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestaoAppServico.cs" />
     <Compile Include="QuestionarioAppServico.cs" />

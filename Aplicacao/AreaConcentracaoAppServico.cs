@@ -13,7 +13,12 @@ namespace Aplicacao
             : base(areaConcentracaoServico)                                                        
         {
             _areaConcentracaoServico = areaConcentracaoServico;                                            
-        }                                                                                
+        }
+
+        public AreaConcentracao ObtemAreaConcentracaoPorNome(string pNome)
+        {
+            return _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(pNome);
+        }
     }                                                                                    
 }                                                                                        
 

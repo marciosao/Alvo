@@ -72,7 +72,6 @@
     <Compile Include="Models\Mapping\PerfilMap.cs" />
     <Compile Include="Models\Mapping\PerfilMenuMap.cs" />
     <Compile Include="Models\Mapping\ProcessoSeletivoMap.cs" />
-    <Compile Include="Models\Mapping\ProfessorMap.cs" />
     <Compile Include="Models\Mapping\QuestaoMap.cs" />
     <Compile Include="Models\Mapping\QuestionarioMap.cs" />
     <Compile Include="Models\Mapping\RespostaQuestaoMap.cs" />
@@ -92,7 +91,6 @@
     <Compile Include="Repositorios\PerfilMenuRepositorio.cs" />
     <Compile Include="Repositorios\PerfilRepositorio.cs" />
     <Compile Include="Repositorios\ProcessoSeletivoRepositorio.cs" />
-    <Compile Include="Repositorios\ProfessorRepositorio.cs" />
     <Compile Include="Repositorios\QuestaoRepositorio.cs" />
     <Compile Include="Repositorios\QuestionarioRepositorio.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />

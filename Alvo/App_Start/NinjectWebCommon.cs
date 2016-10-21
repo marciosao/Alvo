@@ -83,7 +83,6 @@ namespace Alvo.App_Start
             kernel.Bind<IPerfilAppServico>().To<PerfilAppServico>();
             kernel.Bind<IPerfilMenuAppServico>().To<PerfilMenuAppServico>();
             kernel.Bind<IProcessoSeletivoAppServico>().To<ProcessoSeletivoAppServico>();
-            kernel.Bind<IProfessorAppServico>().To<ProfessorAppServico>();
             kernel.Bind<IQuestaoAppServico>().To<QuestaoAppServico>();
             kernel.Bind<IQuestionarioAppServico>().To<QuestionarioAppServico>();
             kernel.Bind<IRespostaQuestaoAppServico>().To<RespostaQuestaoAppServico>();
@@ -104,7 +103,6 @@ namespace Alvo.App_Start
             kernel.Bind<IPerfilServico>().To<PerfilServico>();
             kernel.Bind<IPerfilMenuServico>().To<PerfilMenuServico>();
             kernel.Bind<IProcessoSeletivoServico>().To<ProcessoSeletivoServico>();
-            kernel.Bind<IProfessorServico>().To<ProfessorServico>();
             kernel.Bind<IQuestaoServico>().To<QuestaoServico>();
             kernel.Bind<IQuestionarioServico>().To<QuestionarioServico>();
             kernel.Bind<IRespostaQuestaoServico>().To<RespostaQuestaoServico>();
@@ -125,7 +123,6 @@ namespace Alvo.App_Start
             kernel.Bind<IPerfilRepositorio>().To<PerfilRepositorio>();
             kernel.Bind<IPerfilMenuRepositorio>().To<PerfilMenuRepositorio>();
             kernel.Bind<IProcessoSeletivoRepositorio>().To<ProcessoSeletivoRepositorio>();
-            kernel.Bind<IProfessorRepositorio>().To<ProfessorRepositorio>();
             kernel.Bind<IQuestaoRepositorio>().To<QuestaoRepositorio>();
             kernel.Bind<IQuestionarioRepositorio>().To<QuestionarioRepositorio>();
             kernel.Bind<IRespostaQuestaoRepositorio>().To<RespostaQuestaoRepositorio>();

@@ -143,7 +143,7 @@ namespace Alvo.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("Arquivo", "O formato do arquivo não é suportado.");
+                        ModelState.AddModelError("Arquivo", "O formato do arquivo não é suportado. Somente arquivos CSV, XLS ou XLSX poderão ser importados.");
                         //return View();
                     }
                 }
@@ -153,9 +153,7 @@ namespace Alvo.Controllers
                 }
             }
 
-
             ViewBag.ProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
-            ViewBag.AreaConcentracao = new SelectList(_areaConcentracaoAppServico.ObtemTodos(), "Id", "Nome");
 
             return View("Index.cshtml");
         }

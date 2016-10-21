@@ -20,13 +20,16 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.NotaFinal).HasColumnName("NotaFinal");
             this.Property(t => t.DataAvaliacao).HasColumnName("DataAvaliacao");
             this.Property(t => t.Aprovado).HasColumnName("Aprovado");
-            this.Property(t => t.Concluido).HasColumnName("Concluido");
+            this.Property(t => t.Concluido).HasColumnName("Concluida");
 
             // Relationships
-            this.HasOptional(t => t.Professor)
+            this.HasOptional(t => t.Usuario)
                 .WithMany(t => t.Avaliacao)
                 .HasForeignKey(d => d.IdProfessor);
 
+            this.HasOptional(t => t.CandidatoProcessoSeletivo)
+                .WithMany(t => t.Avaliacao)
+                .HasForeignKey(d => d.IdCandidatoProcessoSeletivo);
         }
     }
 }

@@ -28,6 +28,22 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.CPF).HasColumnName("CPF");
             this.Property(t => t.DataNascimento).HasColumnName("DataNascimento");
             this.Property(t => t.RG).HasColumnName("RG");
+            this.Property(t => t.OrgaoExpedidor).HasColumnName("OrgaoExpedidor");
+            this.Property(t => t.CotaNegros).HasColumnName("CotaNegros");
+            this.Property(t => t.CotaIndigena).HasColumnName("CotaIndigena");
+            this.Property(t => t.LinguaEstrangeira).HasColumnName("LinguaEstrangeira");
+            this.Property(t => t.Endereco).HasColumnName("Endereco");
+            this.Property(t => t.Bairro).HasColumnName("Bairro");
+            this.Property(t => t.Cidade).HasColumnName("Cidade");
+            this.Property(t => t.Estado).HasColumnName("Estado");
+            this.Property(t => t.CEP).HasColumnName("CEP");
+            this.Property(t => t.Email).HasColumnName("Email");
+            this.Property(t => t.Telefone).HasColumnName("Telefone");
+            this.Property(t => t.Celular).HasColumnName("Celular");
+            this.Property(t => t.NecessidadesEspeciais).HasColumnName("NecessidadesEspeciais");
+            this.Property(t => t.TipoNecessidade).HasColumnName("TipoNecessidade"); 
+            this.Property(t => t.Curso).HasColumnName("Curso");
+            this.Property(t => t.Instituicao).HasColumnName("Instituicao");
         }
     }
 }

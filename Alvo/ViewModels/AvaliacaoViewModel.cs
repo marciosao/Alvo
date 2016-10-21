@@ -16,9 +16,9 @@ namespace Alvo.ViewModels
         public int? IdProfessor { get; set; }
         public decimal? NotaFinal { get; set; }
         public bool Aprovado { get; set; }
-        public bool Concluido { get; set; }
+        public bool Concluida { get; set; }
         public DateTime? DataAvaliacao { get; set; }
-        public virtual ProfessorViewModel Professor { get; set; }
+        public virtual UsuarioViewModel Usuario { get; set; }
         public virtual CandidatoProcessoSeletivoViewModel CandidatoProcessoSeletivo { get; set; }
         public virtual ICollection<AvaliacaoQuestionarioViewModel> AvaliacaoQuestionario { get; set; }
         public virtual ICollection<RespostaQuestaoViewModel> RespostaQuestao { get; set; }

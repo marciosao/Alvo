@@ -6,6 +6,8 @@ namespace Dominio.Interfaces.Servicos
     public interface ICandidatoProcessoSeletivoServico : IServicoBase<CandidatoProcessoSeletivo>        
     {
         IEnumerable<CandidatoProcessoSeletivo> ObtemTodosSemAvaliacao();
+        IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor);
+
     }                                                               
 }                                                                   
 
