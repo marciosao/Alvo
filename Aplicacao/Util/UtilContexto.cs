@@ -54,13 +54,45 @@ namespace Aplicacao.Util
             new ValidaCsv {Id = 18,  Desc = "TipoNecessidade",NomeExibicao="TIPO NECESSIDADES ESPECIAIS", tamanho= 20,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
             new ValidaCsv {Id = 19,  Desc = "Curso",NomeExibicao="CURSO", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
             new ValidaCsv {Id = 20,  Desc = "Instituicao",NomeExibicao="INSTITUICAO", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
-
-
-
-
-
-            //new ValidaCsv {Id = 3,  Desc = "DataNascimento",NomeExibicao="DATA DE NASCIMENTO", tamanho= 10,tipo = "fixo",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "Formato dd/mm/aaaa"},
-            
         };
+
+        public static bool ValidarCampos(string Campo, string texto, bool obrigatorio)
+        {
+            bool retorno = false;
+            if (!obrigatorio && texto == string.Empty)
+            {
+                retorno = true;
+            }
+            else
+            {
+                foreach (var item in Util.UtilContexto.ValidacoesCsv)
+                {
+                    if (Campo == item.Desc)
+                    {
+                        if (item.tipo == "fixo")
+                        {
+                            if (texto.Length == item.tamanho)
+                            {
+                                retorno = true;
+                            }
+                            else retorno = false;
+                        }
+                        else if (item.tipo == "variavel")
+                        {
+                            if (texto.Length > 0 && texto.Length <= item.tamanho)
+                            {
+                                retorno = true;
+                            }
+                            else
+                                retorno = false;
+                        }
+                    }
+
+                }
+            }
+
+            return retorno;
+
+        }
     }
 }

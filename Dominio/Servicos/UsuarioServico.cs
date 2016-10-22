@@ -12,8 +12,13 @@ namespace Dominio.Servicos
             : base(usuarioRepositorio)                                              
         {                                                                          
             _usuarioRepositorio = usuarioRepositorio;                                
-        }                                                                          
-                                                                                   
+        }
+
+
+        public System.Collections.IEnumerable ObtemUsuariosProfessores()
+        {
+            return _usuarioRepositorio.ObtemUsuariosProfessores();
+        }
     }                                                                              
 }                                                                                  
 

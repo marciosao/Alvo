@@ -341,6 +341,7 @@
     <Content Include="Views\Avaliacao\Index.cshtml" />
     <Content Include="Views\Avaliacao\Distribuicao.cshtml" />
     <Content Include="Views\Avaliacao\EditDistribuicao.cshtml" />
+    <Content Include="Views\Avaliacao\_EtapaAvaliacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

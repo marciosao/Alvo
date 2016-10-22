@@ -5,6 +5,11 @@ namespace Dominio.Entidades
 {
     public class CandidatoProcessoSeletivo
     {
+        public CandidatoProcessoSeletivo()
+        {
+            this.Avaliacao = new List<Avaliacao>();
+        }
+        
         public int Id { get; set; }
         public int? IdProcessoSeletivo { get; set; }
         public int? IdCandidato { get; set; }
@@ -14,5 +19,7 @@ namespace Dominio.Entidades
         public virtual AreaConcentracao AreaConcentracao { get; set; }
         public virtual Candidato Candidato { get; set; }
         public virtual ProcessoSeletivo ProcessoSeletivo { get; set; }
+
+        public virtual ICollection<Avaliacao> Avaliacao { get; set; }
     }
 }

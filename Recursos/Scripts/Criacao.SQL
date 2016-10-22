@@ -147,6 +147,7 @@ CREATE TABLE Avaliacao
 	Aprovado BOOL,
 	Concluida BOOL,
 	PRIMARY KEY (Id),
+	KEY (IdCandidatoProcessoSeletivo),
 	KEY (IdProfessor)
 ) 
 ;
@@ -314,6 +315,10 @@ ALTER TABLE Questao ADD CONSTRAINT FK_Questao_Questionario
 
 ALTER TABLE Questao ADD CONSTRAINT FK_Questao_TipoQuestao 
 	FOREIGN KEY (IdTipoQuestao) REFERENCES TipoQuestao (Id)
+;
+
+ALTER TABLE Avaliacao ADD CONSTRAINT FK_Aval_CandProcesSeletivo 
+	FOREIGN KEY (IdCandidatoProcessoSeletivo) REFERENCES CandidatoProcessoSeletivo (Id)
 ;
 
 ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_UsuarioProfessor 

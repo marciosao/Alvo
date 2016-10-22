@@ -102,5 +102,50 @@ namespace Alvo.ViewModels
                 return DataNascimento.ToShortDateString();
             } 
         }
+
+        public virtual string CotaNegroFormatado 
+        {
+            get 
+            {
+                if (CotaNegros)
+                {
+                    return "Sim";
+                }
+                else
+                {
+                    return "Não";
+                }
+            }
+        }
+
+        public virtual string CotaIndigenaFormatado
+        {
+            get
+            {
+                if (CotaIndigena)
+                {
+                    return "Sim";
+                }
+                else
+                {
+                    return "Não";
+                }
+            }
+        }
+
+        public virtual string NecessidadesEspeciaisFormatado
+        {
+            get
+            {
+                if (NecessidadesEspeciais)
+                {
+                    return "Sim";
+                }
+                else
+                {
+                    return "Não";
+                }
+            }
+        }
     }
 }

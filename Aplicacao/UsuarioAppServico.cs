@@ -13,7 +13,12 @@ namespace Aplicacao
             : base(usuarioServico)                                                        
         {
             _usuarioServico = usuarioServico;                                            
-        }                                                                                
+        }
+
+        public System.Collections.IEnumerable ObtemUsuariosProfessores()
+        {
+            return _usuarioServico.ObtemUsuariosProfessores();
+        }
     }                                                                                    
 }                                                                                        
 

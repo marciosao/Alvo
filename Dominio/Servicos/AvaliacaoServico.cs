@@ -12,8 +12,12 @@ namespace Dominio.Servicos
             : base(avaliacaoRepositorio)                                              
         {                                                                          
             _avaliacaoRepositorio = avaliacaoRepositorio;                                
-        }                                                                          
-                                                                                   
+        }
+
+        public Avaliacao ObtemAvaliacaoPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
+        {
+            return _avaliacaoRepositorio.ObtemAvaliacaoPorCandidatoProcesso(pCandidatoProcessoSeletivo);
+        }
     }                                                                              
 }                                                                                  
 

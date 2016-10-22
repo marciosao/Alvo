@@ -27,7 +27,11 @@ namespace Alvo.Controllers
         // GET: Avaliacao
         public ActionResult Index()
         {
-            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemTodos());
+            // variável para teste..  pegar o usuário logado no sistema
+            int lUsuario = 3;
+            
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario));
+            
             return View(candidatoProcessoSeletivoViewModel);
         }
 
@@ -43,19 +47,22 @@ namespace Alvo.Controllers
             var candidatoProcessoSeletivo = _candidatoProcessoSeletivoAppServico.ObtemPorId(id);
             var candidatoProcessoSeletivoViewModel = Mapper.Map<CandidatoProcessoSeletivo, CandidatoProcessoSeletivoViewModel>(candidatoProcessoSeletivo);
 
-            ViewBag.AreasConcentracao = new SelectList(_areaConcentracaoAppServico.ObtemTodos(), "Id", "Nome");
-            ViewBag.Professores = new SelectList(_usuarioAppServico.ObtemTodos(), "Id", "Nome");//Usuario com perfil de Professor
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome");//Usuario com perfil de Professor
 
             return View(candidatoProcessoSeletivoViewModel);
         }
 
         [HttpPost]
-        public ActionResult EditDistribuicao(FormCollection formulario)
+        public ActionResult EditDistribuicao(CandidatoProcessoSeletivoViewModel pCandidatoProcessoSeletivo, FormCollection formulario)
         {
-            int area = int.Parse(ViewBag.AreasConcentracao);
-            int prof = int.Parse(ViewBag.Professores);
-            return View("Distribuicao");
+            int lIdProfessor = Convert.ToInt32(formulario["IdProfessor"]);
 
+            if (ModelState.IsValid)
+            {
+                _candidatoProcessoSeletivoAppServico.DistribuiAvaliacaoResponsavel(pCandidatoProcessoSeletivo.Id, lIdProfessor);
+            }
+
+            return RedirectToAction("Distribuicao");
         }
 
         // GET: Avaliacao/Details/5

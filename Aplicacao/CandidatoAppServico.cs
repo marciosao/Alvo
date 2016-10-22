@@ -16,13 +16,15 @@ namespace Aplicacao
         private readonly ICandidatoServico _candidatoServico;
         private readonly ICandidatoProcessoSeletivoServico _candidatoProcessoSeletivoServico;
         private readonly IAreaConcentracaoServico _areaConcentracaoServico;
+        private readonly IAvaliacaoServico _avaliacaoServico;
 
-        public CandidatoAppServico(ICandidatoServico candidatoServico, ICandidatoProcessoSeletivoServico candidatoProcessoSeletivoServico, IAreaConcentracaoServico areaConcentracaoServico)
+        public CandidatoAppServico(ICandidatoServico candidatoServico, ICandidatoProcessoSeletivoServico candidatoProcessoSeletivoServico, IAreaConcentracaoServico areaConcentracaoServico, IAvaliacaoServico avaliacaoServico)
             : base(candidatoServico)
         {
             _candidatoServico = candidatoServico;
             _candidatoProcessoSeletivoServico = candidatoProcessoSeletivoServico;
             _areaConcentracaoServico = areaConcentracaoServico;
+            _avaliacaoServico = avaliacaoServico;
         }
 
         public void ImportarCandidatos(int pIdProcessoSeletivo, string pCaminhoArquivo)
@@ -38,25 +40,20 @@ namespace Aplicacao
                 {
                     //Verificando se já existe um candidado com o mesmo cpf para o processo seletivo. Se existir o candidato não deverá ser importado
                     var lCandidatoExistente = this.ObtemCandidatoPorProcessoCPF(pIdProcessoSeletivo, item.Candidato.CPF);
-                    ////////var lAreaConcentracao = ObtemAreaConcentracaoPorNome();
 
                     if (lCandidatoExistente == null)
                     {
-                        //Gravando o candidato e obtendo o ID do candidato recém inserido
-                        ////////var lCandidato = _candidatoServico.AddWithReturn(item);
-
                         //Gravando o CandidatoProcessoSeletivo com o Id do processo seletivo e do candidato recém cadastrado
-                        ////////CandidatoProcessoSeletivo lcandidatoProcessoSeletivo = new CandidatoProcessoSeletivo();
                         item.IdProcessoSeletivo = pIdProcessoSeletivo;
-                        ////////lcandidatoProcessoSeletivo.Candidato = item;
+                        CandidatoProcessoSeletivo lCandidadoProcesso = _candidatoProcessoSeletivoServico.AddWithReturn(item);
 
+                        //Criando uma AVALIAÇÃO que estará pendente até que seja informado um PROFESSOR RESPONSÁVEL pela avaliação
+                        Avaliacao lAvaliacao = new Avaliacao();
+                        lAvaliacao.IdCandidatoProcessoSeletivo = lCandidadoProcesso.Id;
+                        lAvaliacao.Aprovado = false;
+                        lAvaliacao.Concluido = false;
 
-                        ////////foreach (var itemAreaConcentracao in item.CandidatoProcessoSeletivo)
-                        ////////{
-                        ////////    lcandidatoProcessoSeletivo.AreaConcentracao = itemAreaConcentracao.AreaConcentracao;
-                        ////////}
-
-                        _candidatoProcessoSeletivoServico.Add(item);
+                        _avaliacaoServico.Add(lAvaliacao);
                     }
                     else
                     {
@@ -134,21 +131,16 @@ namespace Aplicacao
                     CandidatoProcessoSeletivo lCandidatoProcessoSeletivo = new CandidatoProcessoSeletivo();
 
                     lCandidato.Nome = item.ItemArray[0].ToString().Trim();
-                    lCandidato.CPF = item.ItemArray[1].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Trim();
-                    lCandidato.RG = item.ItemArray[2].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Trim();
+                    lCandidato.CPF = item.ItemArray[1].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Replace(" ", string.Empty).Trim();
+                    lCandidato.RG = item.ItemArray[2].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Replace(" ", string.Empty).Trim();
                     lCandidato.OrgaoExpedidor = item.ItemArray[3].ToString().Trim();
                     lCandidato.DataNascimento = DateTime.Parse(item.ItemArray[4].ToString().Trim()).Date;
                     lCandidato.CotaNegros = (item.ItemArray[5].ToString().Trim().Equals("Sim") ? true : false);
                     lCandidato.CotaIndigena = (item.ItemArray[6].ToString().Trim().Equals("Sim") ? true : false);
                     lCandidato.LinguaEstrangeira = item.ItemArray[7].ToString().Trim();
 
-                    ////////CandidatoProcessoSeletivo lCandidatoProcessoSeletivo = new CandidatoProcessoSeletivo();
-                    ////////lCandidatoProcessoSeletivo.AreaConcentracao = _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(item.ItemArray[8].ToString().Trim());
+                    lCandidatoProcessoSeletivo.IdAreaConcentracao = _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(item.ItemArray[8].ToString().Trim()).Id;
 
-                    ////////if (lCandidatoProcessoSeletivo.AreaConcentracao != null)
-                    ////////{
-                    ////////    lCandidato.CandidatoProcessoSeletivo.Add(lCandidatoProcessoSeletivo);
-                    ////////}
                     lCandidato.Endereco = item.ItemArray[9].ToString().Trim();
                     lCandidato.Bairro = item.ItemArray[10].ToString().Trim();
                     lCandidato.Cidade = item.ItemArray[11].ToString().Trim();
@@ -163,8 +155,7 @@ namespace Aplicacao
                     lCandidato.Instituicao = item.ItemArray[20].ToString().Trim();
 
                     lCandidatoProcessoSeletivo.Candidato = lCandidato;
-                    lCandidatoProcessoSeletivo.IdAreaConcentracao = _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(item.ItemArray[8].ToString().Trim()).Id;
-
+                    lCandidatoProcessoSeletivo.TemaProjeto = item.ItemArray[21].ToString().Trim();
                     lListaCandidatoProcessoSeletivo.Add(lCandidatoProcessoSeletivo);
 
                     lCandidato = null;
