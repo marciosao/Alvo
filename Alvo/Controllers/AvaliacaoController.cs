@@ -28,7 +28,7 @@ namespace Alvo.Controllers
         public ActionResult Index()
         {
             // variável para teste..  pegar o usuário logado no sistema
-            int lUsuario = 3;
+            int lUsuario = 1;
             
             var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario));
             

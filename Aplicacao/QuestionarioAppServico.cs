@@ -13,7 +13,12 @@ namespace Aplicacao
             : base(questionarioServico)                                                        
         {
             _questionarioServico = questionarioServico;                                            
-        }                                                                                
+        }
+
+        public Questionario ObtemQuestionarioPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
+        {
+            return _questionarioServico.ObtemQuestionarioPorCandidatoProcesso(pCandidatoProcessoSeletivo);
+        }
     }                                                                                    
 }                                                                                        
 

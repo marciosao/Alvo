@@ -49,10 +49,10 @@
                     @Html.DisplayFor(modelItem => item.AreaConcentracao.Nome)
                 </td>
                 <td>
-                    @Html.Raw("Nome Do professor")
+                    @Html.DisplayFor(modelItem => item.Avaliacao.FirstOrDefault().NomePrefessor)
                 </td>
                 <td>
-                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit", title = "Editar" }) |
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
                 </td>
             </tr>
         }

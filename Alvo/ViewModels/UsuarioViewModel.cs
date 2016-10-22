@@ -5,6 +5,10 @@ namespace Alvo.ViewModels
 {
     public class UsuarioViewModel
     {
+        public UsuarioViewModel()
+        {
+            this.Avaliacao = new List<AvaliacaoViewModel>();
+        }
         public int Id { get; set; }
         public int? IdPerfil { get; set; }
         public string Nome { get; set; }
@@ -17,5 +21,7 @@ namespace Alvo.ViewModels
         public bool Ativo { get; set; }
         public string Senha { get; set; }
         public virtual PerfilViewModel perfil { get; set; }
+        public virtual ICollection<AvaliacaoViewModel> Avaliacao { get; set; }
+
     }
 }

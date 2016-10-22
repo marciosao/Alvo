@@ -12,6 +12,15 @@ namespace Infra.Data.Repositorios
 
             return lAvaliacao;
         }
+
+        //public Avaliacao ObtemAvaliacaoPorCandidatoProcesso2(int pCandidatoProcessoSeletivo)
+        //{
+        //    var lAvaliacao = Db.Questionario.Where(q=>
+        //                                            q.AvaliacaoQuestionario.Any(a=>a.Avaliacao.Id == 1) &&
+        //                                            q.ques  )
+
+        //    return lAvaliacao;
+        //}
     }
 }
 

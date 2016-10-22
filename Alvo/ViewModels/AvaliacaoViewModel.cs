@@ -22,5 +22,20 @@ namespace Alvo.ViewModels
         public virtual CandidatoProcessoSeletivoViewModel CandidatoProcessoSeletivo { get; set; }
         public virtual ICollection<AvaliacaoQuestionarioViewModel> AvaliacaoQuestionario { get; set; }
         public virtual ICollection<RespostaQuestaoViewModel> RespostaQuestao { get; set; }
+
+        public virtual string NomePrefessor
+        {
+            get
+            {
+                if (Usuario !=null)
+                {
+                    return Usuario.Nome;
+                }
+                else
+                {
+                    return "-";
+                }
+            }
+        }
     }
 }

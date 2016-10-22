@@ -67,56 +67,6 @@ namespace Aplicacao
             return _candidatoServico.ObtemCandidatoPorProcessoCPF(pIdProcessoSeletivo, pCPF);
         }
 
-
-        private List<Candidato> CandidadosArquivo(string pCaminhoArquivo)
-        {
-            List<Candidato> lListaCandidatos = new List<Candidato>();
-
-            DataTable lDttCandidatos = Arquivos.LoadDataTable(pCaminhoArquivo);
-
-            if (lDttCandidatos != null && lDttCandidatos.Rows.Count > 0)
-            {
-                foreach (DataRow item in lDttCandidatos.Rows)
-                {
-                    Candidato lCandidato = new Candidato();
-
-                    lCandidato.Nome = item.ItemArray[0].ToString().Trim();
-                    lCandidato.CPF = item.ItemArray[1].ToString().Trim();
-                    lCandidato.RG = item.ItemArray[2].ToString().Trim();
-                    lCandidato.OrgaoExpedidor = item.ItemArray[3].ToString().Trim();
-                    lCandidato.DataNascimento = DateTime.Parse(item.ItemArray[4].ToString().Trim()).Date;
-                    lCandidato.CotaNegros =  (item.ItemArray[5].ToString().Trim().Equals("Sim")?true:false);
-                    lCandidato.CotaIndigena = (item.ItemArray[6].ToString().Trim().Equals("Sim") ? true : false);
-                    lCandidato.LinguaEstrangeira = item.ItemArray[7].ToString().Trim();
-
-                    ////////CandidatoProcessoSeletivo lCandidatoProcessoSeletivo = new CandidatoProcessoSeletivo();
-                    ////////lCandidatoProcessoSeletivo.AreaConcentracao = _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(item.ItemArray[8].ToString().Trim());
-
-                    ////////if (lCandidatoProcessoSeletivo.AreaConcentracao != null)
-                    ////////{
-                    ////////    lCandidato.CandidatoProcessoSeletivo.Add(lCandidatoProcessoSeletivo);
-                    ////////}
-                    lCandidato.Endereco = item.ItemArray[9].ToString().Trim();
-                    lCandidato.Bairro = item.ItemArray[10].ToString().Trim();
-                    lCandidato.Cidade = item.ItemArray[11].ToString().Trim();
-                    lCandidato.Estado = item.ItemArray[12].ToString().Trim();
-                    lCandidato.CEP = item.ItemArray[13].ToString().Trim();
-                    lCandidato.Email = item.ItemArray[14].ToString().Trim();
-                    lCandidato.Telefone = item.ItemArray[15].ToString().Trim();
-                    lCandidato.Celular = item.ItemArray[16].ToString().Trim();
-                    lCandidato.NecessidadesEspeciais = (item.ItemArray[17].ToString().Trim().Equals("Sim") ? true : false);
-                    lCandidato.TipoNecessidade = item.ItemArray[18].ToString().Trim();
-                    lCandidato.Curso = item.ItemArray[19].ToString().Trim();
-                    lCandidato.Instituicao = item.ItemArray[20].ToString().Trim();
-
-                    lListaCandidatos.Add(lCandidato);
-                }
-            }
-
-
-            return lListaCandidatos;
-        }
-
         private List<CandidatoProcessoSeletivo> CandidatoProcessoSeletivoArquivo(string pCaminhoArquivo)
         {
             List<CandidatoProcessoSeletivo> lListaCandidatoProcessoSeletivo = new List<CandidatoProcessoSeletivo>();
@@ -125,44 +75,51 @@ namespace Aplicacao
 
             if (lDttCandidatos != null && lDttCandidatos.Rows.Count > 0)
             {
-                foreach (DataRow item in lDttCandidatos.Rows)
+                if (lDttCandidatos.Columns.Count >= 21)
                 {
-                    Candidato lCandidato = new Candidato();
-                    CandidatoProcessoSeletivo lCandidatoProcessoSeletivo = new CandidatoProcessoSeletivo();
+                    foreach (DataRow item in lDttCandidatos.Rows)
+                    {
+                        Candidato lCandidato = new Candidato();
+                        CandidatoProcessoSeletivo lCandidatoProcessoSeletivo = new CandidatoProcessoSeletivo();
 
-                    lCandidato.Nome = item.ItemArray[0].ToString().Trim();
-                    lCandidato.CPF = item.ItemArray[1].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Replace(" ", string.Empty).Trim();
-                    lCandidato.RG = item.ItemArray[2].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Replace(" ", string.Empty).Trim();
-                    lCandidato.OrgaoExpedidor = item.ItemArray[3].ToString().Trim();
-                    lCandidato.DataNascimento = DateTime.Parse(item.ItemArray[4].ToString().Trim()).Date;
-                    lCandidato.CotaNegros = (item.ItemArray[5].ToString().Trim().Equals("Sim") ? true : false);
-                    lCandidato.CotaIndigena = (item.ItemArray[6].ToString().Trim().Equals("Sim") ? true : false);
-                    lCandidato.LinguaEstrangeira = item.ItemArray[7].ToString().Trim();
+                        lCandidato.Nome = item.ItemArray[0].ToString().Trim();
+                        lCandidato.CPF = item.ItemArray[1].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Replace(" ", string.Empty).Trim();
+                        lCandidato.RG = item.ItemArray[2].ToString().Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Replace(" ", string.Empty).Trim();
+                        lCandidato.OrgaoExpedidor = item.ItemArray[3].ToString().Trim();
+                        lCandidato.DataNascimento = DateTime.Parse(item.ItemArray[4].ToString().Trim()).Date;
+                        lCandidato.CotaNegros = (item.ItemArray[5].ToString().Trim().Equals("Sim") ? true : false);
+                        lCandidato.CotaIndigena = (item.ItemArray[6].ToString().Trim().Equals("Sim") ? true : false);
+                        lCandidato.LinguaEstrangeira = item.ItemArray[7].ToString().Trim();
 
-                    lCandidatoProcessoSeletivo.IdAreaConcentracao = _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(item.ItemArray[8].ToString().Trim()).Id;
+                        lCandidatoProcessoSeletivo.IdAreaConcentracao = _areaConcentracaoServico.ObtemAreaConcentracaoPorNome(item.ItemArray[8].ToString().Trim()).Id;
 
-                    lCandidato.Endereco = item.ItemArray[9].ToString().Trim();
-                    lCandidato.Bairro = item.ItemArray[10].ToString().Trim();
-                    lCandidato.Cidade = item.ItemArray[11].ToString().Trim();
-                    lCandidato.Estado = item.ItemArray[12].ToString().Trim();
-                    lCandidato.CEP = item.ItemArray[13].ToString().Replace(".", string.Empty).Trim();
-                    lCandidato.Email = item.ItemArray[14].ToString().Trim();
-                    lCandidato.Telefone = item.ItemArray[15].ToString().Replace("(", string.Empty).Replace(")", string.Empty).Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Trim(); ;
-                    lCandidato.Celular = item.ItemArray[16].ToString().Replace("(", string.Empty).Replace(")", string.Empty).Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Trim(); ;
-                    lCandidato.NecessidadesEspeciais = (item.ItemArray[17].ToString().Trim().Equals("Sim") ? true : false);
-                    lCandidato.TipoNecessidade = item.ItemArray[18].ToString().Trim();
-                    lCandidato.Curso = item.ItemArray[19].ToString().Trim();
-                    lCandidato.Instituicao = item.ItemArray[20].ToString().Trim();
+                        lCandidato.Endereco = item.ItemArray[9].ToString().Trim();
+                        lCandidato.Bairro = item.ItemArray[10].ToString().Trim();
+                        lCandidato.Cidade = item.ItemArray[11].ToString().Trim();
+                        lCandidato.Estado = item.ItemArray[12].ToString().Trim();
+                        lCandidato.CEP = item.ItemArray[13].ToString().Replace(".", string.Empty).Trim();
+                        lCandidato.Email = item.ItemArray[14].ToString().Trim();
+                        lCandidato.Telefone = item.ItemArray[15].ToString().Replace("(", string.Empty).Replace(")", string.Empty).Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Trim(); ;
+                        lCandidato.Celular = item.ItemArray[16].ToString().Replace("(", string.Empty).Replace(")", string.Empty).Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).Trim(); ;
+                        lCandidato.NecessidadesEspeciais = (item.ItemArray[17].ToString().Trim().Equals("Sim") ? true : false);
+                        lCandidato.TipoNecessidade = item.ItemArray[18].ToString().Trim();
+                        lCandidato.Curso = item.ItemArray[19].ToString().Trim();
+                        lCandidato.Instituicao = item.ItemArray[20].ToString().Trim();
 
-                    lCandidatoProcessoSeletivo.Candidato = lCandidato;
-                    lCandidatoProcessoSeletivo.TemaProjeto = item.ItemArray[21].ToString().Trim();
-                    lListaCandidatoProcessoSeletivo.Add(lCandidatoProcessoSeletivo);
+                        lCandidatoProcessoSeletivo.Candidato = lCandidato;
 
-                    lCandidato = null;
-                    lCandidatoProcessoSeletivo = null;
+                        if (lDttCandidatos.Columns.Count == 22)
+                        {
+                            lCandidatoProcessoSeletivo.TemaProjeto = item.ItemArray[21].ToString().Trim();
+                        }
+
+                        lListaCandidatoProcessoSeletivo.Add(lCandidatoProcessoSeletivo);
+
+                        lCandidato = null;
+                        lCandidatoProcessoSeletivo = null;
+                    }
                 }
             }
-
 
             return lListaCandidatoProcessoSeletivo;
         }

@@ -46,7 +46,6 @@ namespace Aplicacao
             {
                 lIdProfessor = lUsuario.Id;
             }
-
             return _candidatoProcessoSeletivoServico.ObtemAvaliacoesPorProfessor(lIdProfessor);
         }
     }                                                                                    
