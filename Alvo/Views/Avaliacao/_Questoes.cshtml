@@ -1,6 +1,28 @@
 ﻿@model Alvo.ViewModels.QuestionarioViewModel
 
+@{
+    int? lIdEtapaAtual = 0;
+    int? lIdCategoriaAtual = 0;
+    int? lIdGrupoAtual = 0;
 
+    foreach (var item in Model.Questao)
+    {
+        if (lIdEtapaAtual == 0)
+        {
+            lIdEtapaAtual = (item.IdEtapa!=null)?item.IdEtapa:0;
+        }
+
+        if (lIdGrupoAtual == 0)
+        {
+            lIdGrupoAtual = (item.CategoriaQuestao.GrupoQuestao.Id != null) ? item.CategoriaQuestao.GrupoQuestao.Id : 0;
+        }
+
+        if (lIdCategoriaAtual == 0)
+        {
+            lIdCategoriaAtual = (item.CategoriaQuestao.Id != null) ? item.CategoriaQuestao.Id : 0;
+        }
+    }
+        
 <div class="col-md-12 col-sm-12" style="text-align:center">
     <div class="form-group">
         @Html.Label("ETAPA II", htmlAttributes: new { @class = "control-label" })
@@ -9,7 +31,7 @@
         @Html.Label("1. PROPOSTA DE TRABLHO", htmlAttributes: new { @class = "control-label" })
     </div>
 </div>
-
+}
 <table class="table">
     <tr>
         <th>
