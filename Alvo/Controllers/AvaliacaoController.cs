@@ -16,12 +16,14 @@ namespace Alvo.Controllers
         private readonly IUsuarioAppServico _usuarioAppServico;
         private readonly ICandidatoProcessoSeletivoAppServico _candidatoProcessoSeletivoAppServico;
         private readonly IAreaConcentracaoAppServico _areaConcentracaoAppServico;
-        public AvaliacaoController(IAvaliacaoAppServico avaliacaoAppServico, IUsuarioAppServico usuarioAppServico, ICandidatoProcessoSeletivoAppServico candidatoProcessoSeletivoAppServico, IAreaConcentracaoAppServico areaConcentracaoAppServico)
+        private readonly IQuestionarioAppServico _questionarioAppServico;
+        public AvaliacaoController(IAvaliacaoAppServico avaliacaoAppServico, IUsuarioAppServico usuarioAppServico, ICandidatoProcessoSeletivoAppServico candidatoProcessoSeletivoAppServico, IAreaConcentracaoAppServico areaConcentracaoAppServico, IQuestionarioAppServico questionarioAppServico)
         {
             _avaliacaoAppServico = avaliacaoAppServico;
             _usuarioAppServico = usuarioAppServico;
             _candidatoProcessoSeletivoAppServico = candidatoProcessoSeletivoAppServico;
             _areaConcentracaoAppServico = areaConcentracaoAppServico;
+            _questionarioAppServico = questionarioAppServico;
         }
 
         // GET: Avaliacao
@@ -130,6 +132,18 @@ namespace Alvo.Controllers
 
         }
 
+        public ActionResult Avaliacao(int id)
+        {
+            var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
+            var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
+
+            var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
+
+            lAvaliacaoViewModel.Questionario = lQuestionario;
+
+            return View(lAvaliacaoViewModel);
+        }
+
         // GET: Avaliacao/Delete/5
         public ActionResult Delete(int id)
         {
@@ -148,6 +162,15 @@ namespace Alvo.Controllers
             _avaliacaoAppServico.Remove(lAvaliacao);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult QuestoesQuestionario(int id)
+        {
+            var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
+
+
+
+            return PartialView("~/Views/Questao/_Questao.cshtml", lQuestionario.Questao);
         }
 
     }

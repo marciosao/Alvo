@@ -1,0 +1,52 @@
+﻿@model Alvo.ViewModels.QuestionarioViewModel
+
+
+<div class="col-md-12 col-sm-12" style="text-align:center">
+    <div class="form-group">
+        @Html.Label("ETAPA II", htmlAttributes: new { @class = "control-label" })
+    </div>
+    <div class="form-group">
+        @Html.Label("1. PROPOSTA DE TRABLHO", htmlAttributes: new { @class = "control-label" })
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Raw("Aspéctos Avaliados")
+        </th>
+        <th>
+            @Html.Raw("Pontuação Máximo")
+        </th>
+        <th></th>
+    </tr>
+    @{
+        decimal lTotalPontos = 0;
+
+        foreach (var item in Model.Questao)
+        {
+            lTotalPontos += (decimal)item.ValorBarema;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorBarema)
+                </td>
+                <td>
+                    <input type="text" name="Nota" id="Nota" width="20px" />
+                </td>
+            </tr>
+        }
+    
+    <tr>
+        <td>
+            TOTAL DE PONTOS
+        </td>
+        <td>
+            @Html.Raw(lTotalPontos)
+        </td>
+        <td></td>
+    </tr>
+}
+</table>

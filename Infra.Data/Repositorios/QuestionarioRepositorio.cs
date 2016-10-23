@@ -9,7 +9,8 @@ namespace Infra.Data.Repositorios
         public Questionario ObtemQuestionarioPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
         {
             var lQuestionario = Db.Questionario.Where(q =>
-                                                    q.AvaliacaoQuestionario.Any(a => a.Avaliacao.IdCandidatoProcessoSeletivo == pCandidatoProcessoSeletivo)).FirstOrDefault();
+                                                    q.AvaliacaoQuestionario.Any(a => 
+                                                                                a.Avaliacao.IdCandidatoProcessoSeletivo == pCandidatoProcessoSeletivo)).FirstOrDefault();
 
             return lQuestionario;
         }

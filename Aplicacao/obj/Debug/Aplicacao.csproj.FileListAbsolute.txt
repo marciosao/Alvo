@@ -1,10 +1,10 @@
 C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Aplicacao.dll
 C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Aplicacao.pdb
 C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Dominio.dll
+C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Excel.dll
+C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\ICSharpCode.SharpZipLib.dll
 C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Dominio.pdb
+C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Excel.pdb
 C:\inetpub\wwwroot\Alvo\Aplicacao\obj\Debug\Aplicacao.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\Alvo\Aplicacao\obj\Debug\Aplicacao.dll
 C:\inetpub\wwwroot\Alvo\Aplicacao\obj\Debug\Aplicacao.pdb
-C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Excel.dll
-C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\ICSharpCode.SharpZipLib.dll
-C:\inetpub\wwwroot\Alvo\Aplicacao\bin\Debug\Excel.pdb

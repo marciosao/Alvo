@@ -13,7 +13,9 @@ namespace Aplicacao
             : base(avaliacaoServico)                                                        
         {
             _avaliacaoServico = avaliacaoServico;                                            
-        }                                                                                
+        }
+
+         
     }                                                                                    
 }                                                                                        
 

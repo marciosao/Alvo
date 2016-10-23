@@ -37,5 +37,7 @@ namespace Alvo.ViewModels
                 }
             }
         }
+
+        public virtual QuestionarioViewModel Questionario { get; set; }
     }
 }
