@@ -7,6 +7,10 @@
         int? lIdCategoriaAtual = 0;
         int? lIdGrupoAtual = 0;
 
+        int? lIdEtapaAnterior = 0;
+        int? lIdCategoriaAnterior = 0;
+        int? lIdGrupoAnterior = 0;
+
         decimal lTotalPontos = 0;
 
         foreach (var item in Model.Questao)
@@ -21,8 +25,8 @@
                     <td colspan="3" style="text-align:center;font-size:large;background-color:#8B8989"><strong>@Html.Label(item.CategoriaQuestao.GrupoQuestao.Nome, htmlAttributes: new { @class = "control-label" })</strong></td>
                 </tr>
                 <tr style="background-color:#EEE9E9">
-                    <th>
-                        <strong>@Html.Label(item.CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label" })</strong>
+                    <th align="center">
+                        @Html.Label(item.CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label", @style = "font-weight:bold; text-align:center;" })
                     </th>
                     <th style="text-align:center">
                         @Html.Raw("Pontuação Máxima")
@@ -48,8 +52,8 @@
                 if (item.IdCategoriaQuestao != lIdCategoriaAtual)
                 {
                     <tr style="background-color:#EEE9E9">
-                        <th>
-                            <strong>@Html.Label(item.CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label" })</strong>
+                        <th align="center">
+                            @Html.Label(item.CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label", @style = "font-weight:bold; text-align:center;" })
                         </th>
                         <th style="text-align:center">
                             @Html.Raw("Pontuação Máxima")
@@ -65,6 +69,11 @@
             }
             else
             {
+                if (lIdEtapaAtual != item.IdEtapa)
+                {
+                    lIdEtapaAnterior = lIdEtapaAtual;
+                }
+
                 lIdEtapaAtual = item.IdEtapa;
             }
 
@@ -74,6 +83,10 @@
             }
             else
             {
+                if (lIdGrupoAtual != item.CategoriaQuestao.GrupoQuestao.Id)
+                {
+                    lIdGrupoAnterior = lIdGrupoAtual;
+                }
                 lIdGrupoAtual = item.CategoriaQuestao.GrupoQuestao.Id;
             }
 
@@ -83,6 +96,10 @@
             }
             else
             {
+                if (lIdCategoriaAtual != item.CategoriaQuestao.Id)
+                {
+                    lIdCategoriaAnterior = lIdCategoriaAtual;
+                }
                 lIdCategoriaAtual = item.CategoriaQuestao.Id;
             }
 
@@ -96,16 +113,28 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ValorBarema)
                     </td>
-                    <td>
+                    <td align="center" valign="middle">
                         <input type="text" name="Nota" id="Nota" width="20px" />
                     </td>
                 </tr>
             }
+            else if (lIdEtapaAnterior == 2 && lIdGrupoAnterior == 1 && lIdCategoriaAnterior == 1)
+            {
+                <tr>
+                    <td colspan="3" style="text-align:center;color:white;font-size:medium;font-family:Arial;background-color:black">@Html.Label("PARECER DO AVALIADOR", htmlAttributes: new { @class = "control-label" })</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        
+                        <textarea name="ParecerAvaliador" rows="10">Enter text here...</textarea>
+                    </td>
+                </tr>
 
+            }
         }
         <tr>
             <td>
-                TOTAL DE PONTOS
+                TOTAL DE PONTOS GERAL
             </td>
             <td>
                 @Html.Raw(lTotalPontos)
