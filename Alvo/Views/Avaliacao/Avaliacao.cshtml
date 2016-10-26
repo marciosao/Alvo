@@ -74,5 +74,11 @@
         @Html.Partial("_Questoes", Model.Questionario)
         @*@Html.Action("QuestoesQuestionario", "Avaliacao")*@
     </fieldset>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
 }
 

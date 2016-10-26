@@ -15,7 +15,12 @@ namespace Aplicacao
             _avaliacaoServico = avaliacaoServico;                                            
         }
 
-         
+
+
+        public void GravarRespostasAvaliacao(Avaliacao lAvaliacao)
+        {
+            throw new System.NotImplementedException();
+        }
     }                                                                                    
 }                                                                                        
 

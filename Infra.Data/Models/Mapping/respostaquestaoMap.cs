@@ -29,7 +29,6 @@ namespace Infra.Data.Models.Mapping
             this.HasOptional(t => t.Questao)
                 .WithMany(t => t.RespostaQuestao)
                 .HasForeignKey(d => d.IdQuestao);
-
         }
     }
 }

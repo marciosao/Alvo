@@ -9,6 +9,7 @@ namespace Alvo.ViewModels
         {
             this.AvaliacaoQuestionario = new List<AvaliacaoQuestionarioViewModel>();
             this.RespostaQuestao = new List<RespostaQuestaoViewModel>();
+            this.Questao = new List<QuestaoViewModel>();
         }
 
         public int Id { get; set; }
@@ -21,7 +22,7 @@ namespace Alvo.ViewModels
         public virtual UsuarioViewModel Usuario { get; set; }
         public virtual CandidatoProcessoSeletivoViewModel CandidatoProcessoSeletivo { get; set; }
         public virtual ICollection<AvaliacaoQuestionarioViewModel> AvaliacaoQuestionario { get; set; }
-        public virtual ICollection<RespostaQuestaoViewModel> RespostaQuestao { get; set; }
+        public virtual List<RespostaQuestaoViewModel> RespostaQuestao { get; set; }
 
         public virtual string NomePrefessor
         {
@@ -39,5 +40,7 @@ namespace Alvo.ViewModels
         }
 
         public virtual QuestionarioViewModel Questionario { get; set; }
+
+        public virtual List<QuestaoViewModel> Questao { get; set; }
     }
 }

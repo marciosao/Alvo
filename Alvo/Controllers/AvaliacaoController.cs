@@ -31,9 +31,9 @@ namespace Alvo.Controllers
         {
             // variável para teste..  pegar o usuário logado no sistema
             int lUsuario = 1;
-            
+
             var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario));
-            
+
             return View(candidatoProcessoSeletivoViewModel);
         }
 
@@ -137,11 +137,35 @@ namespace Alvo.Controllers
             var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
+            ViewBag.IdAvaliacao = id;
+
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
 
             lAvaliacaoViewModel.Questionario = lQuestionario;
 
+            lAvaliacaoViewModel.Questionario.Questao.ForEach(x =>
+                    {
+                        x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
+                        { 
+                            new RespostaQuestaoViewModel()
+                            {
+                                IdQuestao = x.Id
+                            }
+                        };
+                    }
+                );
+
             return View(lAvaliacaoViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Avaliacao(AvaliacaoViewModel pAvaliacaoViewModel)
+        {
+            var lAvaliacao = Mapper.Map<AvaliacaoViewModel, Avaliacao>(pAvaliacaoViewModel);
+
+            _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
+
+            return View();
         }
 
         // GET: Avaliacao/Delete/5

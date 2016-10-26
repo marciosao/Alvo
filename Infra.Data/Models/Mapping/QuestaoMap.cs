@@ -38,9 +38,6 @@ namespace Infra.Data.Models.Mapping
             this.HasOptional(t => t.Etapa)
                 .WithMany(t=>t.Questao)
                 .HasForeignKey(d => d.IdEtapa);
-
-            ////////modelBuilder.Entity<Completed>().HasRequired(e => e.OldStep).WithMany().HasForeignKey(e => e.OldStepId);
-
         }
     }
 }
