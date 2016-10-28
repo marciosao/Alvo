@@ -7,6 +7,7 @@ using Aplicacao.Interfaces;
 using Dominio.Entidades;
 using Alvo.ViewModels;
 using AutoMapper;
+using System.Collections;
 
 namespace Alvo.Controllers
 {
@@ -158,14 +159,58 @@ namespace Alvo.Controllers
             return View(lAvaliacaoViewModel);
         }
 
+        public ActionResult DetalhesAvaliacao(int id)
+        {
+            var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
+            var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
+
+            ViewBag.IdAvaliacao = id;
+
+            var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
+
+            lAvaliacaoViewModel.Questionario = lQuestionario;
+
+            ////////lAvaliacaoViewModel.Questionario.Questao.ForEach(x =>
+            ////////{
+            ////////    x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
+            ////////            { 
+            ////////                new RespostaQuestaoViewModel()
+            ////////                {
+            ////////                    IdQuestao = x.Id
+            ////////                }
+            ////////            };
+            ////////}
+            ////////    );
+
+            return View(lAvaliacaoViewModel);
+        }
+
         [HttpPost]
         public ActionResult Avaliacao(AvaliacaoViewModel pAvaliacaoViewModel)
         {
-            var lAvaliacao = Mapper.Map<AvaliacaoViewModel, Avaliacao>(pAvaliacaoViewModel);
+            Avaliacao lAvaliacao = new Avaliacao();
 
+            lAvaliacao.Id = pAvaliacaoViewModel.Id;
+
+            foreach (var item in pAvaliacaoViewModel.Questao)
+            {
+                foreach (var item2 in item.RespostaQuestao)
+                {
+                    if (item2.IdAvaliacao == lAvaliacao.Id)
+                    {
+                        RespostaQuestao lResposta = new RespostaQuestao();
+                        lResposta.IdAvaliacao = item2.IdAvaliacao;
+                        lResposta.IdQuestao = item2.IdQuestao;
+                        lResposta.ValorResposta = item2.ValorResposta;
+
+                        lAvaliacao.RespostaQuestao.Add(lResposta);
+                    }
+                }
+            }
+            
             _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         // GET: Avaliacao/Delete/5

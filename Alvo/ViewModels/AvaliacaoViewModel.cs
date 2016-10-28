@@ -28,7 +28,7 @@ namespace Alvo.ViewModels
         {
             get
             {
-                if (Usuario !=null)
+                if (Usuario != null)
                 {
                     return Usuario.Nome;
                 }
@@ -42,5 +42,21 @@ namespace Alvo.ViewModels
         public virtual QuestionarioViewModel Questionario { get; set; }
 
         public virtual List<QuestaoViewModel> Questao { get; set; }
+
+        public virtual string Resultado
+        {
+            get
+            {
+                return (Aprovado == false) ? "Reprovado" : "Aprovado";
+            }
+        }
+
+        public virtual string Situacao
+        {
+            get
+            {
+                return (Concluida == false) ? "Pendente" : "Concluída";
+            }
+        }
     }
 }

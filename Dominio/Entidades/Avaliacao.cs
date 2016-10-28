@@ -22,6 +22,6 @@ namespace Dominio.Entidades
 
         public virtual CandidatoProcessoSeletivo CandidatoProcessoSeletivo { get; set; }
         public virtual ICollection<AvaliacaoQuestionario> AvaliacaoQuestionario { get; set; }
-        public virtual ICollection<RespostaQuestao> RespostaQuestao { get; set; }
+        public virtual List<RespostaQuestao> RespostaQuestao { get; set; }
     }
 }

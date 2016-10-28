@@ -10,10 +10,8 @@
         int? lIdCategoriaAnterior = 0;
         int? lIdGrupoAnterior = 0;
 
+        decimal lTotalPontosMaximo = 0;
         decimal lTotalPontos = 0;
-        decimal lTotalGeralPontosParcial = 0;
-        string lClassEtapa3 = "form-control";
-        bool lDisabled = false;
 
         //foreach (var item in Model.Questao)
         for (int i = 0; i < Model.Questao.Count; i++)
@@ -54,15 +52,15 @@
                 }
                 if (Model.Questao[i].IdCategoriaQuestao != lIdCategoriaAtual)
                 {
-        <tr style="background-color:#EEE9E9;width:71%">
-            <th align="center">
-                @Html.Label(Model.Questao[i].CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label", @style = "font-weight:bold; text-align:center;" })
-            </th>
-            <th style="text-align:center;width:20%">
-                @Html.Raw("Pontuação Máxima")
-            </th>
-            <th></th>
-        </tr>
+                    <tr style="background-color:#EEE9E9;width:71%">
+                        <th align="center">
+                            @Html.Label(Model.Questao[i].CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label", @style = "font-weight:bold; text-align:center;" })
+                        </th>
+                        <th style="text-align:center;width:20%">
+                            @Html.Raw("Pontuação Máxima")
+                        </th>
+                        <th></th>
+                    </tr>
                 }
             }
 
@@ -72,7 +70,7 @@
             }
             else
             {
-                if (lIdEtapaAtual != Model.Questao[i].IdEtapa || Model.Questao[i].IdEtapa == 2)
+                if (lIdEtapaAtual != Model.Questao[i].IdEtapa)
                 {
                     lIdEtapaAnterior = lIdEtapaAtual;
                 }
@@ -86,7 +84,7 @@
             }
             else
             {
-                if (lIdGrupoAtual != Model.Questao[i].CategoriaQuestao.GrupoQuestao.Id || Model.Questao[i].CategoriaQuestao.GrupoQuestao.Id == 1)
+                if (lIdGrupoAtual != Model.Questao[i].CategoriaQuestao.GrupoQuestao.Id)
                 {
                     lIdGrupoAnterior = lIdGrupoAtual;
                 }
@@ -99,7 +97,7 @@
             }
             else
             {
-                if (lIdCategoriaAtual != Model.Questao[i].CategoriaQuestao.Id || Model.Questao[i].CategoriaQuestao.Id == 1)
+                if (lIdCategoriaAtual != Model.Questao[i].CategoriaQuestao.Id)
                 {
                     lIdCategoriaAnterior = lIdCategoriaAtual;
                 }
@@ -108,58 +106,49 @@
 
             if (Model.Questao[i].IdEtapa == lIdEtapaAtual && Model.Questao[i].CategoriaQuestao.IdGrupoQuestao == lIdGrupoAtual)
             {
-                lTotalPontos += (decimal)Model.Questao[i].ValorBarema;
+                lTotalPontosMaximo += (decimal)Model.Questao[i].ValorBarema;
+                lTotalPontos += decimal.Parse(Model.Questao[i].RespostaQuestao[0].ValorResposta);
+                <tr>
+                    <td style="font-size:small;height:auto">
+                        @Html.DisplayFor(modelItem => Model.Questao[i].Descricao)
+                    </td>
+                    <td style="text-align:center;vertical-align:middle;font-size:small;height:auto">
+                        @Html.DisplayFor(modelItem => Model.Questao[i].ValorBarema)
+                    </td>
+                    <td align="center" valign="middle" style="vertical-align: middle" width="9%">
+                        @*<input type="text" name="ValorResposta" id="Nota" class="textbox-nota" />*@
+                        @Html.DisplayFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-label", @style = "text-align:right;font-size:medium;color:red" } })
+                        @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdQuestao)
+                        @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdAvaliacao, new { @Value = ViewBag.IdAvaliacao })
+                    </td>
+                </tr>
+            }
+            else if (lIdEtapaAnterior == 2 && lIdGrupoAnterior == 1 && lIdCategoriaAnterior == 1)
+            {
+                <tr>
+                    <td colspan="3" style="text-align:center;color:white;font-size:medium;font-family:Arial;background-color:black">@Html.Label("PARECER DO AVALIADOR", htmlAttributes: new { @class = "control-label" })</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
 
-                if (Model.Questao[i].IdEtapa == 2)
-                {
-                    lTotalGeralPontosParcial += (decimal)Model.Questao[i].ValorBarema;
-                }
-                    <input type="hidden" id="TotalGeralPontosParcial" value=@lTotalGeralPontosParcial />
-                    <tr>
-                        <td style="font-size:small;height:auto">
-                            @Html.DisplayFor(modelItem => Model.Questao[i].Descricao)
-                        </td>
-                        <td style="text-align:center;vertical-align:middle;font-size:small;height:auto">
-                            @Html.DisplayFor(modelItem => Model.Questao[i].ValorBarema)
-                        </td>
-                        <td style="text-align:center;vertical-align:middle" valign="middle" width="9%">
-                            @if ((lIdEtapaAtual == 2 && lIdGrupoAtual == 2)||lIdEtapaAtual == 3)
-                            {
-                                lDisabled = true;
-                            }
+                        <textarea name="ParecerAvaliador" rows="10">Enter text here...</textarea>
+                    </td>
+                </tr>
 
-                            @if(!lDisabled)
-                            {
-                                @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium" }} )
-                            }else{
-                                @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium", @disabled="disabled" }} )
-                            }
-
-                            @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdQuestao)
-                            @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdAvaliacao, new { @Value = ViewBag.IdAvaliacao })
-                        </td>
-                    </tr>
-                }
-                else if (lIdEtapaAnterior == 2 && lIdGrupoAnterior == 1 && lIdCategoriaAnterior == 1)
-                {
-                    <tr>
-                        <td colspan="3" style="text-align:center;color:white;font-size:medium;font-family:Arial;background-color:black">@Html.Label("PARECER DO AVALIADOR", htmlAttributes: new { @class = "control-label" })</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <textarea name="ParecerAvaliador" rows="10">Descreva o parecer</textarea>
-                        </td>
-                    </tr>
-                }
+            }
         }
         <tr>
             <td>
                 TOTAL DE PONTOS GERAL
             </td>
             <td style="text-align:center;font-size:medium">
+                @Html.Raw(lTotalPontosMaximo)
+            </td>
+            <td style="text-align:center;font-size:medium">
                 @Html.Raw(lTotalPontos)
             </td>
-            <td></td>
         </tr>
     }
 </table>
+
+

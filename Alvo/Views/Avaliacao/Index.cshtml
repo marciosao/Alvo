@@ -52,7 +52,17 @@
                     @Html.DisplayFor(modelItem => item.Avaliacao.FirstOrDefault().NomePrefessor)
                 </td>
                 <td>
-                    @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
+                    @{
+                        if (!item.Avaliacao.Any(x=>x.RespostaQuestao.Any()))
+                        {
+                            @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
+                        }
+}
+                    
                 </td>
             </tr>
         }
