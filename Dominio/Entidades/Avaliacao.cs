@@ -18,6 +18,9 @@ namespace Dominio.Entidades
         public DateTime? DataAvaliacao { get; set; }
         public bool Aprovado { get; set; }
         public bool Concluido { get; set; }
+
+        public string ParecerAvaliador { get; set; }
+        
         public virtual Usuario Usuario { get; set; }
 
         public virtual CandidatoProcessoSeletivo CandidatoProcessoSeletivo { get; set; }

@@ -21,6 +21,7 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.DataAvaliacao).HasColumnName("DataAvaliacao");
             this.Property(t => t.Aprovado).HasColumnName("Aprovado");
             this.Property(t => t.Concluido).HasColumnName("Concluida");
+            this.Property(t => t.ParecerAvaliador).HasColumnName("ParecerAvaliador");            
 
             // Relationships
             this.HasOptional(t => t.Usuario)

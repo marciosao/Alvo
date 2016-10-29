@@ -146,6 +146,7 @@ CREATE TABLE Avaliacao
 	DataAvaliacao DATE,
 	Aprovado BOOL,
 	Concluida BOOL,
+	ParecerAvaliador TEXT,
 	PRIMARY KEY (Id),
 	KEY (IdCandidatoProcessoSeletivo),
 	KEY (IdProfessor)

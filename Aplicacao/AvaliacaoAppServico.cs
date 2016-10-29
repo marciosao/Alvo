@@ -34,6 +34,7 @@ namespace Aplicacao
             }
 
             lIdAvaliacao.NotaFinal = lNotaFinal;
+            lIdAvaliacao.ParecerAvaliador = lAvaliacao.ParecerAvaliador;
             lIdAvaliacao.Concluido = true;
             lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
 

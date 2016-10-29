@@ -19,6 +19,8 @@ namespace Alvo.ViewModels
         public bool Aprovado { get; set; }
         public bool Concluida { get; set; }
         public DateTime? DataAvaliacao { get; set; }
+        public string ParecerAvaliador { get; set; }
+
         public virtual UsuarioViewModel Usuario { get; set; }
         public virtual CandidatoProcessoSeletivoViewModel CandidatoProcessoSeletivo { get; set; }
         public virtual ICollection<AvaliacaoQuestionarioViewModel> AvaliacaoQuestionario { get; set; }
