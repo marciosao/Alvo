@@ -38,6 +38,16 @@ namespace Alvo.Controllers
             return View(candidatoProcessoSeletivoViewModel);
         }
 
+        public ActionResult Classificacao()
+        {
+            // variável para teste..  pegar o usuário logado no sistema
+            int lUsuario = 1;
+
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemCandidatosClassificacao(0));
+
+            return View(candidatoProcessoSeletivoViewModel);
+        }
+
         // GET: Distribuição
         public ActionResult Distribuicao()
         {
@@ -138,21 +148,24 @@ namespace Alvo.Controllers
             var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
-            ViewBag.IdAvaliacao = id;
-
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
+
+            lQuestionario.ParecerAvaliador = lAvaliacao.ParecerAvaliador;
 
             lAvaliacaoViewModel.Questionario = lQuestionario;
 
             lAvaliacaoViewModel.Questionario.Questao.ForEach(x =>
                     {
-                        x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
-                        { 
-                            new RespostaQuestaoViewModel()
-                            {
-                                IdQuestao = x.Id
-                            }
-                        };
+                        if (x.RespostaQuestao == null || x.RespostaQuestao.Count == 0)
+                        {
+                            x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
+                            { 
+                                new RespostaQuestaoViewModel()
+                                {
+                                    IdQuestao = x.Id
+                                }
+                            };
+                        }
                     }
                 );
 
@@ -164,9 +177,9 @@ namespace Alvo.Controllers
             var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
-            ViewBag.IdAvaliacao = id;
-
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
+
+            lQuestionario.ParecerAvaliador = lAvaliacao.ParecerAvaliador;
 
             lAvaliacaoViewModel.Questionario = lQuestionario;
 
@@ -191,6 +204,7 @@ namespace Alvo.Controllers
             Avaliacao lAvaliacao = new Avaliacao();
 
             lAvaliacao.Id = pAvaliacaoViewModel.Id;
+            lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
 
             foreach (var item in pAvaliacaoViewModel.Questao)
             {
@@ -207,7 +221,7 @@ namespace Alvo.Controllers
                     }
                 }
             }
-            
+
             _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
 
             return RedirectToAction("Index");

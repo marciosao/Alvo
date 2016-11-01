@@ -345,6 +345,7 @@
     <Content Include="Views\Avaliacao\_Questoes.cshtml" />
     <Content Include="Views\Avaliacao\DetalhesAvaliacao.cshtml" />
     <Content Include="Views\Avaliacao\_DetalhesQuestoes.cshtml" />
+    <Content Include="Views\Avaliacao\Classificacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

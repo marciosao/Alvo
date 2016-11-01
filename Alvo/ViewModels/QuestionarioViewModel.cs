@@ -16,5 +16,7 @@ namespace Alvo.ViewModels
         public bool Ativo { get; set; }
         public virtual List<AvaliacaoQuestionarioViewModel> AvaliacaoQuestionarios { get; set; }
         public virtual List<QuestaoViewModel> Questao { get; set; }
+
+        public virtual string ParecerAvaliador { get; set; }
     }
 }

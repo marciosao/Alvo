@@ -1,6 +1,6 @@
 ﻿@model Alvo.ViewModels.QuestionarioViewModel
 
-<table class="table" style="width:100%">
+<table class="table questoes" style="width:100%">
                     @{
         int? lIdEtapaAtual = 0;
         int? lIdCategoriaAtual = 0;
@@ -12,7 +12,7 @@
 
         decimal lTotalPontos = 0;
         decimal lTotalGeralPontosParcial = 0;
-        string lClassEtapa3 = "form-control";
+        string lClassEtapa3 = "form-control questaoEtapa3";
         bool lDisabled = false;
 
         int lTotalEtapa2Grupo1 = 0;
@@ -126,39 +126,50 @@
                 }
 
                     <input type="hidden" id="TotalGeralPontosParcial" value=@lTotalGeralPontosParcial />
-                    <tr>
-                        <td style="font-size:small;height:auto">
-                            @Html.DisplayFor(modelItem => Model.Questao[i].Descricao)
-                        </td>
-                        <td style="text-align:center;vertical-align:middle;font-size:small;height:auto">
-                            @Html.DisplayFor(modelItem => Model.Questao[i].ValorBarema)
-                        </td>
-                        <td style="text-align:center;vertical-align:middle" valign="middle" width="9%">
-                            @*@if ((lIdEtapaAtual == 2 && lIdGrupoAtual == 2)||lIdEtapaAtual == 3)*@
-                            @if (lIdEtapaAtual == 3)
-                                        {
-                                            lDisabled = true;
-                                        }
+    <tr name="QuestaoQuestionario" idquestao="@Model.Questao[i].Id" valorMaximo="@Model.Questao[i].ValorBarema">
+        <td style="font-size:small;height:auto">
+            @Html.DisplayFor(modelItem => Model.Questao[i].Descricao)
+        </td>
+        <td style="text-align:center;vertical-align:middle;font-size:small;height:auto" class="valorBarema">
+            @Html.DisplayFor(modelItem => Model.Questao[i].ValorBarema)
+        </td>
+        <td style="text-align:center;vertical-align:middle" valign="middle" width="9%" class="questao" data-id-grupo=@lIdGrupoAtual>
+            @if (lIdEtapaAtual == 3)
+            {
+                lDisabled = true;
+            }
 
-                            @if(!lDisabled)
-                            {
-                                @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium" }} )
-                            }else{
-                                @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium", @disabled="disabled" }} )
-                            }
+            @if (!lDisabled)
+            {
+                if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
+                {
+                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                }
+            }
+            else
+            {
+                if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
+                {
+                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium;width:60px", @disabled = "disabled", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                }
+            }
 
-                            @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdQuestao)
-                            @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdAvaliacao, new { @Value = ViewBag.IdAvaliacao })
-                        </td>
-                    </tr>
-                    if (lContadorEtapa2Grupo1 == lTotalEtapa2Grupo1)
-                    {
+            @if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
+            {
+                @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdQuestao)
+                @Html.HiddenFor(model => model.Questao[i].RespostaQuestao[0].IdAvaliacao, new { @Value = ViewBag.IdAvaliacao })
+            }
+        </td>
+    </tr>
+                if (lContadorEtapa2Grupo1 == lTotalEtapa2Grupo1)
+                {
                         <tr>
                             <td colspan="3" style="color:black;font-size:medium;font-family:Arial;background-color:#D8BFD8">@Html.Label("PARECER DO AVALIADOR", htmlAttributes: new { @class = "control-label" })</td>
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <textarea name="ParecerAvaliador" rows="10" style="width:800px">Descreva o parecer</textarea>
+                                @*<textarea name="ParecerAvaliador" rows="10" style="width:800px">Descreva o parecer</textarea>*@
+                                @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
                             </td>
                         </tr>
                         lContadorEtapa2Grupo1 = 0;
@@ -172,7 +183,9 @@
             <td style="text-align:center;font-size:medium">
                 @Html.Raw(lTotalPontos)
             </td>
-            <td></td>
+            <td>
+                <input type="text" id="txtResultadoParcial" class="form-control" style="text-align:right;font-size:medium" />
+            </td>
         </tr>
     }
 </table>

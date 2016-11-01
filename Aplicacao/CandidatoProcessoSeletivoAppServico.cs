@@ -59,6 +59,12 @@ namespace Aplicacao
             }
             return _candidatoProcessoSeletivoServico.ObtemAvaliacoesPorProfessor(lIdProfessor);
         }
+
+
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemCandidatosClassificacao(int pIdProcessoSeletivo)
+        {
+            return _candidatoProcessoSeletivoServico.ObtemCandidatosClassificacao(pIdProcessoSeletivo);
+        }
     }                                                                                    
 }                                                                                        
 

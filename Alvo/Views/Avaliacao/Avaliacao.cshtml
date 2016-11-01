@@ -8,6 +8,11 @@
 {
     @Html.AntiForgeryToken()
 
+    @*@if (!string.IsNullOrEmpty(ViewBag.ParecerAvaliador))
+    {
+        Model.Questionario.ParecerAvaliador = ViewBag.ParecerAvaliador;
+    }*@
+
     <fieldset id="DadosCandidato">
         @Html.HiddenFor(model=>model.Id)
         <legend>Dados do Candidato</legend>
@@ -83,3 +88,98 @@
     </div>
 }
 
+<script type="text/javascript">
+    function AoSairNota(idQuestao) {
+
+        var lSomatorioNota = 0;
+        var lTotalGrupo1 = 0;
+        var lTotalGrupo2 = 0;
+
+        //var lResultadoGrupo1 = 0;
+        //var lResultadoGrupo2 = 0;
+        var lResultadoFinal = 0;
+
+        $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
+            if ($(element).hasClass('questao')) {
+                var lIdGrupo = $(element).attr('data-id-grupo');
+
+                var elFilho = $(element).children();
+
+                if (elFilho.val() != "") {
+                    if (lIdGrupo == 1 || lIdGrupo == 2) {
+
+                        if (lIdGrupo == 1) {
+                            lTotalGrupo1 += parseFloat(elFilho.val());
+                        } else if (lIdGrupo == 2) {
+                            lTotalGrupo2 += parseFloat(elFilho.val());
+                        }
+
+                        lSomatorioNota += parseFloat(elFilho.val());
+
+                        lResultadoFinal = ((lTotalGrupo1 * 7) + (lTotalGrupo2 * 3)) / 10;
+                    }
+                }
+
+                var lTextEtapa3;
+                if (lResultadoFinal >= 7) {
+                    console.log("Média: " + lResultadoFinal);
+                    
+                    $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
+
+                        lTextEtapa3 = $(element).children();
+
+                        if (lTextEtapa3.hasClass('questaoEtapa3')) {
+                            $(element).attr('disabled', false);
+                            $(element).prop('disabled', false);
+                        }
+                    });
+                } else{
+                    $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
+                        lTextEtapa3 = $(element).children();
+                        if (lTextEtapa3.hasClass('questaoEtapa3')) {
+
+                            $(element).val('');
+                            $(element).attr('disabled',true);
+                            $(element).prop('disabled', true);
+
+                        }
+                    })
+                }
+
+            }
+        });
+
+        // $(element).attr('disabled',false)
+
+        $('#txtResultadoParcial').val(lSomatorioNota);
+
+        //console.log(lSomatorioNota);
+        //console.log("Grupo 1: " + lTotalGrupo1);
+        //console.log("Grupo 2: " + lTotalGrupo2);
+    }
+
+    function AoDigitarNota(idQuestao) {
+
+        var lSomatorioNota = 0;
+
+        var elPai = $('#txtNota-' + idQuestao);
+        var elFilho = elPai.parent().parent().find('.valorBarema').html();
+        var lNota = elPai.val();
+        lNota = lNota.trim().replace(',', '.');
+        elFilho = elFilho.trim().replace(',', '.');
+
+                if (elFilho != "" && lNota != "") {
+
+                        var lValorBarema = parseFloat(elFilho).toFixed(2);
+                        var lValorNota = parseFloat(lNota).toFixed(2);
+                        if (parseFloat(lValorNota) > parseFloat(lValorBarema)) {
+
+                            elPai.val('');
+                            //$('#txtNota-' + idQuestao).val('');
+                            //return false;
+                        }
+                        //lSomatorioNota += parseFloat($('#txtNota-' + idQuestao).val());
+                    }
+    }
+
+</script>

@@ -28,6 +28,25 @@ namespace Infra.Data.Repositorios
             return lCandidatoProcessoSeletivo;
         }
 
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemCandidatosClassificacao(int pIdProcessoSeletivo)
+        {
+            int? lIdProcessoSeletivo = null;
+
+            if (pIdProcessoSeletivo > 0)
+            {
+                lIdProcessoSeletivo = pIdProcessoSeletivo;
+            }
+
+            var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x => 
+                                                                                            (lIdProcessoSeletivo == null || x.IdProcessoSeletivo == lIdProcessoSeletivo &&
+                                                                                            x.Avaliacao.Any(a => a.Concluido == true))).OrderBy(o=>o.IdProcessoSeletivo);
+
+            return lCandidatoProcessoSeletivo;
+        }
+
+
+
+
 
     }                                                                            
 }                                                                                
