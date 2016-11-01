@@ -12,7 +12,8 @@
 
         decimal lTotalPontos = 0;
         decimal lTotalGeralPontosParcial = 0;
-        string lClassEtapa3 = "form-control questaoEtapa3";
+        string lClassEtapa3 = "form-control";
+        string lClassEtapa31 = "form-control questaoEtapa31";
         bool lDisabled = false;
 
         int lTotalEtapa2Grupo1 = 0;
@@ -150,7 +151,7 @@
             {
                 if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
                 {
-                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium;width:60px", @disabled = "disabled", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @disabled = "disabled", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
                 }
             }
 

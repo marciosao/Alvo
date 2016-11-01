@@ -23,6 +23,11 @@ namespace Aplicacao
         {
             var lIdAvaliacao = _avaliacaoServico.ObtemPorId(lAvaliacao.Id);
             decimal lNotaFinal = 0;
+
+            decimal lTotalEntrevista = 0;
+            decimal lTotalPropostaTrabalho = 0;
+            decimal lTotalCurriculoLattes = 0;
+
             bool lAvavaliacaoConcluida = true;
 
             foreach (var lRowResposta in lAvaliacao.RespostaQuestao)
