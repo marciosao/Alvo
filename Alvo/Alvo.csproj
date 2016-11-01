@@ -173,6 +173,13 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="Common\HtmlHelpers\HtmlHelpers.cs" />
+    <Compile Include="Common\MvcExtensions\CustomValidationCPFAttribute.cs" />
+    <Compile Include="Common\MvcExtensions\EnumExtensions.cs" />
+    <Compile Include="Common\MvcExtensions\HtmlExtensions.cs" />
+    <Compile Include="Common\MvcExtensions\MaskAttribute.cs" />
+    <Compile Include="Common\MvcExtensions\MensagemActionResultExtension.cs" />
+    <Compile Include="Common\MvcExtensions\viewDataExtensions.cs" />
     <Compile Include="Controllers\AreaConcentracaoController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\AvaliacaoQuestionarioController.cs" />
@@ -269,7 +276,9 @@
     <Content Include="Scripts\select2.full.js" />
     <Content Include="Scripts\Views\Questao\questao.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -342,6 +351,9 @@
     <Content Include="Views\Avaliacao\Distribuicao.cshtml" />
     <Content Include="Views\Avaliacao\EditDistribuicao.cshtml" />
     <Content Include="Views\Avaliacao\_EtapaAvaliacao.cshtml" />
+    <Content Include="Views\Shared\_Mensagem.cshtml" />
+    <Content Include="Views\Home\_Menu.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

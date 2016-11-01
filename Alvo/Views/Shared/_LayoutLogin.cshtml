@@ -1,52 +1,80 @@
-﻿<!DOCTYPE html>
+﻿@using Alvo.Common.HtmlHelpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9;IE=EmulateIE10;IE=EmulateIE11" />
-    <title>@ViewBag.Title - Comprasnet.BA</title>
+    <title>..:: Alvo ::..</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="alvo">
-<div class="container body-content">
-    @*<div style="text-align:center">
-        <img alt="" id="imgLogomarcaComprasnet" src="~/Content/img/Logo_ComprasNet.png" class="center" />
-    </div>*@
-    @RenderBody()
-    <hr/>
-    @*<div style="text-align: center">
-        <img alt="" id="imgLogomarcaGoverno" src="~/Content/img/Logo_Governo_Bahia.gif" class="center"/>
-    </div>*@
-    <footer>
-        <p style="text-align: center">&copy; @DateTime.Now.Year - ALVO</p>
-    </footer>
-</div>
+<body class="comprasnet">
+    <div class="container body-content">
+        @*<div style="text-align:center">
+                <img alt="" id="imgLogomarcaComprasnet" src="~/Content/img/Logo_ComprasNet.png" class="center" />
+            </div>*@
+        <div class="container login-container">
+            <div class="row" style="margin-bottom: 40px;">
+                @*<center>
+                        <img src="~/Content/img/Logo_ComprasNet.png" alt="Comprasnet" rel="tooltip" title="Comprasnet.BA" />
+                    </center>*@
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="img_logo">
+                        @*<img src="~/Content/img/logo_comprasnet_login.png" alt="Comprasnet" rel="tooltip" title="Comprasnet.BA" />*@
+                    </div>
+                    <p align="center">
+                        <br />
+                        @*Acesso aos Módulos do Administrador e do Credenciador do <strong>ComprasNet.Ba</strong>*@
+                    </p>
+                </div>
+            </div>
+            @RenderBody()
+
+            
+        </div>
+        <hr />
+        <div style="text-align: center">
+            @*<img alt="" id="imgLogomarcaGoverno" src="~/Content/img/Logo_Governo_Bahia.gif" class="center" />*@
+        </div>
+        <footer></footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/scripts/CustomValidation.js")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">
-   // all content including images has been loaded
-   window.onload = function(){
-       // post our message to the parent
-       window.parent.postMessage(
-           // get height of the content
-           document.body.scrollHeight
-           // set target domain
-           , "*"
-       );
-   };
 
-   function PageResize(){
-       window.parent.postMessage(
-           document.body.scrollHeight
-           , "*"
-       );
-   }
 
-   setInterval(function () { PageResize(); }, 2000);
+        $(document).ready(function () {
+
+            CustomValidation.Init();
+        });
+
+        // all content including images has been loaded
+        window.onload = function () {
+            // post our message to the parent
+            window.parent.postMessage(
+                // get height of the content
+                document.body.scrollHeight
+                // set target domain
+                , "*"
+            );
+        };
+
+        function PageResize() {
+            window.parent.postMessage(
+                document.body.scrollHeight
+                , "*"
+            );
+        }
+
+        setInterval(function () { PageResize(); }, 2000);
 
     </script>
 

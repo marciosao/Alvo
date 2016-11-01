@@ -1,69 +1,53 @@
-﻿@model Alvo.ViewModels.UsuarioViewModel
+﻿@using Alvo.Common.HtmlHelpers
+@model Alvo.ViewModels.UsuarioViewModel
 
 @{
     Layout = Layout = "~/Views/Shared/_LayoutLogin.cshtml"; ;
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>..:: Alvo ::..</title>
-    @Scripts.Render("~/bundles/jquery")
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/bootstrap")
-</head>
-<body class="comprasnet">
-<div class="container login-container">
-    <div class="row" style="margin-bottom: 40px;">
-        @*<center>
-                    <img src="~/Content/img/Logo_ComprasNet.png" alt="Comprasnet" rel="tooltip" title="Comprasnet.BA" />
-                </center>*@
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-			<div class ="img_logo">
-			@*<img src="~/Content/img/logo_comprasnet_login.png" alt="Comprasnet" rel="tooltip" title="Comprasnet.BA" />*@
-			</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Efetue o Login</h3>
-                </div>
-                <div class="panel-body login-form">
-                    @using (Html.BeginForm())
-                    {
-                        <fieldset>
-                            <div class="form-group">
-                                @Html.TextBoxFor(model => model.Nome, new {@class = "form-control", maxlength = 30, placeholder = "Usuário"})
-                            </div>
-                            <div class="form-group">
-                                @Html.PasswordFor(model => model.Senha, new {@class = "form-control", maxlength = 15, placeholder = "Senha"})
-                            </div>
-							<div class="botoes_entrar">
-								@Html.ActionLink("Alterar Senha", "Index", null, new {@class = "btn btn-default medium yellow"})
-								@Html.ActionLink("Entrar", "Index", null, new { @class = "btn btn-default medium yellow" })
-							</div>	
-                        </fieldset>
-                    }
-                </div>
+
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.ValidationMessage("Sucesso", new { @class = "text-success" })
+@Html.ValidationMessage("Error", new { @class = "text-danger" })
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Efetue o Login</h3>
+            </div>
+            <div class="panel-body login-form">
+                @using (Html.BeginForm("Login", "Home"))
+                {
+
+                    <fieldset>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.CPF, new { @class = "form-control", maxlength = 30, placeholder = "Usuário" })
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(model => model.Senha, new { @class = "form-control", maxlength = 15, placeholder = "Senha" })
+                        </div>
+                        <div class="botoes_entrar">
+                            <input type="submit" value="Entrar" class="btn btn-default medium yellow" />
+                            @*@Html.ActionLink("Esqueci a Senha", "Recupera")*@
+                        </div>
+                    </fieldset>
+                }
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <p align="center" style="font-size: x-small">
-                <br />
-            </p>
-        </div>
-    </div>
 </div>
-</body>
-</html>
+
+@section Scripts {
+    @Html.RenderScripts()
+    @{Html.RenderPartial("~/Views/Shared/_Mensagem.cshtml");}
+
+}
+
+
+
+
+
+
 
 
