@@ -20,7 +20,7 @@ namespace Infra.Data.Models.Mapping
 
             // Relationships
             this.HasOptional(t => t.menu)
-                .WithMany(t => t.perfilmenus)
+                .WithMany(t => t.PerfilMenus)
                 .HasForeignKey(d => d.IdMenu);
             this.HasOptional(t => t.perfil)
                 .WithMany(t => t.perfilmenus)

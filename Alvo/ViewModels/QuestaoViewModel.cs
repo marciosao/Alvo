@@ -9,7 +9,7 @@ namespace Alvo.ViewModels
         public QuestaoViewModel()
         {
             this.OpcaoQuestao = new List<OpcaoQuestaoViewModel>();
-            this.respostaquestaos = new List<RespostaQuestaoViewModel>();
+            this.RespostaQuestao = new List<RespostaQuestaoViewModel>();
         }
 
         [DisplayName("Código")]
@@ -38,6 +38,6 @@ namespace Alvo.ViewModels
         public virtual ICollection<OpcaoQuestaoViewModel> OpcaoQuestao { get; set; }
         public virtual QuestionarioViewModel Questionario { get; set; }
         public virtual TipoQuestaoViewModel tipoquestao { get; set; }
-        public virtual ICollection<RespostaQuestaoViewModel> respostaquestaos { get; set; }
+        public virtual List<RespostaQuestaoViewModel> RespostaQuestao { get; set; }
     }
 }

@@ -332,7 +332,10 @@ ul.dropdown-menu {
     max-width: 100%;
 }
 
-
+.textbox-nota{
+    max-width:20px;
+    text-align:right;
+}
 /* ul.nav.navbar-nav.navbar-right .dropdown-menu{
 	display: none;
 } */

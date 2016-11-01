@@ -5,6 +5,11 @@ namespace Dominio.Entidades
 {
     public class Usuario
     {
+        public Usuario()
+        {
+            this.Avaliacao = new List<Avaliacao>();
+        }
+
         public int Id { get; set; }
         public int? IdPerfil { get; set; }
         public string Nome { get; set; }

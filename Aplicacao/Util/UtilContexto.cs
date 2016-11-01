@@ -54,6 +54,7 @@ namespace Aplicacao.Util
             new ValidaCsv {Id = 18,  Desc = "TipoNecessidade",NomeExibicao="TIPO NECESSIDADES ESPECIAIS", tamanho= 20,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
             new ValidaCsv {Id = 19,  Desc = "Curso",NomeExibicao="CURSO", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
             new ValidaCsv {Id = 20,  Desc = "Instituicao",NomeExibicao="INSTITUICAO", tamanho= 100,tipo = "variavel",obrigatorio = true,TipoExibicao = "Alfanumérico",regra= "NA"},
+            new ValidaCsv {Id = 21,  Desc = "TemaProjeto",NomeExibicao="TEMA", tamanho= 5000,tipo = "variavel",obrigatorio = false,TipoExibicao = "Alfanumérico",regra= "NA"}
         };
 
         public static bool ValidarCampos(string Campo, string texto, bool obrigatorio)

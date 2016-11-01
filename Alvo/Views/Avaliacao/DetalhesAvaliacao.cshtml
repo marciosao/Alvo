@@ -1,0 +1,106 @@
+﻿@model Alvo.ViewModels.AvaliacaoViewModel
+@{
+    ViewBag.Modulo = "Avaliação";
+    ViewBag.Title = "Avaliação Candidato";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset id="DadosCandidato">
+        @Html.HiddenFor(model => model.Id)
+        <legend>Dados do Candidato</legend>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                @Html.Label("Nome", htmlAttributes: new { @class = "control-label" })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.Candidato.Nome)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    @Html.Label("Instituição", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.Candidato.Instituicao)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    @Html.Label("Curso", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.Candidato.Curso)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    @Html.Label("Área de Concentração", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.AreaConcentracao.Nome)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    @Html.Label("Tema do Projeto", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.TemaProjeto)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset id="DadosAvaliacao">
+        <legend>Avaliação</legend>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.Usuario.Nome)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Nota Final", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaFinal)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Situação", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.Situacao)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Resultado", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.Resultado)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset id="DadosQuestionario">
+        <legend>Questionário</legend>
+        @Html.Partial("_DetalhesQuestoes", Model.Questionario)
+    </fieldset>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

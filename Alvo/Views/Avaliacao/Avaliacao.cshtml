@@ -1,0 +1,185 @@
+﻿@model Alvo.ViewModels.AvaliacaoViewModel
+@{
+    ViewBag.Modulo = "Avaliação";
+    ViewBag.Title = "Avaliação Candidato";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @*@if (!string.IsNullOrEmpty(ViewBag.ParecerAvaliador))
+    {
+        Model.Questionario.ParecerAvaliador = ViewBag.ParecerAvaliador;
+    }*@
+
+    <fieldset id="DadosCandidato">
+        @Html.HiddenFor(model=>model.Id)
+        <legend>Dados do Candidato</legend>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                @Html.Label("Nome", htmlAttributes: new { @class = "control-label" })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.Candidato.Nome)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    @Html.Label("Instituição", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.Candidato.Instituicao)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    @Html.Label("Curso", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.Candidato.Curso)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    @Html.Label("Área de Concentração", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.AreaConcentracao.Nome)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    @Html.Label("Tema do Projeto", htmlAttributes: new { @class = "control-label " })
+                    <div>
+                        @Html.DisplayFor(model => model.CandidatoProcessoSeletivo.TemaProjeto)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset id="DadosAvaliacao">
+        <legend>Avaliação</legend>
+        <div class="row">
+            <div class="col-md-5 col-sm-5">
+                @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.Usuario.Nome)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset id="DadosQuestionario">
+        <legend>Questionário</legend>
+        @Html.Partial("_Questoes", Model.Questionario)
+        @*@Html.Action("QuestoesQuestionario", "Avaliacao")*@
+    </fieldset>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function AoSairNota(idQuestao) {
+
+        var lSomatorioNota = 0;
+        var lTotalGrupo1 = 0;
+        var lTotalGrupo2 = 0;
+
+        //var lResultadoGrupo1 = 0;
+        //var lResultadoGrupo2 = 0;
+        var lResultadoFinal = 0;
+
+        $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
+            if ($(element).hasClass('questao')) {
+                var lIdGrupo = $(element).attr('data-id-grupo');
+
+                var elFilho = $(element).children();
+
+                if (elFilho.val() != "") {
+                    if (lIdGrupo == 1 || lIdGrupo == 2) {
+
+                        if (lIdGrupo == 1) {
+                            lTotalGrupo1 += parseFloat(elFilho.val());
+                        } else if (lIdGrupo == 2) {
+                            lTotalGrupo2 += parseFloat(elFilho.val());
+                        }
+
+                        lSomatorioNota += parseFloat(elFilho.val());
+
+                        lResultadoFinal = ((lTotalGrupo1 * 7) + (lTotalGrupo2 * 3)) / 10;
+                    }
+                }
+
+                var lTextEtapa3;
+                if (lResultadoFinal >= 7) {
+                    console.log("Média: " + lResultadoFinal);
+                    
+                    $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
+
+                        lTextEtapa3 = $(element).children();
+
+                        if (lTextEtapa3.hasClass('questaoEtapa3')) {
+                            $(element).attr('disabled', false);
+                            $(element).prop('disabled', false);
+                        }
+                    });
+                } else{
+                    $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
+                        lTextEtapa3 = $(element).children();
+                        if (lTextEtapa3.hasClass('questaoEtapa3')) {
+
+                            $(element).val('');
+                            $(element).attr('disabled',true);
+                            $(element).prop('disabled', true);
+
+                        }
+                    })
+                }
+
+            }
+        });
+
+        // $(element).attr('disabled',false)
+
+        $('#txtResultadoParcial').val(lSomatorioNota);
+
+        //console.log(lSomatorioNota);
+        //console.log("Grupo 1: " + lTotalGrupo1);
+        //console.log("Grupo 2: " + lTotalGrupo2);
+    }
+
+    function AoDigitarNota(idQuestao) {
+
+        var lSomatorioNota = 0;
+
+        var elPai = $('#txtNota-' + idQuestao);
+        var elFilho = elPai.parent().parent().find('.valorBarema').html();
+        var lNota = elPai.val();
+        lNota = lNota.trim().replace(',', '.');
+        elFilho = elFilho.trim().replace(',', '.');
+
+                if (elFilho != "" && lNota != "") {
+
+                        var lValorBarema = parseFloat(elFilho).toFixed(2);
+                        var lValorNota = parseFloat(lNota).toFixed(2);
+                        if (parseFloat(lValorNota) > parseFloat(lValorBarema)) {
+
+                            elPai.val('');
+                            //$('#txtNota-' + idQuestao).val('');
+                            //return false;
+                        }
+                        //lSomatorioNota += parseFloat($('#txtNota-' + idQuestao).val());
+                    }
+    }
+
+</script>

@@ -289,7 +289,6 @@
     <Content Include="Views\AreaConcentracao\Edit.cshtml" />
     <Content Include="Views\AreaConcentracao\Create.cshtml" />
     <Content Include="Views\Avaliacao\Details.cshtml" />
-    <Content Include="Views\Avaliacao\Edit.cshtml" />
     <Content Include="Views\Avaliacao\Delete.cshtml" />
     <Content Include="Views\Avaliacao\Create.cshtml" />
     <Content Include="Views\Candidato\Index.cshtml" />
@@ -342,6 +341,11 @@
     <Content Include="Views\Avaliacao\Distribuicao.cshtml" />
     <Content Include="Views\Avaliacao\EditDistribuicao.cshtml" />
     <Content Include="Views\Avaliacao\_EtapaAvaliacao.cshtml" />
+    <Content Include="Views\Avaliacao\Avaliacao.cshtml" />
+    <Content Include="Views\Avaliacao\_Questoes.cshtml" />
+    <Content Include="Views\Avaliacao\DetalhesAvaliacao.cshtml" />
+    <Content Include="Views\Avaliacao\_DetalhesQuestoes.cshtml" />
+    <Content Include="Views\Avaliacao\Classificacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

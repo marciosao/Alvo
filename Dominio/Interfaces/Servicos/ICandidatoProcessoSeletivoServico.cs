@@ -7,7 +7,7 @@ namespace Dominio.Interfaces.Servicos
     {
         IEnumerable<CandidatoProcessoSeletivo> ObtemTodosSemAvaliacao();
         IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor);
-
+        IEnumerable<CandidatoProcessoSeletivo> ObtemCandidatosClassificacao(int pIdProcessoSeletivo);
     }                                                               
 }                                                                   
 

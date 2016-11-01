@@ -12,8 +12,13 @@ namespace Dominio.Servicos
             : base(questionarioRepositorio)                                              
         {                                                                          
             _questionarioRepositorio = questionarioRepositorio;                                
-        }                                                                          
-                                                                                   
+        }
+
+
+        public Questionario ObtemQuestionarioPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
+        {
+            return _questionarioRepositorio.ObtemQuestionarioPorCandidatoProcesso(pCandidatoProcessoSeletivo);
+        }
     }                                                                              
 }                                                                                  
 
