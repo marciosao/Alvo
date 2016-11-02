@@ -34,9 +34,16 @@ namespace Aplicacao
             {
                 if (!string.IsNullOrEmpty(lRowResposta.ValorResposta))
                 {
-                    if (lRowResposta.Id == 0)
+                    RespostaQuestao lResposta = _respostaQuestaoServico.ObtemPorQuestaoAvaliacao(lRowResposta.IdQuestao, lRowResposta.IdAvaliacao);
+
+                    if (lResposta == null || lResposta.Id == 0)
                     {
                         _respostaQuestaoServico.Add(lRowResposta);
+                    }
+                    else
+                    {
+                        lResposta.ValorResposta = lRowResposta.ValorResposta;
+                        _respostaQuestaoServico.Update(lResposta);
                     }
 
                     lNotaFinal += Decimal.Parse(lRowResposta.ValorResposta);
@@ -57,6 +64,12 @@ namespace Aplicacao
             lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
 
             _avaliacaoServico.Update(lIdAvaliacao);
+        }
+
+
+        public Avaliacao ObtemAvaliacaoPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
+        {
+            return _avaliacaoServico.ObtemAvaliacaoPorCandidatoProcesso(pCandidatoProcessoSeletivo);
         }
     }
 }

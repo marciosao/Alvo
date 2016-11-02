@@ -1,7 +1,7 @@
 ﻿@model Alvo.ViewModels.QuestionarioViewModel
 
 <table class="table questoes" style="width:100%">
-                    @{
+@{
         int? lIdEtapaAtual = 0;
         int? lIdCategoriaAtual = 0;
         int? lIdGrupoAtual = 0;
@@ -18,6 +18,9 @@
 
         int lTotalEtapa2Grupo1 = 0;
         int lContadorEtapa2Grupo1 = 0;
+        
+         //int lIdPerfil = ViewBag.IdPerfil;
+         Alvo.ViewModels.UsuarioViewModel lUsuario = ViewBag.Usuario;
 
         lTotalEtapa2Grupo1 = Model.Questao.Where(x=>x.IdEtapa == 2 && x.IdCategoriaQuestao == 1).Count();
 
@@ -144,7 +147,31 @@
             {
                 if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
                 {
-                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                    //somente Usuario Secretaria poderá preencher questões da categoria Categoria FORMAÇÃO e terceira questão da categoria PRODUÇÃO TÉCNICA E/OU TECNOLOGIA
+                    if (lUsuario.perfil.Id == 3)
+                    {
+                        if (lIdCategoriaAtual == 2 || (lIdCategoriaAtual == 4 && Model.Questao[i].Id == 13)) 
+                        {
+                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
+                        }
+                    }
+                    else
+                    {
+                        if (lIdCategoriaAtual != 2 && (lIdCategoriaAtual != 4 || Model.Questao[i].Id != 13)) 
+                        {
+                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                        }
+                        else
+                        {
+                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
+                        }
+                    }
+
+                    //@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
                 }
             }
             else
@@ -169,8 +196,28 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                @*<textarea name="ParecerAvaliador" rows="10" style="width:800px">Descreva o parecer</textarea>*@
-                                @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
+                            @{
+                                if (lUsuario.perfil.Id == 3)
+                                {
+                                    if (lIdCategoriaAtual == 2 || (lIdCategoriaAtual == 4 && Model.Questao[i].Id == 13))
+                                    {
+                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
+                                    }else
+                                    {
+                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:800px", @readonly = "readonly" })
+                                    }
+                                }else
+                                {
+                                    if (lIdCategoriaAtual != 2 && (lIdCategoriaAtual != 4 || Model.Questao[i].Id != 13))
+                                    {
+                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
+                                    }else
+                                    {
+                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:800px", @readonly = "readonly" })
+                                    }
+                                }
+                               @*@Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })*@
+                            }
                             </td>
                         </tr>
                         lContadorEtapa2Grupo1 = 0;

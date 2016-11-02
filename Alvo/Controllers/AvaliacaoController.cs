@@ -145,7 +145,22 @@ namespace Alvo.Controllers
 
         public ActionResult Avaliacao(int id)
         {
-            var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
+            ////////1	1	Usuario Administrador
+            ////////2	3	Usuario Secretaria 1
+            ////////3	2	Usuario Professor 1
+            ////////*4	2	Usuario Professor 2
+            ////////5	2	Usuario Professor 3
+
+            ////////1	Administrador
+            ////////2	Professor
+            ////////3	Secretaria
+
+            var lUsuario = Mapper.Map<Usuario, UsuarioViewModel>(_usuarioAppServico.ObtemPorId(4));
+
+            ViewBag.IdPerfil = lUsuario.perfil.Id;
+            ViewBag.Usuario = lUsuario;
+
+            var lAvaliacao = _avaliacaoAppServico.ObtemAvaliacaoPorCandidatoProcesso(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
@@ -156,7 +171,22 @@ namespace Alvo.Controllers
 
             lAvaliacaoViewModel.Questionario.Questao.ForEach(x =>
                     {
+                        ////////if (x.RespostaQuestao == null || x.RespostaQuestao.Count == 0 || (x.RespostaQuestao.Any(r => r.IdAvaliacao != lAvaliacao.Id)))
                         if (x.RespostaQuestao == null || x.RespostaQuestao.Count == 0)
+                        {
+                            x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
+                            { 
+                                new RespostaQuestaoViewModel()
+                                {
+                                    IdQuestao = x.Id
+                                }
+                            };
+                        }
+                        else if (x.RespostaQuestao.Any(r => r.IdAvaliacao == lAvaliacao.Id))
+                        {
+                            x.RespostaQuestao = x.RespostaQuestao.Where(z => z.IdAvaliacao == lAvaliacao.Id).ToList();
+                        }
+                        else
                         {
                             x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
                             { 
@@ -204,21 +234,35 @@ namespace Alvo.Controllers
             Avaliacao lAvaliacao = new Avaliacao();
 
             lAvaliacao.Id = pAvaliacaoViewModel.Id;
-            lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
+            if (!string.IsNullOrEmpty(pAvaliacaoViewModel.ParecerAvaliador))
+            {
+                lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
+            }
 
             foreach (var item in pAvaliacaoViewModel.Questao)
             {
                 foreach (var item2 in item.RespostaQuestao)
                 {
+                    RespostaQuestao lResposta = new RespostaQuestao();
+                    lResposta.Id = item2.Id;
+                    lResposta.IdQuestao = item2.IdQuestao;
+                    lResposta.ValorResposta = item2.ValorResposta;
+
                     if (item2.IdAvaliacao == lAvaliacao.Id)
                     {
-                        RespostaQuestao lResposta = new RespostaQuestao();
+                        ////////RespostaQuestao lResposta = new RespostaQuestao();
                         lResposta.IdAvaliacao = item2.IdAvaliacao;
-                        lResposta.IdQuestao = item2.IdQuestao;
-                        lResposta.ValorResposta = item2.ValorResposta;
+                        ////////lResposta.IdQuestao = item2.IdQuestao;
+                        ////////lResposta.ValorResposta = item2.ValorResposta;
 
-                        lAvaliacao.RespostaQuestao.Add(lResposta);
+                        ////////lAvaliacao.RespostaQuestao.Add(lResposta);
                     }
+                    else
+                    {
+                        lResposta.IdAvaliacao = lAvaliacao.Id;
+                    }
+
+                    lAvaliacao.RespostaQuestao.Add(lResposta);
                 }
             }
 

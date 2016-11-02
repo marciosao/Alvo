@@ -53,7 +53,7 @@
                 </td>
                 <td>
                     @{
-                        if (!item.Avaliacao.Any(x=> x.Concluida == true && x.RespostaQuestao.Any()))
+                        if (!item.Avaliacao.Any(x=> x.Concluida == true))
                         {
                             @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
                         }

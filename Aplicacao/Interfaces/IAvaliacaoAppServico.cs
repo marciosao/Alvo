@@ -5,6 +5,8 @@ namespace Aplicacao.Interfaces
     public interface IAvaliacaoAppServico : IAppServicoBase<Avaliacao>         
     {
         void GravarRespostasAvaliacao(Avaliacao lAvaliacao);
+
+        Avaliacao ObtemAvaliacaoPorCandidatoProcesso(int pCandidatoProcessoSeletivo);
     }                                                                      
 }                                                                          
 
