@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Alvo.ViewModels;
+using Aplicacao.Interfaces;
 using AutoMapper;
 using Dominio.Entidades;
 
@@ -12,6 +13,15 @@ namespace Alvo.Controllers
 {
     public class HomeController : Controller
     {
+
+        private IUsuarioAppServico _usuarioApp;
+
+        public HomeController(IUsuarioAppServico usuarioApp)
+        {
+            _usuarioApp = usuarioApp;
+        }
+
+
         [Authorize]
         public ActionResult Index()
         {
@@ -46,8 +56,18 @@ namespace Alvo.Controllers
         [HttpPost]
         public ActionResult Login(UsuarioViewModel userModel)
         {
+            var usuario = _usuarioApp.AutenticarUsuario(Mapper.Map<UsuarioViewModel, Usuario>(userModel));
 
-            return View();
+            if (usuario != null)
+            {
+                Session["Usuario"] = usuario;
+                this.AutenticarAplicacao(userModel);
+                return RedirectToAction("Index");
+            }
+
+          //  ModelState.AddModelError("Error", "Usuário/Senha não conferem");
+
+            return View().Mensagem("Usuário/Senha não conferem");
         }
 
         public ActionResult Logout()
@@ -85,10 +105,54 @@ namespace Alvo.Controllers
             if (usuario != null)
             {
                 usuariosView = Mapper.Map<Usuario, UsuarioViewModel>(usuario);
+                ViewBag.Usuario = usuariosView;
             }
 
 
             return PartialView("_Menu", usuariosView.perfil.perfilmenus);
+        }
+
+        [Authorize]
+        public PartialViewResult AlterarSenha()
+        {
+            var usuario = (Usuario)Session["Usuario"];
+
+            var Login = new UsuarioViewModel() { CPF = usuario.CPF };
+
+            return PartialView("_AlterarSenha", Login);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public PartialViewResult AlterarSenha(AlterarSenhaUsuarioViewModel loginView)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                Usuario lUsuario = new Usuario();
+
+                lUsuario.CPF = loginView.CPF;
+                lUsuario.Senha = loginView.Senha;
+
+                var usuario = _usuarioApp.AlterarSenha(lUsuario, loginView.NovaSenha);
+
+                if (usuario != null)
+                {
+                    ModelState.AddModelError("Sucesso", "Senha Alterada com Sucesso"); //Mudar para padrao de mensagem
+
+                }
+                else
+                {
+                    ModelState.AddModelError("Error", "Senha incorreta. Tente novamente."); //Mudar para padrao de mensagem
+                }
+            }
+
+            loginView.NovaSenha = String.Empty;
+            loginView.ConfirmarSenha = String.Empty;
+            loginView.Senha = String.Empty;
+
+            return PartialView("_AlterarSenha", loginView);
         }
 
 

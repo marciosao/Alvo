@@ -1,33 +1,104 @@
-﻿@model IEnumerable<Alvo.ViewModels.PerfilMenuViewModel>
+﻿@using System.Text
+@using Alvo.ViewModels
+@using WebGrease.Css.Extensions
+@model IEnumerable<Alvo.ViewModels.PerfilMenuViewModel>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdPerfil)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdMenu)
-        </th>
-        <th></th>
-    </tr>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        @*<li>@Html.ActionLink("Validação Fornecedor", "Index", "Familia")</li>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdPerfil)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdMenu)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        @foreach (var MenuItem in Model.Where(x => x.menu.IdPai == null))
+        {
+            <li class="dropdown">
 
-</table>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@MenuItem.menu.Nome<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    @foreach (var SubmenuItem in MenuItem.menu.SubMenus.Where(sb => Model.Any(md => md.perfil.perfilmenus.Any(pm => pm.IdMenu.Equals(sb.Id)))))
+                    {
+                        <li>@Html.ActionLink(SubmenuItem.Nome, SubmenuItem.Action, SubmenuItem.Controller)</li>
+                        @*<li>@Html.ActionLink("Credenciado/Descredenciado", "Index", "Familia")</li>*@
+                    }
+                    @*<li role="separator" class="divider"></li>*@
+                </ul>
+            </li>
+        }
+
+        @*<li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exemplo Menu com SubMenu <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Opção 1", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Opção 2", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Opção 3", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Opção 4", "Index", "Home")</li>
+                    @*<li role="separator" class="divider"></li>
+                </ul>
+            </li>*@
+        @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li id="user" rel="popover" data-placement="bottom" data-trigger="focus" title="Informações do Usuário">
+            <a href="#"><span class="glyphicon glyphicon-user"></span></a>
+            @{
+                var Usuario = (UsuarioViewModel) ViewBag.Usuario;
+                //var Perfils = new StringBuilder();
+                //Usuario.perfil.ForEach(x =>
+                //{
+                //    Perfils.Append(String.Format(String.IsNullOrEmpty(Perfils.ToString()) ? "{0}" : ", {0}", x.Perfil.Nome));
+                //});
+            }
+            <div class="conteudo-hidden" id="content-pop">
+                <div class="user-title">Usuário: </div>
+                <div class="user-info">@Usuario.Nome</div>
+                <div class="user-title">Perfil(s): </div>
+                <div class="user-info">@Usuario.perfil.Nome</div>
+                <div class="user-title">Secretaria: </div>
+                @*<div class="user-info">@(Model.FirstOrDefault().Usuario.Secretaria == null ? Model.FirstOrDefault().Usuario.UnidadeOrg.Cod_secretaria : Model.FirstOrDefault().Usuario.Secretaria.ToString())</div>
+                <div class="user-title">Unidade: </div>
+                <div class="user-info">@Model.FirstOrDefault().Usuario.UnidadeOrg.ToString()</div>*@
+
+                <hr>
+                @*<a class="btn btn-primary" href="#" role="button">Alterar Senha</a>*@
+                @Ajax.ActionLink("Alterar Senha", "AlterarSenha", "Home",
+                        null,
+                                          new AjaxOptions() { LoadingElementId = "divCarregando", HttpMethod = "Post", UpdateTargetId = "alterarSenhaModal", OnSuccess = "ExibirPopUp", InsertionMode = InsertionMode.Replace },
+                                new { @class = "btn btn-primary", @title = "Alterar Senha", @Id = "btnPopUp" })
+            </div>
+
+        </li>
+        <li id="sair">@Html.ActionLink("Sair", "Logout", "Home", null, new { @class = "glyphicon glyphicon-log-out" })</li>
+    </ul>
+
+</div>
+
+ <!------------------------------------------------------------------- MODAL ----------------------------------------->
+<div class="modal" id="modalAlterarSenha" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="width: 40%; height: 55%; margin: 0 auto; overflow: hidden;">
+        <div class="modal-content" style="margin-top: 30%; width: 90%; margin: 0 auto;">
+            <div class="modal-header" style="background-color: #3598D8; border-radius: 0 0 7px 7px;color:white;">
+                <button type="button" id="btnCloseModal" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="LabelModal">
+                    Alterar Senha Usuário - @Usuario.Nome
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 600px; overflow-y: auto;">
+                <div id="alterarSenhaModal">
+
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="submit" class="btn btn-default" data-dismiss="modal" name="OK">Close</button>
+                </div>*@
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!------------------------------------------------------------------- MODAL ----------------------------------------->
+
+
+<script type="text/javascript">
+    function ExibirPopUp(param) {
+        $('#modalAlterarSenha').modal('show');
+    }
+</script>

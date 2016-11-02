@@ -202,6 +202,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AlterarSenhaUsuarioViewModel.cs" />
     <Compile Include="ViewModels\AreaConcentracaoViewModel.cs" />
     <Compile Include="ViewModels\AvaliacaoViewModel.cs" />
     <Compile Include="ViewModels\AvaliacaoQuestionarioViewModel.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\changeSystem.js" />
+    <Content Include="Scripts\CustomValidation.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />
@@ -354,6 +356,7 @@
     <Content Include="Views\Shared\_Mensagem.cshtml" />
     <Content Include="Views\Home\_Menu.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Home\_AlterarSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

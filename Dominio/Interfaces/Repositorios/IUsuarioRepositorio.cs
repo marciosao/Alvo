@@ -6,6 +6,7 @@ namespace Dominio.Interfaces.Repositorios
     public interface IUsuarioRepositorio : IRepositorioBase<Usuario>   
     {
         IEnumerable ObtemUsuariosProfessores();
+        Usuario AutenticarUsuario(Usuario pUsuario);
     }                                                                
 }                                                                    
 

@@ -18,3 +18,15 @@ C:\Projetos\Alvo\Aplicacao\bin\Debug\Excel.pdb
 C:\Projetos\Alvo\Aplicacao\obj\Debug\Aplicacao.csprojResolveAssemblyReference.cache
 C:\Projetos\Alvo\Aplicacao\obj\Debug\Aplicacao.dll
 C:\Projetos\Alvo\Aplicacao\obj\Debug\Aplicacao.pdb
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\Aplicacao.dll
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\Aplicacao.pdb
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\Dominio.dll
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\Excel.dll
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\EntityFramework.dll
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\Dominio.pdb
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\Excel.pdb
+C:\Projetos\dotnet\Alvo\Aplicacao\bin\Debug\EntityFramework.xml
+C:\Projetos\dotnet\Alvo\Aplicacao\obj\Debug\Aplicacao.csprojResolveAssemblyReference.cache
+C:\Projetos\dotnet\Alvo\Aplicacao\obj\Debug\Aplicacao.dll
+C:\Projetos\dotnet\Alvo\Aplicacao\obj\Debug\Aplicacao.pdb

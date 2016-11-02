@@ -28,6 +28,11 @@ namespace Infra.Data.Repositorios
             return Db.Set<TEntity>().ToList();
         }
 
+        public DbSet<TEntity> Entidade()
+        {
+            return Db.Set<TEntity>();
+        }
+
         public void Update(TEntity obj)
         {
             Db.Entry(obj).State = EntityState.Modified;
