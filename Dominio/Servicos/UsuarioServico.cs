@@ -19,6 +19,11 @@ namespace Dominio.Servicos
         {
             return _usuarioRepositorio.ObtemUsuariosProfessores();
         }
+
+        public Usuario AutenticarUsuario(Usuario pUsuario)
+        {
+            return _usuarioRepositorio.AutenticarUsuario(pUsuario);
+        }
     }                                                                              
 }                                                                                  
 
