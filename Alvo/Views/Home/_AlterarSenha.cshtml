@@ -1,0 +1,66 @@
+﻿@using Alvo.Common.HtmlHelpers
+@model Alvo.ViewModels.AlterarSenhaUsuarioViewModel
+
+<div class="panel-body login-form">
+    @using (Ajax.BeginForm("AlterarSenha", "Home", new AjaxOptions
+    {//GetPatients is name of method in PatientController
+        InsertionMode = InsertionMode.Replace, //target element(#patientList) will be replaced
+        UpdateTargetId = "alterarSenhaModal",
+        LoadingElementId = "divCarregando" // div with .gif loader - that is shown when data are loading
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationMessage("Sucesso", new { @class = "text-success" })
+        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+
+        <fieldset class="group background-yellow">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="control-label">Senha Atual: </span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.HiddenFor(model => model.CPF)
+                        @Html.PasswordFor(model => model.Senha, new { @class = "form-control", maxlength = 30, placeholder = "Senha Atual" })
+                        @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="control-label">Nova Senha: </span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.PasswordFor(model => model.NovaSenha, new { @class = "form-control", maxlength = 15, placeholder = "Nova Senha" })
+                        @Html.ValidationMessageFor(model => model.NovaSenha, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="control-label">Confirmar Senha: </span>
+                    </div>
+                    <div class="col-md-8">
+                        @Html.PasswordFor(model => model.ConfirmarSenha, new { @class = "form-control", maxlength = 15, placeholder = "Confirmar Senha" })
+                        @Html.ValidationMessageFor(model => model.ConfirmarSenha, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="botoes_entrar">
+                    <input type="submit" value="Alterar" class="btn btn-default medium yellow" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+@section scripts
+{
+    @Html.RenderScripts()
+    @{Html.RenderPartial("~/Views/Shared/_Mensagem.cshtml");}
+
+}

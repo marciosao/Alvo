@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 
 namespace Dominio.Interfaces.Repositorios
 {
@@ -11,6 +12,8 @@ namespace Dominio.Interfaces.Repositorios
         TEntity AddWithReturn(TEntity obj);
 
         IEnumerable<TEntity> ObtemTodos();
+
+        DbSet<TEntity> Entidade();
 
         void Update(TEntity obj);
 

@@ -14,6 +14,11 @@ namespace Infra.Data.Repositorios
 
             return lProfessores;
         }
+
+       public Usuario AutenticarUsuario(Usuario pUsuario)
+       {
+           return this.Entidade().FirstOrDefault(usr => usr.CPF.Equals(pUsuario.CPF) && usr.Senha.Equals(pUsuario.Senha));
+       }
     }                                                                            
 }                                                                                
 

@@ -88,6 +88,7 @@
     <Compile Include="TipoQuestaoAppServico.cs" />
     <Compile Include="UsuarioAppServico.cs" />
     <Compile Include="Util\Arquivos.cs" />
+    <Compile Include="Util\CriarMD5.cs" />
     <Compile Include="Util\UtilContexto.cs" />
   </ItemGroup>
   <ItemGroup>
