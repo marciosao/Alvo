@@ -51,7 +51,7 @@ namespace Aplicacao
                         Avaliacao lAvaliacao = new Avaliacao();
                         lAvaliacao.IdCandidatoProcessoSeletivo = lCandidadoProcesso.Id;
                         lAvaliacao.Aprovado = false;
-                        lAvaliacao.Concluido = false;
+                        lAvaliacao.Concluida = false;
 
                         _avaliacaoServico.Add(lAvaliacao);
                     }

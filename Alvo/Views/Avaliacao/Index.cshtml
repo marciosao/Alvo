@@ -53,16 +53,17 @@
                 </td>
                 <td>
                     @{
-                        if (!item.Avaliacao.Any(x=> x.Concluida == true))
-                        {
-                            @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
-                        }
-                        else
+            //if (item.Avaliacao.Any(x=> x.Concluida && x.IdCandidatoProcessoSeletivo == item.Id))
+                        if (item.AvaliacaoConcluida != null && item.AvaliacaoConcluida.Concluida)
                         {
                             @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
                         }
+                        else
+                        {
+                            @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
+                        }
                     }
-                    
+
                 </td>
             </tr>
         }

@@ -21,5 +21,15 @@ namespace Alvo.ViewModels
         public virtual ProcessoSeletivoViewModel ProcessoSeletivo { get; set; }
 
         public virtual ICollection<AvaliacaoViewModel> Avaliacao { get; set; }
+
+        public virtual AvaliacaoViewModel AvaliacaoConcluida
+        {
+            get
+            {
+                var lAvaliacao = this.Avaliacao.Where(x => x.IdCandidatoProcessoSeletivo == this.Id).First();
+
+                return lAvaliacao;
+            }
+        }
      }
 }

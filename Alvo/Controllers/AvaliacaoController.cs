@@ -32,6 +32,7 @@ namespace Alvo.Controllers
         {
             // variável para teste..  pegar o usuário logado no sistema
             int lUsuario = 1;
+            var lListaCandidatoProcessoSeletivo = _candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario);
 
             var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario));
 
@@ -171,7 +172,6 @@ namespace Alvo.Controllers
 
             lAvaliacaoViewModel.Questionario.Questao.ForEach(x =>
                     {
-                        ////////if (x.RespostaQuestao == null || x.RespostaQuestao.Count == 0 || (x.RespostaQuestao.Any(r => r.IdAvaliacao != lAvaliacao.Id)))
                         if (x.RespostaQuestao == null || x.RespostaQuestao.Count == 0)
                         {
                             x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
@@ -204,7 +204,7 @@ namespace Alvo.Controllers
 
         public ActionResult DetalhesAvaliacao(int id)
         {
-            var lAvaliacao = _avaliacaoAppServico.ObtemPorId(id);
+            var lAvaliacao = _avaliacaoAppServico.ObtemAvaliacaoPorCandidatoProcesso(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
@@ -213,17 +213,34 @@ namespace Alvo.Controllers
 
             lAvaliacaoViewModel.Questionario = lQuestionario;
 
-            ////////lAvaliacaoViewModel.Questionario.Questao.ForEach(x =>
-            ////////{
-            ////////    x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
-            ////////            { 
-            ////////                new RespostaQuestaoViewModel()
-            ////////                {
-            ////////                    IdQuestao = x.Id
-            ////////                }
-            ////////            };
-            ////////}
-            ////////    );
+            lAvaliacaoViewModel.Questionario.Questao.ForEach(x =>
+            {
+                if (x.RespostaQuestao == null || x.RespostaQuestao.Count == 0)
+                {
+                    x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
+                            { 
+                                new RespostaQuestaoViewModel()
+                                {
+                                    IdQuestao = x.Id
+                                }
+                            };
+                }
+                else if (x.RespostaQuestao.Any(r => r.IdAvaliacao == lAvaliacao.Id))
+                {
+                    x.RespostaQuestao = x.RespostaQuestao.Where(z => z.IdAvaliacao == lAvaliacao.Id).ToList();
+                }
+                else
+                {
+                    x.RespostaQuestao = new List<RespostaQuestaoViewModel> 
+                            { 
+                                new RespostaQuestaoViewModel()
+                                {
+                                    IdQuestao = x.Id
+                                }
+                            };
+                }
+            }
+    );
 
             return View(lAvaliacaoViewModel);
         }
@@ -299,6 +316,5 @@ namespace Alvo.Controllers
 
             return PartialView("~/Views/Questao/_Questao.cshtml", lQuestionario.Questao);
         }
-
     }
 }

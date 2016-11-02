@@ -59,7 +59,7 @@ namespace Aplicacao
 
             if (lAvavaliacaoConcluida)
             {
-                lIdAvaliacao.Concluido = true;
+                lIdAvaliacao.Concluida = true;
             }
             lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
 
