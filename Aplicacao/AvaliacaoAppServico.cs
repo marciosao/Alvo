@@ -10,12 +10,14 @@ namespace Aplicacao
     {
         private readonly IAvaliacaoServico _avaliacaoServico;
         private readonly IRespostaQuestaoServico _respostaQuestaoServico;
+        private readonly IQuestaoServico _questaoServico;
 
-        public AvaliacaoAppServico(IAvaliacaoServico avaliacaoServico, IRespostaQuestaoServico respostaQuestaoServico)
+        public AvaliacaoAppServico(IAvaliacaoServico avaliacaoServico, IRespostaQuestaoServico respostaQuestaoServico, IQuestaoServico questaoServico)
             : base(avaliacaoServico)
         {
             _avaliacaoServico = avaliacaoServico;
             _respostaQuestaoServico = respostaQuestaoServico;
+            _questaoServico = questaoServico;
         }
 
 
@@ -36,6 +38,35 @@ namespace Aplicacao
                 {
                     RespostaQuestao lResposta = _respostaQuestaoServico.ObtemPorQuestaoAvaliacao(lRowResposta.IdQuestao, lRowResposta.IdAvaliacao);
 
+                    if (lResposta == null)
+                    {
+                        lRowResposta.Questao = _questaoServico.ObtemQuestaoPorId(lRowResposta.IdQuestao);
+                    }
+                    else
+                    {
+                        lRowResposta.Questao = lResposta.Questao;
+                    }
+
+                    if (!string.IsNullOrEmpty(lRowResposta.ValorResposta))
+                    {
+                        if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 1)//Grupo Proposta de Trabalho
+                        {
+                            lTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
+                        }
+                        else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 2)//Grupo Avaliação Curriculo Lates
+                        {
+                            lTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
+                        }
+                        else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 3)//Grupo Entrevista
+                        {
+                            lTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
+                        }
+                    }
+
+
+                    //descartando a Questão da resposta
+                    lRowResposta.Questao = null;
+
                     if (lResposta == null || lResposta.Id == 0)
                     {
                         _respostaQuestaoServico.Add(lRowResposta);
@@ -53,15 +84,35 @@ namespace Aplicacao
                     lAvavaliacaoConcluida = false;
                 }
             }
-
-            lIdAvaliacao.NotaFinal = lNotaFinal;
+            
             lIdAvaliacao.ParecerAvaliador = lAvaliacao.ParecerAvaliador;
+            lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
+
+            //calculando a Média final
+            lNotaFinal = ((lTotalEntrevista*4 ) + (lTotalPropostaTrabalho*3) + (lTotalCurriculoLattes*2)) / 10;
+
+            if (lNotaFinal >= 7)
+            {
+                lIdAvaliacao.Aprovado = true;
+            }
+            else
+            {
+                lIdAvaliacao.Aprovado = false;
+            }
+
+            
 
             if (lAvavaliacaoConcluida)
             {
+                lIdAvaliacao.NotaFinal = lNotaFinal;
                 lIdAvaliacao.Concluida = true;
             }
-            lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
+            else
+            {
+                lIdAvaliacao.NotaFinal = 0;
+                lIdAvaliacao.Concluida = false;
+            }
+
 
             _avaliacaoServico.Update(lIdAvaliacao);
         }

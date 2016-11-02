@@ -22,13 +22,47 @@ namespace Alvo.ViewModels
 
         public virtual ICollection<AvaliacaoViewModel> Avaliacao { get; set; }
 
-        public virtual AvaliacaoViewModel AvaliacaoConcluida
+        public virtual string SituacaoAvaliacao
         {
             get
             {
+                string lRetorno = string.Empty;
                 var lAvaliacao = this.Avaliacao.Where(x => x.IdCandidatoProcessoSeletivo == this.Id).First();
 
-                return lAvaliacao;
+                if (lAvaliacao.Concluida)
+                {
+                    lRetorno = "Finalizada";
+                }
+                else
+                {
+                    lRetorno = "Pendente";
+                }
+
+                return lRetorno;
+            }
+        }
+
+        public virtual string Resultado
+        {
+            get
+            {
+                string lRetorno = string.Empty;
+                var lAvaliacao = this.Avaliacao.Where(x => x.IdCandidatoProcessoSeletivo == this.Id).First();
+
+                if (lAvaliacao.Concluida && lAvaliacao.Aprovado)
+                {
+                    lRetorno = "Aprovado";
+                }
+                else if (lAvaliacao.Concluida && !lAvaliacao.Aprovado)
+                {
+                    lRetorno = "Reprovado";
+                }
+                else
+                {
+                    lRetorno = "-";
+                }
+
+                return lRetorno;
             }
         }
      }

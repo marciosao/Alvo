@@ -19,12 +19,10 @@
         int lTotalEtapa2Grupo1 = 0;
         int lContadorEtapa2Grupo1 = 0;
         
-         //int lIdPerfil = ViewBag.IdPerfil;
          Alvo.ViewModels.UsuarioViewModel lUsuario = ViewBag.Usuario;
 
         lTotalEtapa2Grupo1 = Model.Questao.Where(x=>x.IdEtapa == 2 && x.IdCategoriaQuestao == 1).Count();
 
-        //foreach (var item in Model.Questao)
         for (int i = 0; i < Model.Questao.Count; i++)
         {
             /*Cria o primeiro Cabeçalho*/
@@ -170,8 +168,6 @@
                             @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
                         }
                     }
-
-                    //@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa3, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
                 }
             }
             else
@@ -216,7 +212,6 @@
                                         @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:800px", @readonly = "readonly" })
                                     }
                                 }
-                               @*@Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })*@
                             }
                             </td>
                         </tr>
@@ -224,16 +219,5 @@
                     }
                 }
         }
-        <tr>
-            <td>
-                TOTAL DE PONTOS GERAL
-            </td>
-            <td style="text-align:center;font-size:medium">
-                @Html.Raw(lTotalPontos)
-            </td>
-            <td>
-                <input type="text" id="txtResultadoParcial" class="form-control" style="text-align:right;font-size:medium" />
-            </td>
-        </tr>
     }
 </table>

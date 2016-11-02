@@ -13,7 +13,12 @@ namespace Aplicacao
             : base(questaoServico)                                                        
         {
             _questaoServico = questaoServico;                                            
-        }                                                                                
+        }
+
+        public Questao ObtemQuestaoPorId(int? pIdQuestao)
+        {
+            return _questaoServico.ObtemQuestaoPorId(pIdQuestao);
+        }
     }                                                                                    
 }                                                                                        
 

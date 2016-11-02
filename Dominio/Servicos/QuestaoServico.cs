@@ -12,8 +12,13 @@ namespace Dominio.Servicos
             : base(questaoRepositorio)                                              
         {                                                                          
             _questaoRepositorio = questaoRepositorio;                                
-        }                                                                          
-                                                                                   
+        }
+
+
+        public Questao ObtemQuestaoPorId(int? pIdQuestao)
+        {
+            return _questaoRepositorio.ObtemQuestaoPorId(pIdQuestao);
+        }
     }                                                                              
 }                                                                                  
 

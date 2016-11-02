@@ -21,10 +21,13 @@
                 @Html.Raw("Candidato")
             </th>
             <th>
-                @Html.Raw("Tema do Projeto")
+                @Html.Raw("Área de Concentração")
             </th>
             <th>
-                @Html.Raw("Área de Concentração")
+                @Html.Raw("Sit. Avaliação")
+            </th>
+            <th>
+                @Html.Raw("Resultado")
             </th>
             <th>
                 @Html.Raw("Professor")
@@ -36,32 +39,43 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td style="font-size:small">
                     @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Candidato.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TemaProjeto)
+                    @Html.DisplayFor(modelItem => item.AreaConcentracao.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.AreaConcentracao.Nome)
+                    @Html.DisplayFor(modelItem => item.SituacaoAvaliacao)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.Resultado)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Avaliacao.FirstOrDefault().NomePrefessor)
                 </td>
                 <td>
                     @{
-            //if (item.Avaliacao.Any(x=> x.Concluida && x.IdCandidatoProcessoSeletivo == item.Id))
-                        if (item.AvaliacaoConcluida != null && item.AvaliacaoConcluida.Concluida)
-                        {
-                            @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
-                        }
-                        else
+                        if (!item.Avaliacao.Any(x => x.Concluida == true))
                         {
                             @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
                         }
+                        else
+                        {
+                            @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
+                        }
+
+                        @*if (item.AvaliacaoConcluida != null && item.AvaliacaoConcluida.Concluida)
+                            {
+                                @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
+                            }*@
                     }
 
                 </td>
