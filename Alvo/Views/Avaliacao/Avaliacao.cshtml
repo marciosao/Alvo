@@ -128,20 +128,18 @@
 
                         lTextEtapa3 = $(element).children();
 
-                        if (lTextEtapa3.hasClass('questaoEtapa3')) {
-                            $(element).attr('disabled', false);
-                            $(element).prop('disabled', false);
+                        if (lTextEtapa3.hasClass('questaoEtapa31')) {
+                            //$(element).attr('disabled', false);
+                            lTextEtapa3.removeAttr('disabled');
                         }
                     });
                 } else{
                     $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
                         lTextEtapa3 = $(element).children();
-                        if (lTextEtapa3.hasClass('questaoEtapa3')) {
+                        if (lTextEtapa3.hasClass('questaoEtapa31')) {
 
                             $(element).val('');
-                            $(element).attr('disabled',true);
-                            $(element).prop('disabled', true);
-
+                            lTextEtapa3.attr('disabled', 'disabled');
                         }
                     })
                 }
