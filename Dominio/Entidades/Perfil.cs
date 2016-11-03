@@ -7,13 +7,13 @@ namespace Dominio.Entidades
     {
         public Perfil()
         {
-            this.perfilmenus = new List<PerfilMenu>();
-            this.usuarios = new List<Usuario>();
+            this.PerfilMenus = new List<PerfilMenu>();
+            this.Usuarios = new List<Usuario>();
         }
 
         public int Id { get; set; }
         public string Nome { get; set; }
-        public virtual ICollection<PerfilMenu> perfilmenus { get; set; }
-        public virtual ICollection<Usuario> usuarios { get; set; }
+        public virtual ICollection<PerfilMenu> PerfilMenus { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Alvo.ViewModels
         public int? IdMenu { get; set; }
 
 
-        public virtual MenuViewModel menu { get; set; }
-        public virtual PerfilViewModel perfil { get; set; }
+        public virtual MenuViewModel Menu { get; set; }
+        public virtual PerfilViewModel Perfil { get; set; }
     }
 }

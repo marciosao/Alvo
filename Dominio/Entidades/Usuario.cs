@@ -21,7 +21,7 @@ namespace Dominio.Entidades
         public DateTime? DataCadastro { get; set; }
         public bool Ativo { get; set; }
         public string Senha { get; set; }
-        public virtual Perfil perfil { get; set; }
+        public virtual Perfil Perfil { get; set; }
 
         public virtual ICollection<Avaliacao> Avaliacao { get; set; }
     }

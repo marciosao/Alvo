@@ -173,6 +173,13 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="Common\HtmlHelpers\HtmlHelpers.cs" />
+    <Compile Include="Common\MvcExtensions\CustomValidationCPFAttribute.cs" />
+    <Compile Include="Common\MvcExtensions\EnumExtensions.cs" />
+    <Compile Include="Common\MvcExtensions\HtmlExtensions.cs" />
+    <Compile Include="Common\MvcExtensions\MaskAttribute.cs" />
+    <Compile Include="Common\MvcExtensions\MensagemActionResultExtension.cs" />
+    <Compile Include="Common\MvcExtensions\viewDataExtensions.cs" />
     <Compile Include="Controllers\AreaConcentracaoController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\AvaliacaoQuestionarioController.cs" />
@@ -195,6 +202,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AlterarSenhaUsuarioViewModel.cs" />
     <Compile Include="ViewModels\AreaConcentracaoViewModel.cs" />
     <Compile Include="ViewModels\AvaliacaoViewModel.cs" />
     <Compile Include="ViewModels\AvaliacaoQuestionarioViewModel.cs" />
@@ -346,6 +354,8 @@
     <Content Include="Views\Avaliacao\DetalhesAvaliacao.cshtml" />
     <Content Include="Views\Avaliacao\_DetalhesQuestoes.cshtml" />
     <Content Include="Views\Avaliacao\Classificacao.cshtml" />
+    <Content Include="Views\Home\_AlterarSenha.cshtml" />
+    <Content Include="Views\Home\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -45,8 +45,8 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.Senha).HasColumnName("Senha");
 
             // Relationships
-            this.HasOptional(t => t.perfil)
-                .WithMany(t => t.usuarios)
+            this.HasOptional(t => t.Perfil)
+                .WithMany(t => t.Usuarios)
                 .HasForeignKey(d => d.IdPerfil);
 
         }

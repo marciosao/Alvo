@@ -1,0 +1,11 @@
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (1, 1, 1);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (2, 1, 2);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (3, 1, 3);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (4, 1, 4);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (5, 1, 5);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (6, 1, 6);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (7, 1, 7);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (8, 1, 8);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (9, 1, 9);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (10, 1, 10);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (11, 1, 11);

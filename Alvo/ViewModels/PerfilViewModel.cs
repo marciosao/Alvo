@@ -7,13 +7,13 @@ namespace Alvo.ViewModels
     {
         public PerfilViewModel()
         {
-            this.perfilmenus = new List<PerfilMenuViewModel>();
-            this.usuarios = new List<UsuarioViewModel>();
+            this.PerfilMenus = new List<PerfilMenuViewModel>();
+            this.Usuarios = new List<UsuarioViewModel>();
         }
 
         public int Id { get; set; }
         public string Nome { get; set; }
-        public virtual ICollection<PerfilMenuViewModel> perfilmenus { get; set; }
-        public virtual ICollection<UsuarioViewModel> usuarios { get; set; }
+        public virtual ICollection<PerfilMenuViewModel> PerfilMenus { get; set; }
+        public virtual ICollection<UsuarioViewModel> Usuarios { get; set; }
     }
 }

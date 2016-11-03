@@ -109,7 +109,7 @@ namespace Alvo.Controllers
             }
 
 
-            return PartialView("_Menu", usuariosView.perfil.perfilmenus);
+            return PartialView("_Menu", usuariosView.Perfil.PerfilMenus);
         }
 
         [Authorize]

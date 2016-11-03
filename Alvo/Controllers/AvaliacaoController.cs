@@ -158,7 +158,7 @@ namespace Alvo.Controllers
 
             var lUsuario = Mapper.Map<Usuario, UsuarioViewModel>(_usuarioAppServico.ObtemPorId(4));
 
-            ViewBag.IdPerfil = lUsuario.perfil.Id;
+            ViewBag.IdPerfil = lUsuario.Perfil.Id;
             ViewBag.Usuario = lUsuario;
 
             var lAvaliacao = _avaliacaoAppServico.ObtemAvaliacaoPorCandidatoProcesso(id);

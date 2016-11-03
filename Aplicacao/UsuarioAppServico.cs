@@ -46,6 +46,17 @@ namespace Aplicacao
            
             return null;
         }
+
+
+        public void GravarUsuario(Usuario lUsuario)
+        {
+            if (lUsuario.Id == 0)
+            {
+                lUsuario.Senha = criptMd5.RetornarMD5(lUsuario.CPF);
+
+                _usuarioServico.Add(lUsuario);
+            }
+        }
     }                                                                                    
 }                                                                                        
 

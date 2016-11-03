@@ -53,7 +53,7 @@ namespace Aplicacao
             var lUsuario = _usuarioServico.ObtemPorId(pIdProfessor);
             int lIdProfessor = 0;
 
-            if(lUsuario.perfil.Id == (int)Dominio.Enums.Perfil.Professor)
+            if(lUsuario.Perfil.Id == (int)Dominio.Enums.Perfil.Professor)
             {
                 lIdProfessor = lUsuario.Id;
             }

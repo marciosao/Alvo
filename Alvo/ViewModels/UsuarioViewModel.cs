@@ -20,7 +20,7 @@ namespace Alvo.ViewModels
         public DateTime? DataCadastro { get; set; }
         public bool Ativo { get; set; }
         public string Senha { get; set; }
-        public virtual PerfilViewModel perfil { get; set; }
+        public virtual PerfilViewModel Perfil { get; set; }
         public virtual ICollection<AvaliacaoViewModel> Avaliacao { get; set; }
 
     }

@@ -8,6 +8,8 @@ namespace Aplicacao.Interfaces
         IEnumerable ObtemUsuariosProfessores();
         Usuario AutenticarUsuario(Usuario pUsuario);
         Usuario AlterarSenha(Usuario lUsuario, string novaSenha);
+
+        void GravarUsuario(Usuario lUsuario);
     }                                                                      
 }                                                                          
 

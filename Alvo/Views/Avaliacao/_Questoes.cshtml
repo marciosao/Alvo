@@ -146,7 +146,7 @@
                 if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
                 {
                     //somente Usuario Secretaria poderá preencher questões da categoria Categoria FORMAÇÃO e terceira questão da categoria PRODUÇÃO TÉCNICA E/OU TECNOLOGIA
-                    if (lUsuario.perfil.Id == 3)
+                    if (lUsuario.Perfil.Id == 3)
                     {
                         if (lIdCategoriaAtual == 2 || (lIdCategoriaAtual == 4 && Model.Questao[i].Id == 13)) 
                         {
@@ -193,7 +193,7 @@
                         <tr>
                             <td colspan="3">
                             @{
-                                if (lUsuario.perfil.Id == 3)
+                                if (lUsuario.Perfil.Id == 3)
                                 {
                                     if (lIdCategoriaAtual == 2 || (lIdCategoriaAtual == 4 && Model.Questao[i].Id == 13))
                                     {

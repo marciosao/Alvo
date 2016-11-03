@@ -53,7 +53,7 @@ namespace Alvo.Controllers
             {
                 var lUsuarioDomain = Mapper.Map<UsuarioViewModel, Usuario>(pUsuario);
 
-                _usuarioAppServico.Add(lUsuarioDomain);
+                _usuarioAppServico.GravarUsuario(lUsuarioDomain);
 
                 return RedirectToAction("Index");
             }

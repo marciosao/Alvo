@@ -19,11 +19,11 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.IdMenu).HasColumnName("IdMenu");
 
             // Relationships
-            this.HasOptional(t => t.menu)
+            this.HasOptional(t => t.Menu)
                 .WithMany(t => t.PerfilMenus)
                 .HasForeignKey(d => d.IdMenu);
-            this.HasOptional(t => t.perfil)
-                .WithMany(t => t.perfilmenus)
+            this.HasOptional(t => t.Perfil)
+                .WithMany(t => t.PerfilMenus)
                 .HasForeignKey(d => d.IdPerfil);
 
         }

@@ -10,7 +10,7 @@ namespace Infra.Data.Repositorios
 
         public IEnumerable ObtemUsuariosProfessores()
         {
-            var lProfessores = Db.Usuario.Where(x=>x.perfil.Id == 2);
+            var lProfessores = Db.Usuario.Where(x=>x.Perfil.Id == 2);
 
             return lProfessores;
         }
