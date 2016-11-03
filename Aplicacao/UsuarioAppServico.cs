@@ -1,7 +1,8 @@
 ﻿using Aplicacao.Interfaces;
 using Aplicacao.Util;
 using Dominio.Entidades;                                                  
-using Dominio.Interfaces.Servicos;                                       
+using Dominio.Interfaces.Servicos;
+using System;                                       
                                                                                          
                                                                                          
 namespace Aplicacao                                                   
@@ -53,7 +54,7 @@ namespace Aplicacao
             if (lUsuario.Id == 0)
             {
                 lUsuario.Senha = criptMd5.RetornarMD5(lUsuario.CPF);
-
+                lUsuario.DataCadastro = DateTime.Now;
                 _usuarioServico.Add(lUsuario);
             }
         }
