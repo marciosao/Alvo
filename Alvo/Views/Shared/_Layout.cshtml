@@ -81,4 +81,18 @@
         });
     </script>
 </body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".js-example-basic-single").select2();
+    });
+
+    $(function () {
+        $('[rel=popover]').popover({
+            html: true,
+            content: function () {
+                return $('#content-pop').html();
+            }
+        });
+    });
+</script>
 </html>

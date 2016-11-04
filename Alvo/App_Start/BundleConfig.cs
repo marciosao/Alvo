@@ -33,6 +33,7 @@ namespace Alvo
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                    "~/Content/bootstrap.css",
                     "~/Content/bootstrap.min.css",
                     "~/Content/bootstrap-theme.min.css",
                     "~/Content/font-awesome.css",
