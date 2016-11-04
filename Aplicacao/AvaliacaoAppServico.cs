@@ -2,6 +2,7 @@
 using Dominio.Entidades;
 using Dominio.Interfaces.Servicos;
 using System;
+using System.Collections.Generic;
 
 
 namespace Aplicacao
@@ -121,6 +122,12 @@ namespace Aplicacao
         public Avaliacao ObtemAvaliacaoPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
         {
             return _avaliacaoServico.ObtemAvaliacaoPorCandidatoProcesso(pCandidatoProcessoSeletivo);
+        }
+
+
+        public IEnumerable<Avaliacao> ObtemCandidatosClassificacao(int pIdProcessoSeletivo)
+        {
+            return _avaliacaoServico.ObtemCandidatosClassificacao(pIdProcessoSeletivo);
         }
     }
 }

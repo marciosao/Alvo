@@ -57,11 +57,11 @@ namespace Alvo.Controllers
         public ActionResult Login(UsuarioViewModel userModel)
         {
             var usuario = _usuarioApp.AutenticarUsuario(Mapper.Map<UsuarioViewModel, Usuario>(userModel));
-
-            if (usuario != null)
+            var lUsrViewModel = Mapper.Map<Usuario, UsuarioViewModel>(usuario);
+            if (lUsrViewModel != null)
             {
-                Session["Usuario"] = usuario;
-                this.AutenticarAplicacao(userModel);
+                Session["Usuario"] = lUsrViewModel;
+                this.AutenticarAplicacao(lUsrViewModel);
                 return RedirectToAction("Index");
             }
 
@@ -100,26 +100,27 @@ namespace Alvo.Controllers
         [Authorize]
         public PartialViewResult _MenuResult()
         {
-            var usuario = (Usuario)Session["Usuario"];
-            UsuarioViewModel usuariosView = new UsuarioViewModel();
+            var usuario = (UsuarioViewModel)Session["Usuario"];
+            ////////UsuarioViewModel usuariosView = new UsuarioViewModel();
             if (usuario != null)
             {
-                usuariosView = Mapper.Map<Usuario, UsuarioViewModel>(usuario);
-                ViewBag.Usuario = usuariosView;
+                ////////usuariosView = Mapper.Map<Usuario, UsuarioViewModel>(usuario);
+                ////////ViewBag.Usuario = usuariosView;
+                ViewBag.Usuario = usuario;
             }
 
 
-            return PartialView("_Menu", usuariosView.Perfil.PerfilMenus);
+            return PartialView("_Menu", usuario.Perfil.PerfilMenus);
         }
 
         [Authorize]
         public PartialViewResult AlterarSenha()
         {
-            var usuario = (Usuario)Session["Usuario"];
+            var usuario = (UsuarioViewModel)Session["Usuario"];
 
-            var Login = new UsuarioViewModel() { CPF = usuario.CPF };
+            ////////var Login = new UsuarioViewModel() { CPF = usuario.CPF };
 
-            return PartialView("_AlterarSenha", Login);
+            return PartialView("_AlterarSenha", usuario);
         }
 
         [Authorize]

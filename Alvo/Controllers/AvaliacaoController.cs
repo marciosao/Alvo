@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace Alvo.Controllers
 {
-    public class AvaliacaoController : Controller
+    public class AvaliacaoController : BaseController
     {
         private readonly IAvaliacaoAppServico _avaliacaoAppServico;
         private readonly IUsuarioAppServico _usuarioAppServico;
@@ -30,23 +30,18 @@ namespace Alvo.Controllers
         // GET: Avaliacao
         public ActionResult Index()
         {
-            // variável para teste..  pegar o usuário logado no sistema
-            int lUsuario = 1;
-            var lListaCandidatoProcessoSeletivo = _candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario);
+            UsuarioViewModel lUsuario = GetUsuarioLogado();
 
-            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario));
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id));
 
             return View(candidatoProcessoSeletivoViewModel);
         }
 
         public ActionResult Classificacao()
         {
-            // variável para teste..  pegar o usuário logado no sistema
-            int lUsuario = 1;
+            var avaliacaoViewModel = Mapper.Map<IEnumerable<Avaliacao>, IEnumerable<AvaliacaoViewModel>>(_avaliacaoAppServico.ObtemCandidatosClassificacao(0));
 
-            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemCandidatosClassificacao(0));
-
-            return View(candidatoProcessoSeletivoViewModel);
+            return View(avaliacaoViewModel);
         }
 
         // GET: Distribuição

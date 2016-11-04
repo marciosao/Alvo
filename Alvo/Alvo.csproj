@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AreaConcentracaoController.cs" />
     <Compile Include="Controllers\AvaliacaoController.cs" />
     <Compile Include="Controllers\AvaliacaoQuestionarioController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CandidatoController.cs" />
     <Compile Include="Controllers\CandidatoProcessoSeletivoController.cs" />
     <Compile Include="Controllers\CategoriaQuestaoController.cs" />

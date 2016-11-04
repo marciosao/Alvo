@@ -1,5 +1,6 @@
 ﻿using Dominio.Entidades;
 using Dominio.Interfaces.Repositorios;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Infra.Data.Repositorios
@@ -13,14 +14,23 @@ namespace Infra.Data.Repositorios
             return lAvaliacao;
         }
 
-        ////////public Avaliacao ObtemAvaliacaoPorCandidatoProcesso2(int pCandidatoProcessoSeletivo)
-        ////////{
-        ////////    var lAvaliacao = Db.Questionario.Where(q=>
-        ////////                                            q.AvaliacaoQuestionario.Any(a=>a.Avaliacao.Id == 1) &&
-        ////////                                            q.ques  )
+        public IEnumerable<Avaliacao> ObtemCandidatosClassificacao(int pIdProcessoSeletivo)
+        {
+            int? lIdProcessoSeletivo = null;
 
-        ////////    return lAvaliacao;
-        ////////}
+            if (pIdProcessoSeletivo > 0)
+            {
+                lIdProcessoSeletivo = pIdProcessoSeletivo;
+            }
+
+            var lAvaliacoes = Db.Avaliacao.ToList().Where(x =>
+                                                              (lIdProcessoSeletivo == null || x.CandidatoProcessoSeletivo.IdProcessoSeletivo == lIdProcessoSeletivo) &&
+                                                               x.Concluida == true)
+                                                    .OrderByDescending(o=>o.NotaFinal).ThenByDescending(t=>t.CandidatoProcessoSeletivo.IdProcessoSeletivo).ToList();
+                                                    //.GroupBy(g=> g.CandidatoProcessoSeletivo.IdProcessoSeletivo).;
+
+            return lAvaliacoes;
+        }
     }
 }
 

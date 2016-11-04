@@ -38,8 +38,10 @@ namespace Infra.Data.Repositorios
             }
 
             var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x => 
-                                                                                            (lIdProcessoSeletivo == null || x.IdProcessoSeletivo == lIdProcessoSeletivo &&
-                                                                                            x.Avaliacao.Any(a => a.Concluida == true))).OrderBy(o=>o.IdProcessoSeletivo);
+                                                                                            (lIdProcessoSeletivo == null || x.IdProcessoSeletivo == lIdProcessoSeletivo) &&
+                                                                                            x.Avaliacao.Any(a => a.Concluida == true)).OrderBy(o=>o.IdProcessoSeletivo);
+
+            Avaliacao lavalia = new Avaliacao();
 
             return lCandidatoProcessoSeletivo;
         }

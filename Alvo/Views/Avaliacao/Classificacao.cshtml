@@ -1,72 +1,84 @@
-﻿@model IEnumerable<Alvo.ViewModels.CandidatoProcessoSeletivoViewModel>
+﻿@model IEnumerable<Alvo.ViewModels.AvaliacaoViewModel>
 
 @{
     ViewBag.Modulo = "Avaliação";
     ViewBag.Title = "Classificação dos Candidatos";
 }
-<div class="row">
-    <div class="col-md-12 col-sm-12">
-        <input type="submit" value="Pesquisar" class="btn btn-primary" />
-        @Html.ActionLink("Novo", "Create", "", new { @class = "btn btn-primary" })
-    </div>
-</div>
-<p>&nbsp;</p>
-<table id="dvData" class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.Raw("Processo Seletivo")
-            </th>
-            <th>
-                @Html.Raw("Candidato")
-            </th>
-            <th>
-                @Html.Raw("Tema do Projeto")
-            </th>
-            <th>
-                @Html.Raw("Área de Concentração")
-            </th>
-            <th>
-                @Html.Raw("Professor")
-            </th>
-            <th>
-                @Html.Raw("Nota Final")
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@using (Html.BeginForm("Classificacao","Avaliacao"))
+{
+    @Html.AntiForgeryToken()
+    @*<div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Pesquisar" class="btn btn-primary" />
+        </div>
+    </div>*@
+    <p>&nbsp;</p>
+    <table id="dvData" class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Candidato.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TemaProjeto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AreaConcentracao.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Avaliacao.FirstOrDefault().NomePrefessor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Avaliacao.FirstOrDefault().NotaFinal)
-                </td>
-                <td>
-                    @{
-                        if (item.Avaliacao.Any(x => x.Concluida == true && x.RespostaQuestao.Any()))
-                        {
-                            @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
-                        }
-                    }
-
-                </td>
+                <th>
+                    @Html.Raw("Processo Seletivo")
+                </th>
+                <th>
+                    @Html.Raw("Candidato")
+                </th>
+                <th>
+                    @Html.Raw("Área de Concentração")
+                </th>
+                <th>
+                    @Html.Raw("Resultado")
+                </th>
+                <th>
+                    @Html.Raw("Nota Final")
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CandidatoProcessoSeletivo.ProcessoSeletivo.Titulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CandidatoProcessoSeletivo.Candidato.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CandidatoProcessoSeletivo.AreaConcentracao.Nome)
+                    </td>
+                    <td>
+                        @{
+                            if (item.Aprovado)
+                            { 
+                                @Html.DisplayFor(modelItem => item.Resultado)
+                            }
+                            else
+                            {
+                                @*@Html.DisplayFor(modelItem => item.Resultado)*@
+                                @Html.Label(item.Resultado, htmlAttributes: new { @class = "control-label", @style = "color:red; text-align:center;" })
+                            }
+                        }
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.NotaFinal)*@
+                        @{
+                            if (item.Aprovado)
+                            {
+                                @Html.DisplayFor(modelItem => item.NotaFinal)
+                            }
+                            else
+                            {
+                                @*@Html.DisplayFor(modelItem => item.NotaFinal)*@
+                                @Html.Label(item.NotaFinal.ToString(), htmlAttributes: new { @class = "control-label", @style = "color:red" })
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

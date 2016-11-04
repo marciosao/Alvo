@@ -1,0 +1,12 @@
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (1, NULL, 'Processo Seletivo', NULL);
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (2, 1, 'Processo Seletivo', 'ProcessoSeletivo/Index');
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (3, 1, 'Questionário', 'Questionario/Index');
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (4, NULL, 'Candidato', NULL);
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (5, 4, 'Cadastro/Importação', 'Candidato/Index');
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (6, NULL, 'Avaliação', NULL);
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (7, 6, 'Distribuição', 'Avaliacao/Distribuicao');
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (8, 6, 'Avaliação', 'Avaliacao/Index');
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (9, NULL, 'Segurança', NULL);
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (10, 9, 'Usuário', 'Usuario/Index');
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (11, 9, 'Perfil', 'Perfil/Index');
+INSERT INTO `menu` (`Id`, `IdPai`, `Nome`, `Url`) VALUES (12, 6, 'Classificação', 'Avaliacao/Classificacao');

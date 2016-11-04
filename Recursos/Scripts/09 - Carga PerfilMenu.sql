@@ -10,6 +10,7 @@ INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (8, 1, 8);
 INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (9, 1, 9);
 INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (10, 1, 10);
 INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (11, 1, 11);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (22, 1, 12);
 
 /*PROFESSOR*/
 INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (12, 2, 6);
@@ -24,3 +25,4 @@ INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (18, 3, 5);
 INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (19, 3, 6);
 INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (20, 3, 7);
 INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (21, 3, 8);
+INSERT INTO `perfilmenu` (`Id`, `IdPerfil`, `IdMenu`) VALUES (23, 3, 12);

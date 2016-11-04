@@ -1,4 +1,5 @@
-﻿using Dominio.Entidades;                                    
+﻿using Dominio.Entidades;
+using System.Collections.Generic;                                    
                                                                            
 namespace Aplicacao.Interfaces                           
 {                                                                          
@@ -7,6 +8,8 @@ namespace Aplicacao.Interfaces
         void GravarRespostasAvaliacao(Avaliacao lAvaliacao);
 
         Avaliacao ObtemAvaliacaoPorCandidatoProcesso(int pCandidatoProcessoSeletivo);
+
+        IEnumerable<Avaliacao> ObtemCandidatosClassificacao(int pIdProcessoSeletivo);
     }                                                                      
 }                                                                          
 
