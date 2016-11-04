@@ -50,13 +50,8 @@
             <div class="conteudo-hidden" id="content-pop">
                 <div class="user-title">Usuário: </div>
                 <div class="user-info">@Usuario.Nome</div>
-                <div class="user-title">Perfil(s): </div>
+                <div class="user-title">Perfil: </div>
                 <div class="user-info">@Usuario.Perfil.Nome</div>
-                <div class="user-title">Secretaria: </div>
-                @*<div class="user-info">@(Model.FirstOrDefault().Usuario.Secretaria == null ? Model.FirstOrDefault().Usuario.UnidadeOrg.Cod_secretaria : Model.FirstOrDefault().Usuario.Secretaria.ToString())</div>
-                <div class="user-title">Unidade: </div>
-                <div class="user-info">@Model.FirstOrDefault().Usuario.UnidadeOrg.ToString()</div>*@
-
                 <hr>
                 @*<a class="btn btn-primary" href="#" role="button">Alterar Senha</a>*@
                 @Ajax.ActionLink("Alterar Senha", "AlterarSenha", "Home",

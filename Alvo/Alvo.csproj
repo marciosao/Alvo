@@ -357,6 +357,8 @@
     <Content Include="Views\Avaliacao\Classificacao.cshtml" />
     <Content Include="Views\Home\_AlterarSenha.cshtml" />
     <Content Include="Views\Home\_Menu.cshtml" />
+    <Content Include="Views\Shared\_Mensagem.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
