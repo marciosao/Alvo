@@ -1,17 +1,15 @@
 ﻿@model Alvo.ViewModels.ProcessoSeletivoViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Modulo = "Processo Seletivo";
+    ViewBag.Title = "Detalhes";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>ProcessoSeletivoViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Titulo)
+            @Html.Raw("Título")
         </dt>
 
         <dd>
@@ -19,15 +17,15 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NumeroEdital)
-        </dt>
+            @Html.Raw("Nº Edital")
+         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NumeroEdital)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Descricao)
+            @Html.Raw("Descrição")
         </dt>
 
         <dd>
@@ -35,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DataInicio)
+            @Html.Raw("Data Início")
         </dt>
 
         <dd>
@@ -43,7 +41,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DataFim)
+            @Html.Raw("Data Fim")
         </dt>
 
         <dd>
@@ -67,7 +65,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdUsuarioCadastro)
+            @Html.Raw("Usuário Cadastro")
         </dt>
 
         <dd>
@@ -75,7 +73,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IdUsuarioLiberacao)
+            @Html.Raw("Usuário Liberação")
         </dt>
 
         <dd>
@@ -84,7 +82,9 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+    </div>
+</div>

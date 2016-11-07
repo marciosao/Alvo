@@ -29,10 +29,10 @@
                 @Html.Raw("Título")
             </th>
             <th>
-                @Html.Raw("Número Edital")
+                @Html.Raw("Nº Edital")
             </th>
             <th>
-                @Html.Raw("DataInicio")
+                @Html.Raw("Data Inicio")
             </th>
             <th>
                 @Html.Raw("Data Fim")
@@ -57,16 +57,16 @@
                     @Html.DisplayFor(modelItem => item.NumeroEdital)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataInicio)
+                    @String.Format("{0:dd/MM/yyyy}", @item.DataInicio)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataFim)
+                    @String.Format("{0:dd/MM/yyyy}", @item.DataFim)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Liberado)
+                    @Html.DisplayFor(modelItem => item.ProcessoLiberado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Ativo)
+                    @Html.DisplayFor(modelItem => item.ProcessoAtivo)
                 </td>
                 <td>
                     @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit", title = "Editar" }) |

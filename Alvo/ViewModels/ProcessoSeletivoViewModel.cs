@@ -21,5 +21,34 @@ namespace Alvo.ViewModels
         public int? IdUsuarioCadastro { get; set; }
         public int? IdUsuarioLiberacao { get; set; }
         public virtual ICollection<CandidatoProcessoSeletivoViewModel> candidatoprocessoseletivoes { get; set; }
+
+        public virtual string ProcessoLiberado { 
+            get
+            {
+                if (this.Liberado)
+                {
+                    return "Sim";
+                }
+                else
+                {
+                    return "Não";
+                }
+            } 
+        }
+
+        public virtual string ProcessoAtivo
+        {
+            get
+            {
+                if (this.Ativo)
+                {
+                    return "Sim";
+                }
+                else
+                {
+                    return "Não";
+                }
+            }
+        }
     }
 }

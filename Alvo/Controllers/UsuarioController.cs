@@ -69,7 +69,7 @@ namespace Alvo.Controllers
             var lUsuario = _usuarioAppServico.ObtemPorId(id);
             var lUsuarioViewModel = Mapper.Map<Usuario, UsuarioViewModel>(lUsuario);
 
-            ViewBag.IdPerfil = new SelectList(_perfilAppServico.ObtemTodos(), "Id", "Nome");
+            ViewBag.IdPerfil = new SelectList(_perfilAppServico.ObtemTodos(), "Id", "Nome", lUsuarioViewModel.Perfil.Id);
 
             return View(lUsuarioViewModel);
         }

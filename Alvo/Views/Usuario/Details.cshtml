@@ -1,21 +1,19 @@
 ﻿@model Alvo.ViewModels.UsuarioViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Modulo = "Usuário";
+    ViewBag.Title = "Detalhes";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>UsuarioViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.IdPerfil)
+            @Html.Raw("Perfil")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IdPerfil)
+            @Html.DisplayFor(model => model.Perfil.Nome)
         </dd>
 
         <dt>
@@ -59,7 +57,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DataCadastro)
+            @Html.Raw("Data Cadastro")
         </dt>
 
         <dd>
@@ -73,18 +71,12 @@
         <dd>
             @Html.DisplayFor(model => model.Ativo)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Senha)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Senha)
-        </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+    </div>
+</div>

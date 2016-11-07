@@ -101,11 +101,8 @@ namespace Alvo.Controllers
         public PartialViewResult _MenuResult()
         {
             var usuario = (UsuarioViewModel)Session["Usuario"];
-            ////////UsuarioViewModel usuariosView = new UsuarioViewModel();
             if (usuario != null)
             {
-                ////////usuariosView = Mapper.Map<Usuario, UsuarioViewModel>(usuario);
-                ////////ViewBag.Usuario = usuariosView;
                 ViewBag.Usuario = usuario;
             }
 

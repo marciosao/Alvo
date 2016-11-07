@@ -43,7 +43,13 @@
                 @Html.DisplayFor(modelItem => item.Perfil.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CPF)
+                @{
+                    var CPF = string.Empty;
+                    CPF = String.Format(@"{0:000\.000\.000\-00}", Convert.ToInt64(item.CPF));
+                    @*@Html.DisplayFor(modelItem => item.CPF)*@
+                    
+                    @Html.Raw(CPF)
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
