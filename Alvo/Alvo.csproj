@@ -260,6 +260,7 @@
     <None Include="Properties\PublishProfiles\Alvo.pubxml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\changeSystem.js" />
+    <Content Include="Scripts\CustomValidation.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
     <Content Include="Scripts\jquery-3.1.0.slim.js" />

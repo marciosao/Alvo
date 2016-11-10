@@ -1,6 +1,7 @@
 ﻿
 $(document).ready(function () {
     $('body.alvo #dvData').DataTable({
+        "destroy":true,
         "paging": true,
         "pageLength": 10,
         "ordering": true,
