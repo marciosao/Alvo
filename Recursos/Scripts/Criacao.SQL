@@ -1,3 +1,7 @@
+create database db_spsgestec;
+
+use db_spsgestec;
+
 DROP TABLE IF EXISTS Etapa
 ;
 DROP TABLE IF EXISTS CategoriaQuestao

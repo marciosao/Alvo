@@ -1,4 +1,4 @@
-INSERT INTO `bdalvo`.`processoseletivo`
+INSERT INTO `processoseletivo`
 (`Titulo`,`NumeroEdital`,`Descricao`,`DataInicio`,`DataFim`,`Liberado`,`Ativo`,`IdUsuarioCadastro`,`IdUsuarioLiberacao`)
 
 VALUES

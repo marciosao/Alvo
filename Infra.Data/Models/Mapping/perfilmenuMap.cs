@@ -13,7 +13,7 @@ namespace Infra.Data.Models.Mapping
 
             // Properties
             // Table & Column Mappings
-            this.ToTable("perfilmenu", "bdalvo");
+            this.ToTable("perfilmenu", "db_spsgestec");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.IdPerfil).HasColumnName("IdPerfil");
             this.Property(t => t.IdMenu).HasColumnName("IdMenu");

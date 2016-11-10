@@ -1,21 +1,13 @@
 ﻿@model IEnumerable<Alvo.ViewModels.QuestaoViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Modulo = "Questões";
+    ViewBag.Title = "Pesquisa";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table id="dvData" class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdTipoQuestao)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IdCategoriaQuestao)
@@ -35,21 +27,18 @@
             @Html.DisplayFor(modelItem => item.Descricao)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IdTipoQuestao)
+            @Html.DisplayFor(modelItem => item.CategoriaQuestao.Nome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IdCategoriaQuestao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdQuestionario)
+            @Html.DisplayFor(modelItem => item.Questionario.Descricao)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ValorBarema)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+           @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Editar" }) |
+           @Html.ActionLink(" ", "Details", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes" }) |
+           @Html.ActionLink(" ", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-trash", title = "Excluir" })
         </td>
     </tr>
 }

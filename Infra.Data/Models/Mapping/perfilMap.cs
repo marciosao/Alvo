@@ -16,7 +16,7 @@ namespace Infra.Data.Models.Mapping
                 .HasMaxLength(20);
 
             // Table & Column Mappings
-            this.ToTable("perfil", "bdalvo");
+            this.ToTable("perfil", "db_spsgestec");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Nome).HasColumnName("Nome");
         }

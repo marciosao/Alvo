@@ -1,3 +1,3 @@
-INSERT INTO `bdalvo`.`perfil`(`Nome`)VALUES('Administrador');
-INSERT INTO `bdalvo`.`perfil`(`Nome`)VALUES('Professor');
-INSERT INTO `bdalvo`.`perfil`(`Nome`)VALUES('Secretaria');
+INSERT INTO `perfil`(`Nome`)VALUES('Administrador');
+INSERT INTO `perfil`(`Nome`)VALUES('Professor');
+INSERT INTO `perfil`(`Nome`)VALUES('Secretaria');

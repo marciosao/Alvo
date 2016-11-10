@@ -1,1 +1,1 @@
-INSERT INTO `bdalvo`.`questionario`(`Descricao`,`Ativo`)VALUES('Questionário Padrão Processo Seletivo',1);
+INSERT INTO `questionario`(`Descricao`,`Ativo`)VALUES('Questionário Padrão Processo Seletivo',1);
