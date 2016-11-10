@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Alvo.ViewModels.CandidatoViewModel>
+﻿@using Alvo.Common.HtmlHelpers
+@model IEnumerable<Alvo.ViewModels.CandidatoViewModel>
 
 @{
     ViewBag.Modulo = "Candidato";
@@ -11,7 +12,7 @@
         @Html.ActionLink("Novo", "Create", "", new { @class = "btn btn-primary" })
         @Ajax.ActionLink("Importar Candidato", "PopUpImportarCandidatos", "Candidato",
                         null,
-                                 new AjaxOptions() { HttpMethod = "Post", UpdateTargetId = "ConteudoImportacaoCandidato", OnSuccess = "ExibirPopUpImportacaoCandidato", InsertionMode = InsertionMode.Replace },
+                                          new AjaxOptions() { LoadingElementId = "divCarregando", HttpMethod = "Post", UpdateTargetId = "ConteudoImportacaoCandidato", OnSuccess = "ExibirPopUpImportacaoCandidato", InsertionMode = InsertionMode.Replace },
                        new { @class = "btn btn-default", @title = "Importação de Candidatos", @Id = "btnPopUp" })
 
 
@@ -54,10 +55,10 @@
                 @Html.DisplayNameFor(model => model.CPF)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
+                @Html.DisplayNameFor(model => model.RG)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RG)
+                @Html.DisplayNameFor(model => model.DataNascimento)
             </th>
             <th></th>
         </tr>
@@ -73,10 +74,10 @@
                     @Html.DisplayFor(modelItem => item.CPF)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataFormatada)
+                    @Html.DisplayFor(modelItem => item.RG)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RG)
+                    @Html.DisplayFor(modelItem => item.DataFormatada)
                 </td>
                 <td>
                     @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-edit", title = "Editar" }) |
@@ -95,3 +96,9 @@
         $('#modalImportacaoCandidato').modal('show');
     }
 </script>
+
+@section Scripts {
+    @Html.RenderScripts()
+    @{Html.RenderPartial("~/Views/Shared/_Mensagem.cshtml");}
+
+}

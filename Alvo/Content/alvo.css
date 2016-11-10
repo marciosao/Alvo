@@ -38,6 +38,23 @@ body.alvo .page-title {
 	background-color: #fafafa;
 }
 
+body.alvo .progresso
+    {
+        display: none;
+        position: fixed;
+        top: 360px;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -100px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: transparent;
+        border: 1px solid transparent;
+        height: 90px;
+        width: 120px;
+    }
 
 
 body.alvo  form {

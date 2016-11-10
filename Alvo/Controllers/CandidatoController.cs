@@ -155,7 +155,7 @@ namespace Alvo.Controllers
 
             ViewBag.ProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
 
-            return View("Index");
+            return RedirectToAction("Index","Candidato").Mensagem("Candidatos Importados com Sucesso.");
         }
 
     }

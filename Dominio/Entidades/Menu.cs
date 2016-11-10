@@ -14,6 +14,7 @@ namespace Dominio.Entidades
         public int? IdPai { get; set; }
         public string Nome { get; set; }
         public string Url { get; set; }
+        public bool Ativo { get; set; }
         public virtual ICollection<Menu> SubMenus { get; set; }
         public virtual Menu MenuPai { get; set; }
         public virtual ICollection<PerfilMenu> PerfilMenus { get; set; }

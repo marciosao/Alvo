@@ -13,8 +13,7 @@ namespace Alvo
                                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
                                 "~/Scripts/bootstrap.min.js",
                                 "~/Scripts/changeSystem.js",
-                                "~/Scripts/select2.full.js",
-                                "~/Scripts/Util.js"
+                                "~/Scripts/select2.full.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

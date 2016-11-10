@@ -124,10 +124,8 @@ namespace Alvo.Controllers
         [HttpPost]
         public PartialViewResult AlterarSenha(AlterarSenhaUsuarioViewModel loginView)
         {
-
             if (ModelState.IsValid)
             {
-
                 Usuario lUsuario = new Usuario();
 
                 lUsuario.CPF = loginView.CPF;
@@ -144,7 +142,7 @@ namespace Alvo.Controllers
                 {
                     ModelState.AddModelError("Error", "Senha incorreta. Tente novamente."); //Mudar para padrao de mensagem
                 }
-            }
+                }
 
             loginView.NovaSenha = String.Empty;
             loginView.ConfirmarSenha = String.Empty;

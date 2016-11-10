@@ -24,6 +24,7 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.IdPai).HasColumnName("IdPai");
             this.Property(t => t.Nome).HasColumnName("Nome");
             this.Property(t => t.Url).HasColumnName("Url");
+            this.Property(t => t.Ativo).HasColumnName("Ativo");
 
             // Relationships
             this.HasOptional(t => t.MenuPai)
