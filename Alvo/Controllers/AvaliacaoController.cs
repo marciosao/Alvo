@@ -151,10 +151,13 @@ namespace Alvo.Controllers
             ////////2	Professor
             ////////3	Secretaria
 
-            var lUsuario = Mapper.Map<Usuario, UsuarioViewModel>(_usuarioAppServico.ObtemPorId(4));
+            ////////UsuarioViewModel lUsuario = GetUsuarioLogado();
+
+            ////////var lUsuario = Mapper.Map<Usuario, UsuarioViewModel>(_usuarioAppServico.ObtemPorId(4));
+            var lUsuario = Mapper.Map<UsuarioViewModel,Usuario >(GetUsuarioLogado());
 
             ViewBag.IdPerfil = lUsuario.Perfil.Id;
-            ViewBag.Usuario = lUsuario;
+            ViewBag.Usuario = Mapper.Map<Usuario, UsuarioViewModel>(lUsuario);
 
             var lAvaliacao = _avaliacaoAppServico.ObtemAvaliacaoPorCandidatoProcesso(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
