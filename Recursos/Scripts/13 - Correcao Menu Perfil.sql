@@ -1,0 +1,1 @@
+update menu set Ativo = 0 where Id = 11;

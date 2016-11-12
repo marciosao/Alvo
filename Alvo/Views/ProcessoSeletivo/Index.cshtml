@@ -7,17 +7,17 @@
 
 @using (Html.BeginForm())
 {
-    <div class="group background-cinza">
+    @*<div class="group background-cinza">
         <div class="row ">
             <div class="col-md-5 col-sm-5">
                 @Html.Label("Combo: ", htmlAttributes: new { @class = "control-label " })
                 @Html.RadioButton("IdTodos", "0", false, new { @Id = "COmbo", @class = "radio-inline" }) @Html.Raw("Todos ")
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <input type="submit" value="Pesquisar" class="btn btn-primary" />
+            @*<input type="submit" value="Pesquisar" class="btn btn-primary" />*@
             @Html.ActionLink("Novo", "Create", "", new { @class = "btn btn-primary" })
         </div>
     </div>

@@ -123,6 +123,11 @@ namespace Aplicacao
 
             return lListaCandidatoProcessoSeletivo;
         }
+
+        public IEnumerable<Candidato> ObtemCandidatoPorProcesso(int pIdProcessoSeletivo)
+        {
+            return _candidatoServico.ObtemCandidatoPorProcesso(pIdProcessoSeletivo);
+        }
     }
 }
 

@@ -26,16 +26,6 @@ namespace Infra.Data.Repositorios
                                                         && usr.Email.Trim().Equals(usuario.Email.Trim()));
 
            return usrAlter;
-           ////////if (usrAlter != null)
-           ////////{
-           ////////    usrAlter.Senha = usuario.Senha;
-           ////////    this.Update(usrAlter);
-           ////////    return usrAlter;
-           ////////}
-           ////////else
-           ////////{
-           ////////    return null;
-           ////////}
        }
     }                                                                            
 }                                                                                

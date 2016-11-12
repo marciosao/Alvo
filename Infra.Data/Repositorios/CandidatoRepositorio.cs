@@ -1,5 +1,6 @@
 ﻿using Dominio.Entidades;
 using Dominio.Interfaces.Repositorios;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Infra.Data.Repositorios
@@ -12,6 +13,21 @@ namespace Infra.Data.Repositorios
 
             return lCandidato;
         }
+
+        public IEnumerable<Candidato> ObtemCandidatoPorProcesso(int pIdProcessoSeletivo)
+        {
+            int? lIdProcessoSeletivo = null;
+
+            if (pIdProcessoSeletivo > 0)
+            {
+                lIdProcessoSeletivo = pIdProcessoSeletivo;
+            }
+
+            var lCandidato = Db.Candidato.Where(x =>x.CandidatoProcessoSeletivo.Any(c => (lIdProcessoSeletivo == null || c.IdProcessoSeletivo == lIdProcessoSeletivo)));
+
+            return lCandidato;
+        }
+
     }
 }
 

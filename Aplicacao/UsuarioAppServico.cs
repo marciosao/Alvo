@@ -64,8 +64,6 @@ namespace Aplicacao
         {
             usuario.CPF = usuario.CPF.Replace(".", string.Empty).Replace("-", string.Empty);
 
-            //lUsuario.Senha = criptMd5.RetornarMD5(lUsuario.Senha);
-
             var usrAlter = _usuarioServico.RecuperarSenha(usuario);
             if (usrAlter != null)
             {
@@ -78,11 +76,6 @@ namespace Aplicacao
             {
                 return null;
             }
-
-
-
-
-            return _usuarioServico.RecuperarSenha(usuario);
         }
     }                                                                                    
 }                                                                                        

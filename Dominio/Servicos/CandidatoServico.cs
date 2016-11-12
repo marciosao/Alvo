@@ -1,6 +1,7 @@
 ﻿using Dominio.Entidades;
 using Dominio.Interfaces.Repositorios;
 using Dominio.Interfaces.Servicos;
+using System.Collections.Generic;
 
 namespace Dominio.Servicos
 {
@@ -16,6 +17,11 @@ namespace Dominio.Servicos
         public Candidato ObtemCandidatoPorProcessoCPF(int pIdProcessoSeletivo, string pCPF)
         {
             return _candidatoRepositorio.ObtemCandidatoPorProcessoCPF(pIdProcessoSeletivo, pCPF);
+        }
+
+        public IEnumerable<Candidato> ObtemCandidatoPorProcesso(int pIdProcessoSeletivo)
+        {
+            return _candidatoRepositorio.ObtemCandidatoPorProcesso(pIdProcessoSeletivo);
         }
     }
 }

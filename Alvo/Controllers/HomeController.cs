@@ -65,7 +65,7 @@ namespace Alvo.Controllers
                 return RedirectToAction("Index");
             }
 
-          //  ModelState.AddModelError("Error", "Usuário/Senha não conferem");
+            //  ModelState.AddModelError("Error", "Usuário/Senha não conferem");
 
             return View().Mensagem("Usuário/Senha não conferem");
         }
@@ -142,7 +142,7 @@ namespace Alvo.Controllers
                 {
                     ModelState.AddModelError("Error", "Senha incorreta. Tente novamente."); //Mudar para padrao de mensagem
                 }
-                }
+            }
 
             loginView.NovaSenha = String.Empty;
             loginView.ConfirmarSenha = String.Empty;

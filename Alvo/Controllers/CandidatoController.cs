@@ -31,6 +31,21 @@ namespace Alvo.Controllers
         public ActionResult Index()
         {
             var CandidatoViewModel = Mapper.Map<IEnumerable<Candidato>, IEnumerable<CandidatoViewModel>>(_candidatoAppServico.ObtemTodos());
+
+            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
+
+            return View(CandidatoViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection form)
+        {
+            var lIdProcesso = (form["IdProcessoSeletivo"]!=string.Empty)?form["IdProcessoSeletivo"]:"0";
+
+            var CandidatoViewModel = Mapper.Map<IEnumerable<Candidato>, IEnumerable<CandidatoViewModel>>(_candidatoAppServico.ObtemCandidatoPorProcesso(int.Parse(lIdProcesso)));
+
+            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
+
             return View(CandidatoViewModel);
         }
 

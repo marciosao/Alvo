@@ -24,11 +24,6 @@
             <a href="#"><span class="glyphicon glyphicon-user"></span></a>
             @{
                 var Usuario = (UsuarioViewModel) ViewBag.Usuario;
-                //var Perfils = new StringBuilder();
-                //Usuario.perfil.ForEach(x =>
-                //{
-                //    Perfils.Append(String.Format(String.IsNullOrEmpty(Perfils.ToString()) ? "{0}" : ", {0}", x.Perfil.Nome));
-                //});
             }
             <div class="conteudo-hidden" id="content-pop">
                 <div class="user-title">Usuário: </div>
@@ -37,11 +32,15 @@
                 <div class="user-info">@Usuario.Perfil.Nome</div>
                 <hr>
                 @Ajax.ActionLink("Alterar Senha", "AlterarSenha", "Home",
-                        null,
-                                          new AjaxOptions() { LoadingElementId = "divCarregando", HttpMethod = "Post", UpdateTargetId = "alterarSenhaModal", OnSuccess = "ExibirPopUp", InsertionMode = InsertionMode.Replace },
-                                new { @class = "btn btn-primary", @title = "Alterar Senha", @Id = "btnPopUp" })
+                        null, new AjaxOptions() { 
+                            LoadingElementId = "divCarregando", 
+                            HttpMethod = "Post",
+                            UpdateTargetId = "alterarSenhaModal", 
+                            OnSuccess = "ExibirPopUp", 
+                            InsertionMode = InsertionMode.Replace 
+                        },
+                        new { @class = "btn btn-primary", @title = "Alterar Senha", @Id = "btnPopUpAlterarSenha" })
             </div>
-
         </li>
         <li id="sair">@Html.ActionLink("Sair", "Logout", "Home", null, new { @class = "glyphicon glyphicon-log-out" })</li>
     </ul>
