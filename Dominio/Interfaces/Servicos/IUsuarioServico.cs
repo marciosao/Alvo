@@ -7,6 +7,8 @@ namespace Dominio.Interfaces.Servicos
     {
         IEnumerable ObtemUsuariosProfessores();
         Usuario AutenticarUsuario(Usuario pUsuario);
+
+        Usuario RecuperarSenha(Usuario usuario);
     }                                                               
 }                                                                   
 

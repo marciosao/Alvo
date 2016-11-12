@@ -12,6 +12,7 @@ namespace Alvo.ViewModels
         public int Id { get; set; }
         public int? IdPerfil { get; set; }
         public string Nome { get; set; }
+
         public string Matricula { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }

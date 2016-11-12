@@ -1,0 +1,87 @@
+﻿@using Alvo.Common.HtmlHelpers
+@model Alvo.ViewModels.RecuperarViewModel
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+   
+}
+
+@using (Html.BeginForm("Recuperar","Home"))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-8 col-md-8 col-md-offset-2">
+            <div class="login-panel panel panel-default col-md-12">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Esqueci a Senha</h3>
+                </div>
+                <div class="row" style="margin-bottom: 20px;"></div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("Sucesso", new { @class = "text-success" })
+                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-4 col-sd-4" })
+                    @Html.HiddenFor(model => model.Senha)
+                    <div class="col-md-5 col-sd-5">
+                        @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NovaSenha, htmlAttributes: new { @class = "control-label col-md-4 col-sd-4" })
+                    <div class="col-md-5 col-sd-5">
+                        @Html.EditorFor(model => model.NovaSenha, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NovaSenha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ConfirmarSenha, htmlAttributes: new { @class = "control-label col-md-4 col-sd-4" })
+                    <div class="col-md-5 col-sd-5">
+                        @Html.EditorFor(model => model.ConfirmarSenha, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmarSenha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.Cpf, htmlAttributes: new { @class = "control-label col-md-4 col-sd-4" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Matricula, htmlAttributes: new { @class = "control-label col-md-4 col-sd-4" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Matricula, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Matricula, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-4 col-sd-4" })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;"></div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Confirmar" class="btn btn-default medium yellow" />
+                        @Html.ActionLink("Cancelar", "Login", "Home", new { @class = "btn btn-default medium yellow" })
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 20px;"></div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.inputmask.js")
+    @Html.RenderScripts()
+}

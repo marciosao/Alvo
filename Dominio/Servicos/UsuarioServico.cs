@@ -24,6 +24,11 @@ namespace Dominio.Servicos
         {
             return _usuarioRepositorio.AutenticarUsuario(pUsuario);
         }
+
+        public Usuario RecuperarSenha(Usuario usuario)
+        {
+            return _usuarioRepositorio.RecuperarSenha(usuario);
+        }
     }                                                                              
 }                                                                                  
 

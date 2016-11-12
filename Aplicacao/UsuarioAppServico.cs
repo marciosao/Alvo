@@ -58,6 +58,32 @@ namespace Aplicacao
                 _usuarioServico.Add(lUsuario);
             }
         }
+
+
+        public Usuario RecuperarSenha(Usuario usuario)
+        {
+            usuario.CPF = usuario.CPF.Replace(".", string.Empty).Replace("-", string.Empty);
+
+            //lUsuario.Senha = criptMd5.RetornarMD5(lUsuario.Senha);
+
+            var usrAlter = _usuarioServico.RecuperarSenha(usuario);
+            if (usrAlter != null)
+            {
+                usrAlter.Senha = criptMd5.RetornarMD5(usuario.Senha);
+                this.Update(usrAlter);
+
+                return usrAlter;
+            }
+            else
+            {
+                return null;
+            }
+
+
+
+
+            return _usuarioServico.RecuperarSenha(usuario);
+        }
     }                                                                                    
 }                                                                                        
 

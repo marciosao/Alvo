@@ -115,9 +115,9 @@ namespace Alvo.Controllers
         {
             var usuario = (UsuarioViewModel)Session["Usuario"];
 
-            ////////var Login = new UsuarioViewModel() { CPF = usuario.CPF };
+            var Login = new AlterarSenhaUsuarioViewModel() { CPF = usuario.CPF };
 
-            return PartialView("_AlterarSenha", usuario);
+            return PartialView("_AlterarSenha", Login);
         }
 
         [Authorize]
@@ -149,6 +149,39 @@ namespace Alvo.Controllers
             loginView.Senha = String.Empty;
 
             return PartialView("_AlterarSenha", loginView);
+        }
+
+        public ActionResult Recupera()
+        {
+            return View("Recuperar", new RecuperarViewModel() { Senha = "compras" });
+        }
+
+        public ActionResult Recuperar(RecuperarViewModel pRecuperarForm)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = new Usuario()
+                {
+                    CPF = pRecuperarForm.Cpf,
+                    Senha = pRecuperarForm.NovaSenha,
+                    Matricula = pRecuperarForm.Matricula,
+                    Email = pRecuperarForm.Email
+
+                };
+
+                var returnUsuario = _usuarioApp.RecuperarSenha(usuario);
+                if (returnUsuario != null)
+                {
+                    ModelState.AddModelError("Sucesso", "Alterção Realizada Com Sucesso");
+                    return RedirectToAction("Login").Mensagem("Alterção Realizada Com Sucesso");
+                }
+                else
+                {
+                    ModelState.AddModelError("Error", "Erro ao tentar recuperar Senha, Favor verificar os dados!");
+                }
+            }
+
+            return View(pRecuperarForm);
         }
 
 

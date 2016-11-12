@@ -10,6 +10,8 @@ namespace Aplicacao.Interfaces
         Usuario AlterarSenha(Usuario lUsuario, string novaSenha);
 
         void GravarUsuario(Usuario lUsuario);
+
+        Usuario RecuperarSenha(Usuario usuario);
     }                                                                      
 }                                                                          
 
