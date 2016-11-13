@@ -226,6 +226,7 @@
     <Compile Include="ViewModels\QuestionarioViewModel.cs" />
     <Compile Include="ViewModels\RecuperarViewModel.cs" />
     <Compile Include="ViewModels\RespostaQuestaoViewModel.cs" />
+    <Compile Include="ViewModels\SituacaoAvaliacaoViewModel.cs" />
     <Compile Include="ViewModels\TipoQuestaoViewModel.cs" />
     <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>

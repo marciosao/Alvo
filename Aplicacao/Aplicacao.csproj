@@ -55,6 +55,7 @@
     <Compile Include="CandidatoAppServico.cs" />
     <Compile Include="CandidatoProcessoSeletivoAppServico.cs" />
     <Compile Include="CategoriaQuestaoAppServico.cs" />
+    <Compile Include="SituacaoAvaliacaoAppServico.cs" />
     <Compile Include="EtapaAppServico.cs" />
     <Compile Include="GrupoQuestaoAppServico.cs" />
     <Compile Include="Interfaces\IAppServicoBase.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Interfaces\ICandidatoAppServico.cs" />
     <Compile Include="Interfaces\ICandidatoProcessoSeletivoAppServico.cs" />
     <Compile Include="Interfaces\ICategoriaQuestaoAppServico.cs" />
+    <Compile Include="Interfaces\ISituacaoAvaliacaoAppServico.cs" />
     <Compile Include="Interfaces\IEtapaAppServico.cs" />
     <Compile Include="Interfaces\IGrupoQuestaoAppServico.cs" />
     <Compile Include="Interfaces\IMenuAppServico.cs" />

@@ -35,6 +35,8 @@ namespace Infra.Data.Models
         public DbSet<TipoQuestao> TipoQuestao { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Etapa> Etapa { get; set; }
+        public DbSet<SituacaoAvaliacao> SituacaoAvaliacao { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -56,6 +58,7 @@ namespace Infra.Data.Models
             modelBuilder.Configurations.Add(new TipoQuestaoMap());
             modelBuilder.Configurations.Add(new UsuarioMap());
             modelBuilder.Configurations.Add(new EtapaMap());
+            modelBuilder.Configurations.Add(new SituacaoAvaliacaoMap());
 
             ////////modelBuilder.Properties().Where(p => "Id" + p.Name == p.ReflectedType.Name).Configure(p => p.IsKey());
             modelBuilder.Properties().Where(p => "Id" == p.ReflectedType.Name).Configure(p => p.IsKey());

@@ -22,7 +22,7 @@ namespace Alvo.ViewModels
 
         public virtual ICollection<AvaliacaoViewModel> Avaliacao { get; set; }
 
-        public virtual string SituacaoAvaliacao
+        public virtual string EstadoAvaliacao
         {
             get
             {
@@ -39,6 +39,17 @@ namespace Alvo.ViewModels
                 }
 
                 return lRetorno;
+            }
+        }
+
+        public virtual string SituacaoAvaliacao
+        {
+            get
+            {
+                string lRetorno = string.Empty;
+                var lAvaliacao = this.Avaliacao.Where(x => x.IdCandidatoProcessoSeletivo == this.Id).First();
+
+                return lAvaliacao.SituacaoAvaliacao.Situacao;
             }
         }
 

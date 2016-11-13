@@ -14,6 +14,7 @@ namespace Dominio.Entidades
         public int Id { get; set; }
         public int? IdCandidatoProcessoSeletivo { get; set; }
         public int? IdProfessor { get; set; }
+        public int? IdSituacaoAvaliacao { get; set; }
         public Nullable<decimal> NotaFinal { get; set; }
         public DateTime? DataAvaliacao { get; set; }
         public bool Aprovado { get; set; }
@@ -22,6 +23,8 @@ namespace Dominio.Entidades
         public string ParecerAvaliador { get; set; }
         
         public virtual Usuario Usuario { get; set; }
+
+        public virtual SituacaoAvaliacao SituacaoAvaliacao { get; set; }
 
         public virtual CandidatoProcessoSeletivo CandidatoProcessoSeletivo { get; set; }
         public virtual ICollection<AvaliacaoQuestionario> AvaliacaoQuestionario { get; set; }

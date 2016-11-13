@@ -24,7 +24,10 @@
                 @Html.Raw("Área de Concentração")
             </th>
             <th>
-                @Html.Raw("Sit. Avaliação")
+                @Html.Raw("Estado Avaliação")
+            </th>
+            <th>
+                @Html.Raw("Situação")
             </th>
             <th>
                 @Html.Raw("Resultado")
@@ -47,6 +50,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AreaConcentracao.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoAvaliacao)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SituacaoAvaliacao)

@@ -58,6 +58,7 @@
     <Compile Include="Entidades\Questao.cs" />
     <Compile Include="Entidades\Questionario.cs" />
     <Compile Include="Entidades\RespostaQuestao.cs" />
+    <Compile Include="Entidades\SituacaoAvaliacao.cs" />
     <Compile Include="Entidades\TipoQuestao.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Enums\Perfil.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Interfaces\Repositorios\ICandidatoProcessoSeletivoRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\ICandidatoRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\ICategoriaQuestaoRepositorio.cs" />
+    <Compile Include="Interfaces\Repositorios\ISituacaoAvaliacaoRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IEtapaRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IGrupoQuestaoRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IMenuRepositorio.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Interfaces\Servicos\ICandidatoProcessoSeletivoServico.cs" />
     <Compile Include="Interfaces\Servicos\ICandidatoServico.cs" />
     <Compile Include="Interfaces\Servicos\ICategoriaQuestaoServico.cs" />
+    <Compile Include="Interfaces\Servicos\ISituacaoAvaliacaoServico.cs" />
     <Compile Include="Interfaces\Servicos\IEtapaServico.cs" />
     <Compile Include="Interfaces\Servicos\IGrupoQuestaoServico.cs" />
     <Compile Include="Interfaces\Servicos\IMenuServico.cs" />
@@ -106,6 +109,7 @@
     <Compile Include="Servicos\CandidatoProcessoSeletivoServico.cs" />
     <Compile Include="Servicos\CandidatoServico.cs" />
     <Compile Include="Servicos\CategoriaQuestaoServico.cs" />
+    <Compile Include="Servicos\SituacaoAvaliacaoServico.cs" />
     <Compile Include="Servicos\EtapaServico.cs" />
     <Compile Include="Servicos\GrupoQuestaoServico.cs" />
     <Compile Include="Servicos\MenuServico.cs" />

@@ -162,6 +162,8 @@ namespace Alvo.Controllers
             var lAvaliacao = _avaliacaoAppServico.ObtemAvaliacaoPorCandidatoProcesso(id);
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
+            ViewBag.IdSituacaoAvaliacao = lAvaliacao.SituacaoAvaliacao.Id;
+
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
 
             lQuestionario.ParecerAvaliador = lAvaliacao.ParecerAvaliador;

@@ -65,6 +65,7 @@
     <Compile Include="Models\Mapping\CandidatoMap.cs" />
     <Compile Include="Models\Mapping\CandidatoProcessoSeletivoMap.cs" />
     <Compile Include="Models\Mapping\CategoriaQuestaoMap.cs" />
+    <Compile Include="Models\Mapping\SituacaoAvaliacaoMap.cs" />
     <Compile Include="Models\Mapping\EtapaMap.cs" />
     <Compile Include="Models\Mapping\GrupoQuestaoMap.cs" />
     <Compile Include="Models\Mapping\MenuMap.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Repositorios\CandidatoProcessoSeletivoRepositorio.cs" />
     <Compile Include="Repositorios\CandidatoRepositorio.cs" />
     <Compile Include="Repositorios\CategoriaQuestaoRepositorio.cs" />
+    <Compile Include="Repositorios\SituacaoAvaliacaoRepositorio.cs" />
     <Compile Include="Repositorios\EtapaRepositorio.cs" />
     <Compile Include="Repositorios\GrupoQuestaoRepositorio.cs" />
     <Compile Include="Repositorios\MenuRepositorio.cs" />

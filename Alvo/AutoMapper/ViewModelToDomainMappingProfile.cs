@@ -31,6 +31,7 @@ namespace Alvo.AutoMapper
             Mapper.CreateMap<TipoQuestao, TipoQuestaoViewModel>();
             Mapper.CreateMap<Usuario, UsuarioViewModel>();
             Mapper.CreateMap<Etapa, EtapaViewModel>();
+            Mapper.CreateMap<SituacaoAvaliacao, SituacaoAvaliacaoViewModel>();
         }
     }
 }
