@@ -32,7 +32,6 @@ namespace Aplicacao
 
         public void DistribuiAvaliacaoResponsavel(int pCandidatoProcessoSeletivo, int lIdProfessor)
         {
-
             CandidatoProcessoSeletivo lCandidatoProcessoSeletivo = _candidatoProcessoSeletivoServico.ObtemPorId(pCandidatoProcessoSeletivo);
             
             //Está fixo pois, neste momento tem apenas 1 questionário
@@ -40,6 +39,7 @@ namespace Aplicacao
 
             Avaliacao lAvaliacao = _avaliacaoServico.ObtemAvaliacaoPorCandidatoProcesso(lCandidatoProcessoSeletivo.Id);
             lAvaliacao.IdProfessor = lIdProfessor;
+            lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria;
             _avaliacaoServico.Update(lAvaliacao);
 
             AvaliacaoQuestionario lAvaliacaoQuestionario = new AvaliacaoQuestionario();

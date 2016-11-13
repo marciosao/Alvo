@@ -154,7 +154,7 @@ namespace Alvo.Controllers
             ////////UsuarioViewModel lUsuario = GetUsuarioLogado();
 
             ////////var lUsuario = Mapper.Map<Usuario, UsuarioViewModel>(_usuarioAppServico.ObtemPorId(4));
-            var lUsuario = Mapper.Map<UsuarioViewModel,Usuario >(GetUsuarioLogado());
+            var lUsuario = Mapper.Map<UsuarioViewModel, Usuario>(GetUsuarioLogado());
 
             ViewBag.IdPerfil = lUsuario.Perfil.Id;
             ViewBag.Usuario = Mapper.Map<Usuario, UsuarioViewModel>(lUsuario);
@@ -247,7 +247,7 @@ namespace Alvo.Controllers
         }
 
         [HttpPost]
-        public ActionResult Avaliacao(AvaliacaoViewModel pAvaliacaoViewModel)
+        public ActionResult Avaliacao(AvaliacaoViewModel pAvaliacaoViewModel, FormCollection form)
         {
             Avaliacao lAvaliacao = new Avaliacao();
 
@@ -257,9 +257,35 @@ namespace Alvo.Controllers
                 lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
             }
 
-            foreach (var item in pAvaliacaoViewModel.Questao)
+            if (pAvaliacaoViewModel.Questao != null)
             {
-                foreach (var item2 in item.RespostaQuestao)
+                foreach (var item in pAvaliacaoViewModel.Questao)
+                {
+                    foreach (var item2 in item.RespostaQuestao)
+                    {
+                        RespostaQuestao lResposta = new RespostaQuestao();
+                        lResposta.Id = item2.Id;
+                        lResposta.IdQuestao = item2.IdQuestao;
+                        lResposta.ValorResposta = item2.ValorResposta;
+
+                        if (item2.IdAvaliacao == lAvaliacao.Id)
+                        {
+                            lResposta.IdAvaliacao = item2.IdAvaliacao;
+                        }
+                        else
+                        {
+                            lResposta.IdAvaliacao = lAvaliacao.Id;
+                        }
+
+                        lAvaliacao.RespostaQuestao.Add(lResposta);
+                    }
+                }
+            }
+            else
+            {
+                List<RespostaQuestaoViewModel> lListaRespostaQuestao = RetornaQuestoesEtapaIII(form);
+
+                foreach (var item2 in lListaRespostaQuestao)
                 {
                     RespostaQuestao lResposta = new RespostaQuestao();
                     lResposta.Id = item2.Id;
@@ -268,12 +294,7 @@ namespace Alvo.Controllers
 
                     if (item2.IdAvaliacao == lAvaliacao.Id)
                     {
-                        ////////RespostaQuestao lResposta = new RespostaQuestao();
                         lResposta.IdAvaliacao = item2.IdAvaliacao;
-                        ////////lResposta.IdQuestao = item2.IdQuestao;
-                        ////////lResposta.ValorResposta = item2.ValorResposta;
-
-                        ////////lAvaliacao.RespostaQuestao.Add(lResposta);
                     }
                     else
                     {
@@ -316,6 +337,19 @@ namespace Alvo.Controllers
 
 
             return PartialView("~/Views/Questao/_Questao.cshtml", lQuestionario.Questao);
+        }
+
+        private List<RespostaQuestaoViewModel> RetornaQuestoesEtapaIII(FormCollection pForm)
+        {
+            List<RespostaQuestaoViewModel> lListaRespostaQuestao = new List<RespostaQuestaoViewModel>();
+            RespostaQuestaoViewModel lRespostaQuestao = new RespostaQuestaoViewModel();
+
+            for (int i = 0; i < pForm.Count; i++)
+            {
+                string teste = pForm[i].ToString();
+            }
+
+            return lListaRespostaQuestao;
         }
     }
 }
