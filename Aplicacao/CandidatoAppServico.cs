@@ -8,6 +8,7 @@ using System.Data;
 using System.IO;
 using System.Text;
 using Aplicacao.Util;
+using Dominio.Enums;
 
 namespace Aplicacao
 {
@@ -30,7 +31,6 @@ namespace Aplicacao
         public void ImportarCandidatos(int pIdProcessoSeletivo, string pCaminhoArquivo)
         {
             //Obtendo os candidados a partir do arquivo
-            ////////List<Candidato> lListaCandidatos = CandidadosArquivo(pCaminhoArquivo);
             List<CandidatoProcessoSeletivo> lListaCandidatoProcessoSeletivo = CandidatoProcessoSeletivoArquivo(pCaminhoArquivo);
             StringBuilder lListaCandidatosExistentes = new StringBuilder();
 
@@ -47,11 +47,12 @@ namespace Aplicacao
                         item.IdProcessoSeletivo = pIdProcessoSeletivo;
                         CandidatoProcessoSeletivo lCandidadoProcesso = _candidatoProcessoSeletivoServico.AddWithReturn(item);
 
-                        //Criando uma AVALIAÇÃO que estará pendente até que seja informado um PROFESSOR RESPONSÁVEL pela avaliação
+                        //Criando uma AVALIAÇÃO que estará pendente até que seja informado um PROFESSOR RESPONSÁVEL pela avaliação e com a situação 'Pendente Etapa II Secretaria'
                         Avaliacao lAvaliacao = new Avaliacao();
                         lAvaliacao.IdCandidatoProcessoSeletivo = lCandidadoProcesso.Id;
                         lAvaliacao.Aprovado = false;
                         lAvaliacao.Concluida = false;
+                        lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria ;//'Pendente Etapa II Secretaria'
 
                         _avaliacaoServico.Add(lAvaliacao);
                     }

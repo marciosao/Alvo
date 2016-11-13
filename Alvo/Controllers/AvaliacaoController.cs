@@ -163,6 +163,7 @@ namespace Alvo.Controllers
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
             ViewBag.IdSituacaoAvaliacao = lAvaliacao.SituacaoAvaliacao.Id;
+            ViewBag.ValorNota = 7; // Obter o cálculo da nota Parcial aqui //---------------------------------------------------------------------------
 
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
 

@@ -62,6 +62,7 @@
     <Compile Include="Entidades\TipoQuestao.cs" />
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Enums\Perfil.cs" />
+    <Compile Include="Enums\SiuacaoAvaliacao.cs" />
     <Compile Include="Interfaces\Repositorios\IAreaConcentracaoRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IAvaliacaoQuestionarioRepositorio.cs" />
     <Compile Include="Interfaces\Repositorios\IAvaliacaoRepositorio.cs" />

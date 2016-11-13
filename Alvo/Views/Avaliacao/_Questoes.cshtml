@@ -21,7 +21,7 @@
         
          Alvo.ViewModels.UsuarioViewModel lUsuario = ViewBag.Usuario;
          int lIdSituacaoAvaliacao = ViewBag.IdSituacaoAvaliacao;
-         decimal lNotaParcial = 7;
+         string lNotaParcial = "7";
 
         lTotalEtapa2Grupo1 = Model.Questao.Where(x=>x.IdEtapa == 2 && x.IdCategoriaQuestao == 1).Count();
 
@@ -30,21 +30,25 @@
             /*Cria o primeiro Cabeçalho*/
             if (lIdEtapaAtual == 0 && lIdGrupoAtual == 0 && lIdCategoriaAtual == 0)
             {
-                <tr>
-                    <td colspan="3" style="text-align:center;color:white;font-size:large;font-family:Arial;background-color:black">@Html.Label(Model.Questao[i].Etapa.Nome, htmlAttributes: new { @class = "control-label" })</td>
-                </tr>
-                <tr>
-                    <td colspan="3" style="text-align:center;font-size:large;background-color:#8B8989"><strong>@Html.Label(Model.Questao[i].CategoriaQuestao.GrupoQuestao.Nome, htmlAttributes: new { @class = "control-label" })</strong></td>
-                </tr>
-                <tr style="background-color:#EEE9E9;width:71%">
-                    <th align="center">
-                        @Html.Label(Model.Questao[i].CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label", @style = "font-weight:bold; text-align:center;" })
-                    </th>
-                    <th style="text-align:center;width:20%">
-                        @Html.Raw("Pontuação Máxima")
-                    </th>
-                    <th></th>
-                </tr>
+                if (Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3)
+                ////////if ((Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3) || decimal.Parse(lNotaParcial) >= 7)
+                {
+                    <tr>
+                        <td colspan="3" style="text-align:center;color:white;font-size:large;font-family:Arial;background-color:black">@Html.Label(Model.Questao[i].Etapa.Nome, htmlAttributes: new { @class = "control-label" })</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:center;font-size:large;background-color:#8B8989"><strong>@Html.Label(Model.Questao[i].CategoriaQuestao.GrupoQuestao.Nome, htmlAttributes: new { @class = "control-label" })</strong></td>
+                    </tr>
+                    <tr style="background-color:#EEE9E9;width:71%">
+                        <th align="center">
+                            @Html.Label(Model.Questao[i].CategoriaQuestao.Nome, htmlAttributes: new { @class = "control-label", @style = "font-weight:bold; text-align:center;" })
+                        </th>
+                        <th style="text-align:center;width:20%">
+                            @Html.Raw("Pontuação Máxima")
+                        </th>
+                        <th></th>
+                    </tr>
+                }            
             }
             else if (Model.Questao[i].IdEtapa != lIdEtapaAtual || Model.Questao[i].IdCategoriaQuestao != lIdCategoriaAtual || Model.Questao[i].CategoriaQuestao.IdGrupoQuestao != lIdGrupoAtual)
             {
@@ -53,12 +57,13 @@
                 {
                     //Se a 3ª etapa e a média for maior ou igual à 7 exibe o titulo da 3ª etapa
                     if (Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3) 
+                    ////////if ((Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3) || decimal.Parse(lNotaParcial) >= 7)
                     { 
                         <tr>
                             <td colspan="3" style="text-align:center;color:white;font-size:large;font-family:Arial;background-color:black">@Html.Label(Model.Questao[i].Etapa.Nome, htmlAttributes: new { @class = "control-label" })</td>
                         </tr>
                     }
-                    else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && lNotaParcial >= 7)
+                    else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && decimal.Parse(lNotaParcial) >= 7)
                     {
                         <tr>
                             <td colspan="3" style="text-align:center;color:white;font-size:large;font-family:Arial;background-color:black">@Html.Label(Model.Questao[i].Etapa.Nome, htmlAttributes: new { @class = "control-label" })</td>
@@ -68,12 +73,13 @@
                 if (Model.Questao[i].CategoriaQuestao.IdGrupoQuestao != lIdGrupoAtual)
                 {
                     if (Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3)
+                    ////////if ((Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3) || decimal.Parse(lNotaParcial) >= 7)
                     {
                         <tr>
                             <td colspan="3" style="text-align:center;font-size:large;background-color:#8B8989"><strong>@Html.Label(Model.Questao[i].CategoriaQuestao.GrupoQuestao.Nome, htmlAttributes: new { @class = "control-label" })</strong></td>
                         </tr>
                     }
-                    else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && lNotaParcial >= 7)
+                    else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && decimal.Parse(lNotaParcial) >= 7)
                     {
                         <tr>
                             <td colspan="3" style="text-align:center;font-size:large;background-color:#8B8989"><strong>@Html.Label(Model.Questao[i].CategoriaQuestao.GrupoQuestao.Nome, htmlAttributes: new { @class = "control-label" })</strong></td>
@@ -83,6 +89,7 @@
                 if (Model.Questao[i].IdCategoriaQuestao != lIdCategoriaAtual)
                 {
                     if (Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3)
+                    ////////if ((Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3) || decimal.Parse(lNotaParcial) >= 7)
                     {
                         <tr style="background-color:#EEE9E9;width:71%">
                             <th align="center">
@@ -94,7 +101,7 @@
                             <th></th>
                         </tr>
                     }
-                    else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && lNotaParcial >= 7)
+                    else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && decimal.Parse(lNotaParcial) >= 7)
                     {
                         <tr style="background-color:#EEE9E9;width:71%">
                             <th align="center">
@@ -166,6 +173,7 @@
 
                     <input type="hidden" id="TotalGeralPontosParcial" value=@lTotalGeralPontosParcial />
                 if (Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3)
+                ////////if ((Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3) || decimal.Parse(lNotaParcial) >= 7)
                 {
                     <tr name="QuestaoQuestionario" idquestao="@Model.Questao[i].Id" valorMaximo="@Model.Questao[i].ValorBarema">
                         <td style="font-size:small;height:auto">
@@ -189,22 +197,26 @@
                                     {
                                         if (lIdCategoriaAtual == 2 || (lIdCategoriaAtual == 4 && Model.Questao[i].Id == 13)) 
                                         {
-                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                                            @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })*@
+                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")" } })
                                         }
                                         else
                                         {
-                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
+                                            @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })*@
+                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
                                         }
                                     }
                                     else
                                     {
-                                        if (lIdCategoriaAtual != 2 && (lIdCategoriaAtual != 4 || Model.Questao[i].Id != 13)) 
+                                        if (lIdCategoriaAtual != 2 && (lIdCategoriaAtual != 4 || Model.Questao[i].Id != 13))
                                         {
-                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                                            @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })*@
+                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")" } })
                                         }
                                         else
                                         {
-                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
+                                            @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })*@
+                                            @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
                                         }
                                     }
                                 }
@@ -213,7 +225,8 @@
                             {
                                 if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
                                 {
-                                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @disabled = "disabled", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                                    @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @disabled = "disabled", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })*@
+                                @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")" } })
                                 }
                             }
 
@@ -225,7 +238,7 @@
                         </td>
                     </tr>
                 }
-                else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && lNotaParcial >= 7)//-----------------------------------------------------------
+                else if ((Model.Questao[i].IdEtapa == 3 && lIdSituacaoAvaliacao == 3) && decimal.Parse(lNotaParcial) >= 7)//-----------------------------------------------------------
                 {
                     <tr name="QuestaoQuestionario" idquestao="@Model.Questao[i].Id" valormaximo="@Model.Questao[i].ValorBarema">
                         <td style="font-size:small;height:auto">
@@ -273,7 +286,8 @@
                             {
                                 if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
                                 {
-                                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @disabled = "disabled", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
+                                    @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @disabled = "disabled", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })*@
+                                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")" } })
                                 }
                             }
 
@@ -285,39 +299,44 @@
                         </td>
                     </tr>
                 }//--------------------------------------------------------------------------------------------------------------------------------------------------
-                if (lContadorEtapa2Grupo1 == lTotalEtapa2Grupo1)
+                if (Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3)
+                ////////if ((Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3) || decimal.Parse(lNotaParcial) >= 7)
                 {
-                        <tr>
-                            <td colspan="3" style="color:black;font-size:medium;font-family:Arial;background-color:#D8BFD8">@Html.Label("PARECER DO AVALIADOR", htmlAttributes: new { @class = "control-label" })</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                            @{
-                                if (lUsuario.Perfil.Id == 3)
-                                {
-                                    if (lIdCategoriaAtual == 2 || (lIdCategoriaAtual == 4 && Model.Questao[i].Id == 13))
+                    if (lContadorEtapa2Grupo1 == lTotalEtapa2Grupo1)
+                    {
+                            <tr>
+                                <td colspan="3" style="color:black;font-size:medium;font-family:Arial;background-color:#D8BFD8">@Html.Label("PARECER DO AVALIADOR", htmlAttributes: new { @class = "control-label" })</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                @{
+                                    if (lUsuario.Perfil.Id == 3)
                                     {
-                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
+                                        if (lIdCategoriaAtual == 2 || (lIdCategoriaAtual == 4 && Model.Questao[i].Id == 13))
+                                        {
+                                            @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
+                                        }else
+                                        {
+                                            @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:800px", @readonly = "readonly" })
+                                        }
                                     }else
                                     {
-                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:800px", @readonly = "readonly" })
-                                    }
-                                }else
-                                {
-                                    if (lIdCategoriaAtual != 2 && (lIdCategoriaAtual != 4 || Model.Questao[i].Id != 13))
-                                    {
-                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
-                                    }else
-                                    {
-                                        @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:800px", @readonly = "readonly" })
+                                        if (lIdCategoriaAtual != 2 && (lIdCategoriaAtual != 4 || Model.Questao[i].Id != 13))
+                                        {
+                                            @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @style = "width:800px" })
+                                        }else
+                                        {
+                                            @Html.TextAreaFor(model => model.ParecerAvaliador, htmlAttributes: new { @class = "form-control", @style = "text-align:right;font-size:medium;background-color:#eeeeee;width:800px", @readonly = "readonly" })
+                                        }
                                     }
                                 }
-                            }
-                            </td>
-                        </tr>
-                        lContadorEtapa2Grupo1 = 0;
+                                </td>
+                            </tr>
+                            lContadorEtapa2Grupo1 = 0;
                     }
                 }
+
+            }
         }
-    }
+}
 </table>

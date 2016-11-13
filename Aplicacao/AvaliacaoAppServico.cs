@@ -26,6 +26,7 @@ namespace Aplicacao
         {
             var lIdAvaliacao = _avaliacaoServico.ObtemPorId(lAvaliacao.Id);
             decimal lNotaFinal = 0;
+            decimal lNotaParcial = 0;
 
             decimal lTotalEntrevista = 0;
             decimal lTotalPropostaTrabalho = 0;
@@ -89,31 +90,72 @@ namespace Aplicacao
             lIdAvaliacao.ParecerAvaliador = lAvaliacao.ParecerAvaliador;
             lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
 
+            //calculando a média parcial
+            lNotaParcial = ((lTotalPropostaTrabalho * 7) + (lTotalCurriculoLattes * 3)) / 10;
+
             //calculando a Média final
-            lNotaFinal = ((lTotalEntrevista*4 ) + (lTotalPropostaTrabalho*3) + (lTotalCurriculoLattes*2)) / 10;
+            lNotaFinal = ((lTotalEntrevista * 4) + (lTotalPropostaTrabalho * 3) + (lTotalCurriculoLattes * 2)) / 10;
 
-            if (lNotaFinal >= 7)
+            //Definindo a próxima Situação
+            if (lIdAvaliacao.SituacaoAvaliacao.Id == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria)
             {
-                lIdAvaliacao.Aprovado = true;
+                lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor;
             }
-            else
+            else if (lIdAvaliacao.SituacaoAvaliacao.Id == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor)
             {
-                lIdAvaliacao.Aprovado = false;
+                //Se for a avaliação do professor e o candidato não obteve a média suficiente para a entrevista, que é maior ou igual à 7, 
+                //a avaliação deve ser concluída e o candidato estará reprovado. Caso contrário o candidato passará pela próxima etapa que é a entrevista
+                if (lNotaParcial >= 7)
+                {
+                    lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII;
+                }
+                else
+                {
+                    lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.Concluida;
+                    lIdAvaliacao.Concluida = true;
+                    lIdAvaliacao.Aprovado = false;
+                    lAvavaliacaoConcluida = true;
+                    lIdAvaliacao.NotaFinal = lNotaFinal;
+                }
+
             }
-
-            
-
-            if (lAvavaliacaoConcluida)
+            else if (lIdAvaliacao.SituacaoAvaliacao.Id == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII)
             {
-                lIdAvaliacao.NotaFinal = lNotaFinal;
+                lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.Concluida;
                 lIdAvaliacao.Concluida = true;
-            }
-            else
-            {
-                lIdAvaliacao.NotaFinal = 0;
-                lIdAvaliacao.Concluida = false;
+                lAvavaliacaoConcluida = true;
+
+                lIdAvaliacao.NotaFinal = lNotaFinal;
+
+                if (lNotaFinal >= 7)
+                {
+                    lIdAvaliacao.Aprovado = true;
+                }
+                else
+                {
+                    lIdAvaliacao.Aprovado = false;
+                }
             }
 
+            ////////if (lNotaFinal >= 7)
+            ////////{
+            ////////    lIdAvaliacao.Aprovado = true;
+            ////////}
+            ////////else
+            ////////{
+            ////////    lIdAvaliacao.Aprovado = false;
+            ////////}
+
+            ////////if (lAvavaliacaoConcluida)
+            ////////{
+            ////////    lIdAvaliacao.NotaFinal = lNotaFinal;
+            ////////    lIdAvaliacao.Concluida = true;
+            ////////}
+            ////////else
+            ////////{
+            ////////    lIdAvaliacao.NotaFinal = 0;
+            ////////    lIdAvaliacao.Concluida = false;
+            ////////}
 
             _avaliacaoServico.Update(lIdAvaliacao);
         }
