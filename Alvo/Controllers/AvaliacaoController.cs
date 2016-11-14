@@ -283,25 +283,11 @@ namespace Alvo.Controllers
             }
             else
             {
-                List<RespostaQuestaoViewModel> lListaRespostaQuestao = RetornaQuestoesEtapaIII(form);
+                List<RespostaQuestao> lListaRespostaQuestao = RetornaQuestoesEtapaIII(form, lAvaliacao.Id);
 
                 foreach (var item2 in lListaRespostaQuestao)
                 {
-                    RespostaQuestao lResposta = new RespostaQuestao();
-                    lResposta.Id = item2.Id;
-                    lResposta.IdQuestao = item2.IdQuestao;
-                    lResposta.ValorResposta = item2.ValorResposta;
-
-                    if (item2.IdAvaliacao == lAvaliacao.Id)
-                    {
-                        lResposta.IdAvaliacao = item2.IdAvaliacao;
-                    }
-                    else
-                    {
-                        lResposta.IdAvaliacao = lAvaliacao.Id;
-                    }
-
-                    lAvaliacao.RespostaQuestao.Add(lResposta);
+                    lAvaliacao.RespostaQuestao.Add(item2);
                 }
             }
 
@@ -339,15 +325,51 @@ namespace Alvo.Controllers
             return PartialView("~/Views/Questao/_Questao.cshtml", lQuestionario.Questao);
         }
 
-        private List<RespostaQuestaoViewModel> RetornaQuestoesEtapaIII(FormCollection pForm)
+        private List<RespostaQuestao> RetornaQuestoesEtapaIII(FormCollection pForm, int pIdAvaliacao)
         {
-            List<RespostaQuestaoViewModel> lListaRespostaQuestao = new List<RespostaQuestaoViewModel>();
-            RespostaQuestaoViewModel lRespostaQuestao = new RespostaQuestaoViewModel();
+            List<RespostaQuestao> lListaRespostaQuestao = new List<RespostaQuestao>();
 
-            for (int i = 0; i < pForm.Count; i++)
-            {
-                string teste = pForm[i].ToString();
-            }
+            RespostaQuestao lRespostaQuestao16 = new RespostaQuestao();
+            lRespostaQuestao16.ValorResposta = pForm[2].ToString();
+            lRespostaQuestao16.IdQuestao = int.Parse(pForm[3].ToString());
+            lRespostaQuestao16.IdAvaliacao = pIdAvaliacao;
+
+            lListaRespostaQuestao.Add(lRespostaQuestao16);
+
+            RespostaQuestao lRespostaQuestao17 = new RespostaQuestao();
+            lRespostaQuestao17.ValorResposta = pForm[5].ToString();
+            lRespostaQuestao17.IdQuestao = int.Parse(pForm[6].ToString());
+            lRespostaQuestao17.IdAvaliacao = pIdAvaliacao;
+
+            lListaRespostaQuestao.Add(lRespostaQuestao17);
+
+            RespostaQuestao lRespostaQuestao18 = new RespostaQuestao();
+            lRespostaQuestao18.ValorResposta = pForm[8].ToString();
+            lRespostaQuestao18.IdQuestao = int.Parse(pForm[9].ToString());
+            lRespostaQuestao18.IdAvaliacao = pIdAvaliacao;
+
+            lListaRespostaQuestao.Add(lRespostaQuestao18);
+
+            RespostaQuestao lRespostaQuestao19 = new RespostaQuestao();
+            lRespostaQuestao19.ValorResposta = pForm[11].ToString();
+            lRespostaQuestao19.IdQuestao = int.Parse(pForm[12].ToString());
+            lRespostaQuestao19.IdAvaliacao = pIdAvaliacao;
+
+            lListaRespostaQuestao.Add(lRespostaQuestao19);
+
+            RespostaQuestao lRespostaQuestao20 = new RespostaQuestao();
+            lRespostaQuestao20.ValorResposta = pForm[14].ToString();
+            lRespostaQuestao20.IdQuestao = int.Parse(pForm[15].ToString());
+            lRespostaQuestao20.IdAvaliacao = pIdAvaliacao;
+
+            lListaRespostaQuestao.Add(lRespostaQuestao20);
+
+            RespostaQuestao lRespostaQuestao21 = new RespostaQuestao();
+            lRespostaQuestao21.ValorResposta = pForm[17].ToString();
+            lRespostaQuestao21.IdQuestao = int.Parse(pForm[18].ToString());
+            lRespostaQuestao21.IdAvaliacao = pIdAvaliacao;
+
+            lListaRespostaQuestao.Add(lRespostaQuestao21);
 
             return lListaRespostaQuestao;
         }
