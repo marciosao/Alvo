@@ -28,9 +28,9 @@ namespace Aplicacao
             decimal lNotaFinal = 0;
             decimal lNotaParcial = 0;
 
-            decimal lTotalEntrevista = 0;
-            decimal lTotalPropostaTrabalho = 0;
-            decimal lTotalCurriculoLattes = 0;
+            ////////decimal lTotalEntrevista = 0;
+            ////////decimal lTotalPropostaTrabalho = 0;
+            ////////decimal lTotalCurriculoLattes = 0;
 
             bool lAvavaliacaoConcluida = true;
 
@@ -49,22 +49,21 @@ namespace Aplicacao
                         lRowResposta.Questao = lResposta.Questao;
                     }
 
-                    if (!string.IsNullOrEmpty(lRowResposta.ValorResposta))
-                    {
-                        if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 1)//Grupo Proposta de Trabalho
-                        {
-                            lTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
-                        }
-                        else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 2)//Grupo Avaliação Curriculo Lates
-                        {
-                            lTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
-                        }
-                        else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 3)//Grupo Entrevista
-                        {
-                            lTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
-                        }
-                    }
-
+                    ////////if (!string.IsNullOrEmpty(lRowResposta.ValorResposta))
+                    ////////{
+                    ////////    if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 1)//Grupo Proposta de Trabalho
+                    ////////    {
+                    ////////        lTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
+                    ////////    }
+                    ////////    else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 2)//Grupo Avaliação Curriculo Lates
+                    ////////    {
+                    ////////        lTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
+                    ////////    }
+                    ////////    else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 3)//Grupo Entrevista
+                    ////////    {
+                    ////////        lTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
+                    ////////    }
+                    ////////}
 
                     //descartando a Questão da resposta
                     lRowResposta.Questao = null;
@@ -79,7 +78,7 @@ namespace Aplicacao
                         _respostaQuestaoServico.Update(lResposta);
                     }
 
-                    lNotaFinal += Decimal.Parse(lRowResposta.ValorResposta);
+                    ////////lNotaFinal += Decimal.Parse(lRowResposta.ValorResposta);
                 }
                 else
                 {
@@ -91,10 +90,13 @@ namespace Aplicacao
             lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
 
             //calculando a média parcial
-            lNotaParcial = ((lTotalPropostaTrabalho * 7) + (lTotalCurriculoLattes * 3)) / 10;
+            ////////lNotaParcial = ((lTotalPropostaTrabalho * 7) + (lTotalCurriculoLattes * 3)) / 10;
+
+            lNotaParcial = this.CalculoMedias(lAvaliacao,"P");
 
             //calculando a Média final
-            lNotaFinal = ((lTotalEntrevista * 4) + (lTotalPropostaTrabalho * 3) + (lTotalCurriculoLattes * 2)) / 10;
+            ////////lNotaFinal = ((lTotalEntrevista * 4) + (lTotalPropostaTrabalho * 3) + (lTotalCurriculoLattes * 2)) / 10;
+            lNotaFinal = this.CalculoMedias(lAvaliacao, "F");
 
             //Definindo a próxima Situação
             if (lIdAvaliacao.SituacaoAvaliacao.Id == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria)
@@ -137,26 +139,6 @@ namespace Aplicacao
                 }
             }
 
-            ////////if (lNotaFinal >= 7)
-            ////////{
-            ////////    lIdAvaliacao.Aprovado = true;
-            ////////}
-            ////////else
-            ////////{
-            ////////    lIdAvaliacao.Aprovado = false;
-            ////////}
-
-            ////////if (lAvavaliacaoConcluida)
-            ////////{
-            ////////    lIdAvaliacao.NotaFinal = lNotaFinal;
-            ////////    lIdAvaliacao.Concluida = true;
-            ////////}
-            ////////else
-            ////////{
-            ////////    lIdAvaliacao.NotaFinal = 0;
-            ////////    lIdAvaliacao.Concluida = false;
-            ////////}
-
             _avaliacaoServico.Update(lIdAvaliacao);
         }
 
@@ -170,6 +152,47 @@ namespace Aplicacao
         public IEnumerable<Avaliacao> ObtemCandidatosClassificacao(int pIdProcessoSeletivo)
         {
             return _avaliacaoServico.ObtemCandidatosClassificacao(pIdProcessoSeletivo);
+        }
+
+        private decimal CalculoMedias(Avaliacao pAvaliacao, string pTipoMedia)
+        {
+            decimal lResultado = 0;
+
+            decimal lTotalEntrevista = 0;
+            decimal lTotalPropostaTrabalho = 0;
+            decimal lTotalCurriculoLattes = 0;
+
+            pAvaliacao = _avaliacaoServico.ObtemPorId(pAvaliacao.Id);
+
+            foreach (var lRowResposta in pAvaliacao.RespostaQuestao)
+            {
+                if (!string.IsNullOrEmpty(lRowResposta.ValorResposta))
+                {
+                    if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 1)//Grupo Proposta de Trabalho
+                    {
+                        lTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
+                    }
+                    else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 2)//Grupo Avaliação Curriculo Lates
+                    {
+                        lTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
+                    }
+                    else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 3)//Grupo Entrevista
+                    {
+                        lTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
+                    }
+                }
+            }
+
+            if (pTipoMedia.Equals("P")) //Cálculo Média Parcial
+            {
+                lResultado = ((lTotalPropostaTrabalho * 7) + (lTotalCurriculoLattes * 3)) / 10;
+            }
+            else if (pTipoMedia.Equals("F"))//Cálculo Média Parcial
+            {
+                lResultado = ((lTotalEntrevista * 4) + (lTotalPropostaTrabalho * 3) + (lTotalCurriculoLattes * 2)) / 10;
+            }
+
+            return lResultado;
         }
     }
 }

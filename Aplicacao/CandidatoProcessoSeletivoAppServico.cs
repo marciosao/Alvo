@@ -48,6 +48,11 @@ namespace Aplicacao
             _avaliacaoQuestionarioServico.Add(lAvaliacaoQuestionario);
         }
 
+        /// <summary>
+        /// Obtem as avaliações por professor com a situação disponível para professor.
+        /// </summary>
+        /// <param name="pIdProfessor">Identificador do Professor (Id)</param>
+        /// <returns>Lista de Candidatos</returns>
         public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int pIdProfessor)
         {
             var lUsuario = _usuarioServico.ObtemPorId(pIdProfessor);

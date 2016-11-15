@@ -14,6 +14,11 @@ namespace Infra.Data.Repositorios
             return lCandidatoProcessoSeletivo;
         }
 
+       /// <summary>
+       /// Obtem as avaliações por professor com a situação disponível para professor.
+       /// </summary>
+       /// <param name="pIdProfessor">Identificador do Professor (Id)</param>
+       /// <returns>Lista de Candidatos</returns>
         public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor)
         {
             int? lIdProfessor = null;
@@ -23,7 +28,23 @@ namespace Infra.Data.Repositorios
                 lIdProfessor = pIdProfessor;
             }
 
-            var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x => x.Avaliacao.Any(a => a.IdProfessor != null  && (lIdProfessor == null || a.IdProfessor == lIdProfessor)));
+            ////////var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x => 
+            ////////                                                                             x.Avaliacao.Any(a => 
+            ////////                                                                                             a.IdProfessor != null  && 
+            ////////                                                                                             (lIdProfessor == null || a.IdProfessor == lIdProfessor) &&
+            ////////                                                                                             a.IdSituacaoAvaliacao != (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria)
+            ////////                                                                             );
+
+            var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x =>
+                                                                             x.Avaliacao.Any(a =>
+                                                                                             a.IdProfessor != null &&
+                                                                                             (lIdProfessor == null || a.IdProfessor == lIdProfessor)));
+            if (pIdProfessor > 0)
+            {
+                lCandidatoProcessoSeletivo = lCandidatoProcessoSeletivo.ToList().Where(x =>
+                                                                                       x.Avaliacao.Any(a =>
+                                                                                                       a.IdSituacaoAvaliacao != (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria));
+            }
 
             return lCandidatoProcessoSeletivo;
         }
@@ -45,11 +66,6 @@ namespace Infra.Data.Repositorios
 
             return lCandidatoProcessoSeletivo;
         }
-
-
-
-
-
     }                                                                            
 }                                                                                
 
