@@ -89,6 +89,7 @@ namespace Alvo.App_Start
             kernel.Bind<ITipoQuestaoAppServico>().To<TipoQuestaoAppServico>();
             kernel.Bind<IUsuarioAppServico>().To<UsuarioAppServico>();
             kernel.Bind<IEtapaAppServico>().To<EtapaAppServico>();
+            kernel.Bind<ISituacaoAvaliacaoAppServico>().To<SituacaoAvaliacaoAppServico>();
 
             kernel.Bind(typeof(IServicoBase<>)).To(typeof(ServicoBase<>));
             kernel.Bind<IAreaConcentracaoServico>().To<AreaConcentracaoServico>();
@@ -109,6 +110,7 @@ namespace Alvo.App_Start
             kernel.Bind<ITipoQuestaoServico>().To<TipoQuestaoServico>();
             kernel.Bind<IUsuarioServico>().To<UsuarioServico>();
             kernel.Bind<IEtapaServico>().To<EtapaServico>();
+            kernel.Bind<ISituacaoAvaliacaoServico>().To<SituacaoAvaliacaoServico>();
 
             kernel.Bind(typeof(IRepositorioBase<>)).To(typeof(RepositorioBase<>));
             kernel.Bind<IAreaConcentracaoRepositorio>().To<AreaConcentracaoRepositorio>();
@@ -129,6 +131,7 @@ namespace Alvo.App_Start
             kernel.Bind<ITipoQuestaoRepositorio>().To<TipoQuestaoRepositorio>();
             kernel.Bind<IUsuarioRepositorio>().To<UsuarioRepositorio>();
             kernel.Bind<IEtapaRepositorio>().To<EtapaRepositorio>();
+            kernel.Bind<ISituacaoAvaliacaoRepositorio>().To<SituacaoAvaliacaoRepositorio>();
         }        
     }
 }

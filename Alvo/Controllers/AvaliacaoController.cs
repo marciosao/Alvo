@@ -18,21 +18,44 @@ namespace Alvo.Controllers
         private readonly ICandidatoProcessoSeletivoAppServico _candidatoProcessoSeletivoAppServico;
         private readonly IAreaConcentracaoAppServico _areaConcentracaoAppServico;
         private readonly IQuestionarioAppServico _questionarioAppServico;
-        public AvaliacaoController(IAvaliacaoAppServico avaliacaoAppServico, IUsuarioAppServico usuarioAppServico, ICandidatoProcessoSeletivoAppServico candidatoProcessoSeletivoAppServico, IAreaConcentracaoAppServico areaConcentracaoAppServico, IQuestionarioAppServico questionarioAppServico)
+        private readonly IProcessoSeletivoAppServico _processoSeletivoAppServico;
+        private readonly ISituacaoAvaliacaoAppServico _situacaoAvaliacaoAppServico;
+
+        public AvaliacaoController(IAvaliacaoAppServico avaliacaoAppServico, IUsuarioAppServico usuarioAppServico, ICandidatoProcessoSeletivoAppServico candidatoProcessoSeletivoAppServico, IAreaConcentracaoAppServico areaConcentracaoAppServico, IQuestionarioAppServico questionarioAppServico, IProcessoSeletivoAppServico processoSeletivoAppServico, ISituacaoAvaliacaoAppServico situacaoAvaliacaoAppServico)
         {
             _avaliacaoAppServico = avaliacaoAppServico;
             _usuarioAppServico = usuarioAppServico;
             _candidatoProcessoSeletivoAppServico = candidatoProcessoSeletivoAppServico;
             _areaConcentracaoAppServico = areaConcentracaoAppServico;
             _questionarioAppServico = questionarioAppServico;
+            _processoSeletivoAppServico = processoSeletivoAppServico;
+            _situacaoAvaliacaoAppServico = situacaoAvaliacaoAppServico;
         }
 
         // GET: Avaliacao
         public ActionResult Index()
         {
             UsuarioViewModel lUsuario = GetUsuarioLogado();
+            ViewBag.IdUsuario = lUsuario;
 
             var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id));
+
+            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
+            ViewBag.IdSituacaoAvaliacao = new SelectList(_situacaoAvaliacaoAppServico.ObtemTodos(), "Id", "Situacao");            
+
+            return View(candidatoProcessoSeletivoViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection form)
+        {
+            UsuarioViewModel lUsuario = GetUsuarioLogado();
+            ViewBag.IdUsuario = lUsuario;
+
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id));
+
+            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
+            ViewBag.IdSituacaoAvaliacao = new SelectList(_situacaoAvaliacaoAppServico.ObtemTodos(), "Id", "Situacao");
 
             return View(candidatoProcessoSeletivoViewModel);
         }
