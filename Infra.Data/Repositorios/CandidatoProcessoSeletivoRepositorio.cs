@@ -28,13 +28,6 @@ namespace Infra.Data.Repositorios
                 lIdProfessor = pIdProfessor;
             }
 
-            ////////var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x => 
-            ////////                                                                             x.Avaliacao.Any(a => 
-            ////////                                                                                             a.IdProfessor != null  && 
-            ////////                                                                                             (lIdProfessor == null || a.IdProfessor == lIdProfessor) &&
-            ////////                                                                                             a.IdSituacaoAvaliacao != (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria)
-            ////////                                                                             );
-
             var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x =>
                                                                              x.Avaliacao.Any(a =>
                                                                                              a.IdProfessor != null &&
