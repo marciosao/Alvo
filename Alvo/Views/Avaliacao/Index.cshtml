@@ -23,14 +23,22 @@
                 @{
                     if (ViewBag.IdUsuario != null && (ViewBag.IdUsuario.IdPerfil == (int)Dominio.Enums.Perfil.Administrador || ViewBag.IdUsuario.IdPerfil == (int)Dominio.Enums.Perfil.Secretaria))
                     {
-                        <div class="col-md-5 col-sm-5">
-                        <div class="form-group">
-                            <div>
-                                @Html.Label("Situação", htmlAttributes: new { @class = "control-label " })
-                                @Html.DropDownList("IdSituacaoAvaliacao", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdSituacaoAvaliacao" })<br />
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                                <div>
+                                    @Html.Label("Situação", htmlAttributes: new { @class = "control-label " })
+                                    @Html.DropDownList("IdSituacaoAvaliacao", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdSituacaoAvaliacao" })<br />
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="form-group">
+                                <div>
+                                    @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
+                                    @Html.DropDownList("IdProfessor", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProfessor" })<br />
+                                </div>
+                            </div>
+                        </div>
                     }
                 }
             </div>

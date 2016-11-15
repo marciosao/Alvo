@@ -53,7 +53,7 @@ namespace Aplicacao
         /// </summary>
         /// <param name="pIdProfessor">Identificador do Professor (Id)</param>
         /// <returns>Lista de Candidatos</returns>
-        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int pIdProfessor)
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int pIdProfessor, int pIdProcessoSeletivo, int pIdSituacaoAvaliacao, int pIdProfessorPesquisa)
         {
             var lUsuario = _usuarioServico.ObtemPorId(pIdProfessor);
             int lIdProfessor = 0;
@@ -62,9 +62,8 @@ namespace Aplicacao
             {
                 lIdProfessor = lUsuario.Id;
             }
-            return _candidatoProcessoSeletivoServico.ObtemAvaliacoesPorProfessor(lIdProfessor);
+            return _candidatoProcessoSeletivoServico.ObtemAvaliacoesPorProfessor(lIdProfessor,pIdProcessoSeletivo,pIdSituacaoAvaliacao,pIdProfessorPesquisa);
         }
-
 
         public IEnumerable<CandidatoProcessoSeletivo> ObtemCandidatosClassificacao(int pIdProcessoSeletivo)
         {

@@ -7,7 +7,7 @@ namespace Dominio.Interfaces.Repositorios
     {
         IEnumerable<CandidatoProcessoSeletivo> ObtemTodosSemAvaliacao();
 
-        IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor);
+        IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor, int pIdProcessoSeletivo, int pIdSituacaoAvaliacao, int pIdProfessorPesquisa);
         IEnumerable<CandidatoProcessoSeletivo> ObtemCandidatosClassificacao(int pIdProcessoSeletivo);
     }
 }                                                                    

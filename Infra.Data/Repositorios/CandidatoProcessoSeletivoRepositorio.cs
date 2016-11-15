@@ -19,19 +19,41 @@ namespace Infra.Data.Repositorios
        /// </summary>
        /// <param name="pIdProfessor">Identificador do Professor (Id)</param>
        /// <returns>Lista de Candidatos</returns>
-        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor)
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor, int pIdProcessoSeletivo, int pIdSituacaoAvaliacao, int pIdProfessorPesquisa)
         {
             int? lIdProfessor = null;
+            int? lIdProcessoSeletivo = null;
+            int? lIdSituacaoAvaliacao = null;
+            int? lIdProfessorPesquisa = null;
 
             if (pIdProfessor > 0)
             {
                 lIdProfessor = pIdProfessor;
             }
 
+            if (pIdProfessorPesquisa > 0)
+            {
+                lIdProfessorPesquisa = pIdProfessorPesquisa;
+            }
+
+            if (pIdProcessoSeletivo > 0)
+            {
+                lIdProcessoSeletivo = pIdProcessoSeletivo;
+            }
+
+            if (pIdSituacaoAvaliacao > 0)
+            {
+                lIdSituacaoAvaliacao = pIdSituacaoAvaliacao;
+            }
+
             var lCandidatoProcessoSeletivo = Db.CandidatoProcessoSeletivo.ToList().Where(x =>
+                                                                             (lIdProcessoSeletivo == null || x.IdProcessoSeletivo == lIdProcessoSeletivo) &&
                                                                              x.Avaliacao.Any(a =>
                                                                                              a.IdProfessor != null &&
-                                                                                             (lIdProfessor == null || a.IdProfessor == lIdProfessor)));
+                                                                                             (lIdProfessor == null || a.IdProfessor == lIdProfessor) &&
+                                                                                             (lIdProfessorPesquisa == null || a.IdProfessor == lIdProfessorPesquisa) &&
+                                                                                             (lIdSituacaoAvaliacao == null || a.IdSituacaoAvaliacao == lIdSituacaoAvaliacao))
+                                                                                             );
             if (pIdProfessor > 0)
             {
                 lCandidatoProcessoSeletivo = lCandidatoProcessoSeletivo.ToList().Where(x =>

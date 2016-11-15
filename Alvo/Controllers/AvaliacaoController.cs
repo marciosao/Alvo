@@ -38,10 +38,11 @@ namespace Alvo.Controllers
             UsuarioViewModel lUsuario = GetUsuarioLogado();
             ViewBag.IdUsuario = lUsuario;
 
-            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id));
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id, 0, 0,0));
 
             ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
-            ViewBag.IdSituacaoAvaliacao = new SelectList(_situacaoAvaliacaoAppServico.ObtemTodos(), "Id", "Situacao");            
+            ViewBag.IdSituacaoAvaliacao = new SelectList(_situacaoAvaliacaoAppServico.ObtemTodos(), "Id", "Situacao");
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome");//Usuario com perfil de Professor
 
             return View(candidatoProcessoSeletivoViewModel);
         }
@@ -52,10 +53,15 @@ namespace Alvo.Controllers
             UsuarioViewModel lUsuario = GetUsuarioLogado();
             ViewBag.IdUsuario = lUsuario;
 
-            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id));
+            int lIdProcessoSeletivo = (!string.IsNullOrEmpty(form["IdProcessoSeletivo"])) ? int.Parse(form["IdProcessoSeletivo"]) : 0;
+            int lIdSituacaoAvaliacao = (!string.IsNullOrEmpty(form["IdSituacaoAvaliacao"])) ? int.Parse(form["IdSituacaoAvaliacao"]) : 0;
+            int lIdProfessor = (!string.IsNullOrEmpty(form["IdProfessor"])) ? int.Parse(form["IdProfessor"]) : 0;
 
-            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
-            ViewBag.IdSituacaoAvaliacao = new SelectList(_situacaoAvaliacaoAppServico.ObtemTodos(), "Id", "Situacao");
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id, lIdProcessoSeletivo, lIdSituacaoAvaliacao, lIdProfessor));
+
+            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo", lIdProcessoSeletivo);
+            ViewBag.IdSituacaoAvaliacao = new SelectList(_situacaoAvaliacaoAppServico.ObtemTodos(), "Id", "Situacao", lIdSituacaoAvaliacao);
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome", lIdProfessor);//Usuario com perfil de Professor
 
             return View(candidatoProcessoSeletivoViewModel);
         }

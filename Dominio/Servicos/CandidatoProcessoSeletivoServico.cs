@@ -22,9 +22,9 @@ namespace Dominio.Servicos
         }
 
 
-        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor)
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor, int pIdProcessoSeletivo, int pIdSituacaoAvaliacao, int pIdProfessorPesquisa)
         {
-            return _candidatoProcessoSeletivoRepositorio.ObtemAvaliacoesPorProfessor(pIdProfessor);
+            return _candidatoProcessoSeletivoRepositorio.ObtemAvaliacoesPorProfessor(pIdProfessor,pIdProcessoSeletivo,pIdSituacaoAvaliacao,pIdProfessorPesquisa);
         }
 
 
