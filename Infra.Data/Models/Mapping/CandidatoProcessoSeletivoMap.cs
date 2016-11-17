@@ -13,7 +13,7 @@ namespace Infra.Data.Models.Mapping
 
             // Properties
             this.Property(t => t.TemaProjeto)
-                .HasMaxLength(150);
+                .HasMaxLength(65535);
 
             this.Property(t => t.DescricaoTema)
                 .HasMaxLength(65535);

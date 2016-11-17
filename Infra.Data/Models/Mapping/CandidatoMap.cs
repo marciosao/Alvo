@@ -19,7 +19,7 @@ namespace Infra.Data.Models.Mapping
                 .HasMaxLength(14);
 
             this.Property(t => t.RG)
-                .HasMaxLength(12);
+                .HasMaxLength(14);
 
             // Table & Column Mappings
             this.ToTable("candidato", "db_spsgestec");

@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace Infra.Data.Repositorios
 {
-    public class RepositorioBase<TEntity>: IDisposable, IRepositorioBase<TEntity> where TEntity : class
+    public class RepositorioBase<TEntity> : IDisposable, IRepositorioBase<TEntity> where TEntity : class
     {
         protected bdalvoContext Db = new bdalvoContext();
 
@@ -52,10 +52,17 @@ namespace Infra.Data.Repositorios
 
         public TEntity AddWithReturn(TEntity obj)
         {
-            Db.Set<TEntity>().Add(obj);
-            Db.SaveChanges();
+            try
+            {
+                Db.Set<TEntity>().Add(obj);
+                Db.SaveChanges();
 
-            return obj;
+                return obj;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
