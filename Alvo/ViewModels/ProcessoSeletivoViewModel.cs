@@ -1,5 +1,8 @@
+using Alvo.Common.MvcExtensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alvo.ViewModels
 {
@@ -14,7 +17,17 @@ namespace Alvo.ViewModels
         public string Titulo { get; set; }
         public string NumeroEdital { get; set; }
         public string Descricao { get; set; }
+
+        [DisplayName("Data Inicio: ")]
+        [Required(ErrorMessage = "*")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Mask("99/99/9999", "DataInicio")]
         public DateTime? DataInicio { get; set; }
+
+        [DisplayName("Data Fim: ")]
+        [Required(ErrorMessage = "*")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Mask("99/99/9999", "DataFim")]
         public DateTime? DataFim { get; set; }
         public bool Liberado { get; set; }
         public bool Ativo { get; set; }

@@ -1,4 +1,5 @@
-﻿@model Alvo.ViewModels.ProcessoSeletivoViewModel
+﻿@using Alvo.Common.HtmlHelpers
+@model Alvo.ViewModels.ProcessoSeletivoViewModel
 
 @{
     ViewBag.Modulo = "Processo Seletivo";
@@ -44,7 +45,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-2 col-sm-2">
                 @Html.ValidationMessageFor(model => model.DataFim, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -99,5 +99,9 @@
 
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+@Scripts.Render("~/Scripts/jquery.inputmask.js")
+
+@Html.RenderScripts()
+
 }

@@ -13,7 +13,8 @@ namespace Infra.Data.Models.Mapping
 
             // Properties
             // Table & Column Mappings
-            this.ToTable("avaliacao", "db_spsgestec");
+            ////////this.ToTable("avaliacao", "db_spsgestec");
+            this.ToTable("Avaliacao");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.IdCandidatoProcessoSeletivo).HasColumnName("IdCandidatoProcessoSeletivo");
             this.Property(t => t.IdProfessor).HasColumnName("IdProfessor");

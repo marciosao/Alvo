@@ -1,0 +1,1 @@
+alter table CandidatoProcessoSeletivo modify column TemaProjeto Text;
