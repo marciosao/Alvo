@@ -8,9 +8,6 @@
 
 
 <div class="row">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.ValidationMessage("Sucesso", new { @class = "text-success" })
-    @Html.ValidationMessage("Error", new { @class = "text-danger" })
     <div class="col-md-4 col-md-offset-4">
         <div class="login-panel panel panel-default">
             <div class="panel-heading">
@@ -19,12 +16,17 @@
             <div class="panel-body login-form">
                 @using (Html.BeginForm("Login", "Home"))
                 {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.ValidationMessage("Sucesso", new { @class = "text-success" })
+                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
 
                     <fieldset>
                         <div class="form-group">
+                            @Html.ValidationMessageFor(model => model.CPF, null, new { @class = "text-danger" })
                             @Html.TextBoxFor(model => model.CPF, new {@class = "form-control", maxlength = 30, placeholder = "Usuário"})
                         </div>
                         <div class="form-group">
+                            @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-danger" })
                             @Html.PasswordFor(model => model.Senha, new {@class = "form-control", maxlength = 15, placeholder = "Senha"})
                         </div>
                         <div class="botoes_entrar">
