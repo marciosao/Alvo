@@ -39,7 +39,8 @@ namespace Aplicacao
 
             Avaliacao lAvaliacao = _avaliacaoServico.ObtemAvaliacaoPorCandidatoProcesso(lCandidatoProcessoSeletivo.Id);
             lAvaliacao.IdProfessor = lIdProfessor;
-            lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria;
+            ////////lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria;
+            lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor;
             _avaliacaoServico.Update(lAvaliacao);
 
             AvaliacaoQuestionario lAvaliacaoQuestionario = new AvaliacaoQuestionario();

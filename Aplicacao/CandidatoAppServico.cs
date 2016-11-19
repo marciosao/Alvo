@@ -52,7 +52,8 @@ namespace Aplicacao
                         lAvaliacao.IdCandidatoProcessoSeletivo = lCandidadoProcesso.Id;
                         lAvaliacao.Aprovado = false;
                         lAvaliacao.Concluida = false;
-                        lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria ;//'Pendente Etapa II Secretaria'
+                        ////////lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria ;//'Pendente Etapa II Secretaria'
+                        lAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor;//'Pendente Etapa II Professor'
 
                         _avaliacaoServico.Add(lAvaliacao);
                     }

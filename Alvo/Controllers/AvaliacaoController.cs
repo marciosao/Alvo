@@ -38,7 +38,13 @@ namespace Alvo.Controllers
             UsuarioViewModel lUsuario = GetUsuarioLogado();
             ViewBag.IdUsuario = lUsuario;
 
-            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id, 0, 0,0));
+            var lIdProfessorPesquisa = 0;
+            if (lUsuario.Perfil.Id != (int)Dominio.Enums.Perfil.Secretaria)
+            {
+                lIdProfessorPesquisa = lUsuario.Id;
+            }
+
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lUsuario.Id, 0, 0, lIdProfessorPesquisa));
 
             ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
             ViewBag.IdSituacaoAvaliacao = new SelectList(_situacaoAvaliacaoAppServico.ObtemTodos(), "Id", "Situacao");
@@ -192,6 +198,7 @@ namespace Alvo.Controllers
             var lAvaliacaoViewModel = Mapper.Map<Avaliacao, AvaliacaoViewModel>(lAvaliacao);
 
             ViewBag.IdSituacaoAvaliacao = lAvaliacao.SituacaoAvaliacao.Id;
+            ViewBag.lParecerAvaliador = lAvaliacao.ParecerAvaliador;
             ViewBag.ValorNota = 7; // Obter o cálculo da nota Parcial aqui //---------------------------------------------------------------------------
 
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
@@ -281,48 +288,55 @@ namespace Alvo.Controllers
             Avaliacao lAvaliacao = new Avaliacao();
 
             lAvaliacao.Id = pAvaliacaoViewModel.Id;
-            if (!string.IsNullOrEmpty(pAvaliacaoViewModel.ParecerAvaliador))
+            if ((!string.IsNullOrEmpty(pAvaliacaoViewModel.ParecerAvaliador) && pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor)|| pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII)
             {
                 lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
-            }
+                //}
 
-            if (pAvaliacaoViewModel.Questao != null)
-            {
-                foreach (var item in pAvaliacaoViewModel.Questao)
+                if (pAvaliacaoViewModel.Questao != null)
                 {
-                    foreach (var item2 in item.RespostaQuestao)
+                    foreach (var item in pAvaliacaoViewModel.Questao)
                     {
-                        RespostaQuestao lResposta = new RespostaQuestao();
-                        lResposta.Id = item2.Id;
-                        lResposta.IdQuestao = item2.IdQuestao;
-                        lResposta.ValorResposta = item2.ValorResposta;
-
-                        if (item2.IdAvaliacao == lAvaliacao.Id)
+                        foreach (var item2 in item.RespostaQuestao)
                         {
-                            lResposta.IdAvaliacao = item2.IdAvaliacao;
-                        }
-                        else
-                        {
-                            lResposta.IdAvaliacao = lAvaliacao.Id;
-                        }
+                            RespostaQuestao lResposta = new RespostaQuestao();
+                            lResposta.Id = item2.Id;
+                            lResposta.IdQuestao = item2.IdQuestao;
+                            lResposta.ValorResposta = item2.ValorResposta;
 
-                        lAvaliacao.RespostaQuestao.Add(lResposta);
+                            if (item2.IdAvaliacao == lAvaliacao.Id)
+                            {
+                                lResposta.IdAvaliacao = item2.IdAvaliacao;
+                            }
+                            else
+                            {
+                                lResposta.IdAvaliacao = lAvaliacao.Id;
+                            }
+
+                            lAvaliacao.RespostaQuestao.Add(lResposta);
+                        }
                     }
                 }
+                else
+                {
+                    List<RespostaQuestao> lListaRespostaQuestao = RetornaQuestoesEtapaIII(form, lAvaliacao.Id);
+
+                    foreach (var item2 in lListaRespostaQuestao)
+                    {
+                        lAvaliacao.RespostaQuestao.Add(item2);
+                    }
+                }
+
+                _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
+
+                return RedirectToAction("Index");
+                //.Mensagem("Candidatos Importados com Sucesso.")
             }
             else
             {
-                List<RespostaQuestao> lListaRespostaQuestao = RetornaQuestoesEtapaIII(form, lAvaliacao.Id);
-
-                foreach (var item2 in lListaRespostaQuestao)
-                {
-                    lAvaliacao.RespostaQuestao.Add(item2);
-                }
+                return RedirectToAction("Avaliacao", "Avaliacao").Mensagem("Caro Professor, o Parecer do Avaliador é obrigatório.");
+                //return View().Mensagem("Caro Professor, o Parecer do Avaliador é obrigatório.");
             }
-
-            _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
-
-            return RedirectToAction("Index");
         }
 
         // GET: Avaliacao/Delete/5
@@ -359,43 +373,43 @@ namespace Alvo.Controllers
             List<RespostaQuestao> lListaRespostaQuestao = new List<RespostaQuestao>();
 
             RespostaQuestao lRespostaQuestao16 = new RespostaQuestao();
-            lRespostaQuestao16.ValorResposta = pForm[2].ToString();
-            lRespostaQuestao16.IdQuestao = int.Parse(pForm[3].ToString());
+            lRespostaQuestao16.ValorResposta = pForm[4].ToString();
+            lRespostaQuestao16.IdQuestao = int.Parse(pForm[5].ToString());
             lRespostaQuestao16.IdAvaliacao = pIdAvaliacao;
 
             lListaRespostaQuestao.Add(lRespostaQuestao16);
 
             RespostaQuestao lRespostaQuestao17 = new RespostaQuestao();
-            lRespostaQuestao17.ValorResposta = pForm[5].ToString();
-            lRespostaQuestao17.IdQuestao = int.Parse(pForm[6].ToString());
+            lRespostaQuestao17.ValorResposta = pForm[7].ToString();
+            lRespostaQuestao17.IdQuestao = int.Parse(pForm[8].ToString());
             lRespostaQuestao17.IdAvaliacao = pIdAvaliacao;
 
             lListaRespostaQuestao.Add(lRespostaQuestao17);
 
             RespostaQuestao lRespostaQuestao18 = new RespostaQuestao();
-            lRespostaQuestao18.ValorResposta = pForm[8].ToString();
-            lRespostaQuestao18.IdQuestao = int.Parse(pForm[9].ToString());
+            lRespostaQuestao18.ValorResposta = pForm[10].ToString();
+            lRespostaQuestao18.IdQuestao = int.Parse(pForm[11].ToString());
             lRespostaQuestao18.IdAvaliacao = pIdAvaliacao;
 
             lListaRespostaQuestao.Add(lRespostaQuestao18);
 
             RespostaQuestao lRespostaQuestao19 = new RespostaQuestao();
-            lRespostaQuestao19.ValorResposta = pForm[11].ToString();
-            lRespostaQuestao19.IdQuestao = int.Parse(pForm[12].ToString());
+            lRespostaQuestao19.ValorResposta = pForm[13].ToString();
+            lRespostaQuestao19.IdQuestao = int.Parse(pForm[14].ToString());
             lRespostaQuestao19.IdAvaliacao = pIdAvaliacao;
 
             lListaRespostaQuestao.Add(lRespostaQuestao19);
 
             RespostaQuestao lRespostaQuestao20 = new RespostaQuestao();
-            lRespostaQuestao20.ValorResposta = pForm[14].ToString();
-            lRespostaQuestao20.IdQuestao = int.Parse(pForm[15].ToString());
+            lRespostaQuestao20.ValorResposta = pForm[16].ToString();
+            lRespostaQuestao20.IdQuestao = int.Parse(pForm[17].ToString());
             lRespostaQuestao20.IdAvaliacao = pIdAvaliacao;
 
             lListaRespostaQuestao.Add(lRespostaQuestao20);
 
             RespostaQuestao lRespostaQuestao21 = new RespostaQuestao();
-            lRespostaQuestao21.ValorResposta = pForm[17].ToString();
-            lRespostaQuestao21.IdQuestao = int.Parse(pForm[18].ToString());
+            lRespostaQuestao21.ValorResposta = pForm[19].ToString();
+            lRespostaQuestao21.IdQuestao = int.Parse(pForm[20].ToString());
             lRespostaQuestao21.IdAvaliacao = pIdAvaliacao;
 
             lListaRespostaQuestao.Add(lRespostaQuestao21);

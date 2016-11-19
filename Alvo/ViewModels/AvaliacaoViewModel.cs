@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alvo.ViewModels
 {
@@ -21,6 +22,8 @@ namespace Alvo.ViewModels
         public bool Aprovado { get; set; }
         public bool Concluida { get; set; }
         public DateTime? DataAvaliacao { get; set; }
+
+        [Required(ErrorMessage = "Caro Professor, o Parecer do Avaliador é obrigatório.")]
         public string ParecerAvaliador { get; set; }
 
         public virtual UsuarioViewModel Usuario { get; set; }

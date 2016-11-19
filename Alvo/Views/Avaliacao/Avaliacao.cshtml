@@ -1,4 +1,5 @@
-﻿@model Alvo.ViewModels.AvaliacaoViewModel
+﻿@using Alvo.Common.HtmlHelpers
+@model Alvo.ViewModels.AvaliacaoViewModel
 @{
     ViewBag.Modulo = "Avaliação";
     ViewBag.Title = "Avaliação Candidato";
@@ -6,9 +7,20 @@
 
 @using (Html.BeginForm())
 {
+    Alvo.ViewModels.UsuarioViewModel lUsuario = ViewBag.Usuario;
+    int lIdSituacaoAvaliacao = ViewBag.IdSituacaoAvaliacao;
+    string lParecerAvaliador = ViewBag.lParecerAvaliador;
     @Html.AntiForgeryToken()
+
     <fieldset id="DadosCandidato">
         @Html.HiddenFor(model=>model.Id)
+        
+        @Html.HiddenFor(modelItem => Model.IdSituacaoAvaliacao)
+
+        @if (!string.IsNullOrEmpty(lParecerAvaliador))
+        { 
+            @Html.HiddenFor(modelItem => Model.ParecerAvaliador)
+        }
         <legend>Dados do Candidato</legend>
         <div class="row">
             <div class="col-md-4 col-sm-4">
@@ -107,7 +119,12 @@
     </fieldset>
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            @{
+                if (lUsuario != null && lUsuario.Perfil.Id == (int)Dominio.Enums.Perfil.Professor)
+                { 
+                    <input type="submit" value="Confirmar" class="btn btn-primary" />
+                }
+            }
             @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
         </div>
     </div>
@@ -198,3 +215,9 @@
     }
 
 </script>
+
+@section Scripts {
+    @Html.RenderScripts()
+    @{Html.RenderPartial("~/Views/Shared/_Mensagem.cshtml");}
+
+}

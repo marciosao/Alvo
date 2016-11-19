@@ -54,12 +54,12 @@ namespace Infra.Data.Repositorios
                                                                                              (lIdProfessorPesquisa == null || a.IdProfessor == lIdProfessorPesquisa) &&
                                                                                              (lIdSituacaoAvaliacao == null || a.IdSituacaoAvaliacao == lIdSituacaoAvaliacao))
                                                                                              );
-            if (pIdProfessor > 0)
-            {
-                lCandidatoProcessoSeletivo = lCandidatoProcessoSeletivo.ToList().Where(x =>
-                                                                                       x.Avaliacao.Any(a =>
-                                                                                                       a.IdSituacaoAvaliacao != (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria));
-            }
+            ////////if (pIdProfessor > 0)
+            ////////{
+            ////////    lCandidatoProcessoSeletivo = lCandidatoProcessoSeletivo.ToList().Where(x =>
+            ////////                                                                           x.Avaliacao.Any(a =>
+            ////////                                                                                           a.IdSituacaoAvaliacao != (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria));
+            ////////}
 
             return lCandidatoProcessoSeletivo;
         }

@@ -82,6 +82,20 @@
     <tbody>
         @foreach (var item in Model)
         {
+            string lCor = "color:black";
+            if (item.SituacaoAvaliacao.Equals("Pendente Etapa II Professor"))
+            {
+                lCor = "color:blue";
+            }
+            else if (item.SituacaoAvaliacao.Equals("Pendente Etapa III"))
+            {
+                lCor = "color:red";
+            }
+            else if (item.SituacaoAvaliacao.Equals("Concluída"))
+            {
+                lCor = "color:green";
+            }
+            
             <tr>
                 @*<td style="font-size:small">
                     @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
