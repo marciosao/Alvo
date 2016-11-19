@@ -68,6 +68,14 @@
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
+                @Html.Label("Nota Parcial", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaParcial)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
                 @Html.Label("Nota Final", htmlAttributes: new { @class = "control-label " })
                 <div class="form-group">
                     <div>

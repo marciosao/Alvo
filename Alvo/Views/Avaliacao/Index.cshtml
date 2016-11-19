@@ -55,9 +55,9 @@
 <table id="dvData" class="table">
     <thead>
         <tr>
-            <th>
+            @*<th>
                 @Html.Raw("Processo Seletivo")
-            </th>
+            </th>*@
             <th>
                 @Html.Raw("Candidato")
             </th>
@@ -83,9 +83,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td style="font-size:small">
+                @*<td style="font-size:small">
                     @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Candidato.Nome)
                 </td>

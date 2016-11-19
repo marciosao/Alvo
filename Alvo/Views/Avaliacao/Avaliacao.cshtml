@@ -7,12 +7,6 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    @*@if (!string.IsNullOrEmpty(ViewBag.ParecerAvaliador))
-    {
-        Model.Questionario.ParecerAvaliador = ViewBag.ParecerAvaliador;
-    }*@
-
     <fieldset id="DadosCandidato">
         @Html.HiddenFor(model=>model.Id)
         <legend>Dados do Candidato</legend>
@@ -64,7 +58,7 @@
     <fieldset id="DadosAvaliacao">
         <legend>Avaliação</legend>
         <div class="row">
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-3">
                 @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
                 <div class="form-group">
                     <div>
@@ -89,7 +83,15 @@
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
-                @Html.Label("Nota", htmlAttributes: new { @class = "control-label " })
+                @Html.Label("Nota Parcial", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaParcial)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Nota Final", htmlAttributes: new { @class = "control-label " })
                 <div class="form-group">
                     <div>
                         @Html.DisplayFor(model => model.NotaFinal)
@@ -102,7 +104,6 @@
     <fieldset id="DadosQuestionario">
         <legend>Questionário</legend>
         @Html.Partial("_Questoes", Model.Questionario)
-        @*@Html.Action("QuestoesQuestionario", "Avaliacao")*@
     </fieldset>
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -119,8 +120,6 @@
         var lTotalGrupo1 = 0;
         var lTotalGrupo2 = 0;
 
-        //var lResultadoGrupo1 = 0;
-        //var lResultadoGrupo2 = 0;
         var lResultadoFinal = 0;
 
         $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
@@ -173,10 +172,6 @@
         // $(element).attr('disabled',false)
 
         $('#txtResultadoParcial').val(lSomatorioNota);
-
-        //console.log(lSomatorioNota);
-        //console.log("Grupo 1: " + lTotalGrupo1);
-        //console.log("Grupo 2: " + lTotalGrupo2);
     }
 
     function AoDigitarNota(idQuestao) {
@@ -199,7 +194,6 @@
                             //$('#txtNota-' + idQuestao).val('');
                             //return false;
                         }
-                        //lSomatorioNota += parseFloat($('#txtNota-' + idQuestao).val());
                     }
     }
 
