@@ -1,7 +1,5 @@
-create database db_spsgestec;
-
-use db_spsgestec;
-
+DROP TABLE IF EXISTS SituacaoAvaliacao
+;
 DROP TABLE IF EXISTS Etapa
 ;
 DROP TABLE IF EXISTS CategoriaQuestao
@@ -38,6 +36,15 @@ DROP TABLE IF EXISTS Perfil
 ;
 DROP TABLE IF EXISTS Usuario
 ;
+
+CREATE TABLE SituacaoAvaliacao
+(
+	Id INTEGER NOT NULL AUTO_INCREMENT,
+	Situacao VARCHAR(50),
+	PRIMARY KEY (Id)
+) 
+;
+
 
 CREATE TABLE Etapa
 (
@@ -146,13 +153,16 @@ CREATE TABLE Avaliacao
 	Id INTEGER NOT NULL AUTO_INCREMENT,
 	IdCandidatoProcessoSeletivo INTEGER,
 	IdProfessor INTEGER,
+	NotaParcial DOUBLE,
 	NotaFinal DOUBLE,
 	DataAvaliacao DATE,
 	Aprovado BOOL,
 	Concluida BOOL,
 	ParecerAvaliador TEXT,
+	IdSituacaoAvaliacao INTEGER,
 	PRIMARY KEY (Id),
 	KEY (IdCandidatoProcessoSeletivo),
+	KEY (IdSituacaoAvaliacao),
 	KEY (IdProfessor)
 ) 
 ;
@@ -173,7 +183,7 @@ CREATE TABLE CandidatoProcessoSeletivo
 	IdProcessoSeletivo INTEGER,
 	IdCandidato INTEGER,
 	IdAreaConcentracao INTEGER,
-	TemaProjeto VARCHAR(150),
+	TemaProjeto TEXT,
 	DescricaoTema TEXT,
 	PRIMARY KEY (Id),
 	KEY (IdAreaConcentracao),
@@ -324,6 +334,10 @@ ALTER TABLE Questao ADD CONSTRAINT FK_Questao_TipoQuestao
 
 ALTER TABLE Avaliacao ADD CONSTRAINT FK_Aval_CandProcesSeletivo 
 	FOREIGN KEY (IdCandidatoProcessoSeletivo) REFERENCES CandidatoProcessoSeletivo (Id)
+;
+
+ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_SitAvaliacao 
+	FOREIGN KEY (IdSituacaoAvaliacao) REFERENCES SituacaoAvaliacao (Id)
 ;
 
 ALTER TABLE Avaliacao ADD CONSTRAINT FK_Avaliacao_UsuarioProfessor 

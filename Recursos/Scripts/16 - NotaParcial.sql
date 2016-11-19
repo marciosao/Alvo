@@ -1,0 +1,1 @@
+ALTER TABLE Avaliacao ADD NotaParcial DOUBLE;

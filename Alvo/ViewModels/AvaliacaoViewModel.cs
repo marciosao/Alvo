@@ -16,6 +16,7 @@ namespace Alvo.ViewModels
         public int? IdCandidatoProcessoSeletivo { get; set; }
         public int? IdProfessor { get; set; }
         public int? IdSituacaoAvaliacao { get; set; }
+        public decimal? NotaParcial { get; set; }
         public decimal? NotaFinal { get; set; }
         public bool Aprovado { get; set; }
         public bool Concluida { get; set; }

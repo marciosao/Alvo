@@ -19,6 +19,7 @@ namespace Infra.Data.Models.Mapping
             this.Property(t => t.IdCandidatoProcessoSeletivo).HasColumnName("IdCandidatoProcessoSeletivo");
             this.Property(t => t.IdProfessor).HasColumnName("IdProfessor");
             this.Property(t => t.IdSituacaoAvaliacao).HasColumnName("IdSituacaoAvaliacao");
+            this.Property(t => t.NotaParcial).HasColumnName("NotaParcial");
             this.Property(t => t.NotaFinal).HasColumnName("NotaFinal");
             this.Property(t => t.DataAvaliacao).HasColumnName("DataAvaliacao");
             this.Property(t => t.Aprovado).HasColumnName("Aprovado");

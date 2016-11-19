@@ -15,6 +15,7 @@ namespace Dominio.Entidades
         public int? IdCandidatoProcessoSeletivo { get; set; }
         public int? IdProfessor { get; set; }
         public int? IdSituacaoAvaliacao { get; set; }
+        public Nullable<decimal> NotaParcial { get; set; }
         public Nullable<decimal> NotaFinal { get; set; }
         public DateTime? DataAvaliacao { get; set; }
         public bool Aprovado { get; set; }
