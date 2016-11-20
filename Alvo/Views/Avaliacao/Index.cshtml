@@ -7,57 +7,57 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-        
-        <fieldset id="Processo">
-            <legend>Filtro de Pesquisa</legend>
-            <div class="row">
-                <div class="col-md-5 col-sm-5">
+
+
+    <fieldset id="Processo">
+        <legend>Filtro de Pesquisa</legend>
+        <div class="row">
+            <div class="col-md-5 col-sm-5">
+                <div class="form-group">
+                    <div>
+                        @Html.Label("Processo Seletivo", htmlAttributes: new { @class = "control-label " })
+                        @Html.DropDownList("IdProcessoSeletivo", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProcessoSeletivo" })<br />
+                    </div>
+                </div>
+            </div>
+            @{
+    if (ViewBag.IdUsuario != null && (ViewBag.IdUsuario.IdPerfil == (int)Dominio.Enums.Perfil.Administrador || ViewBag.IdUsuario.IdPerfil == (int)Dominio.Enums.Perfil.Secretaria))
+    {
+        <div class="col-md-3 col-sm-3">
+            <div class="form-group">
+                <div>
+                    @Html.Label("Situação", htmlAttributes: new { @class = "control-label " })
+                    @Html.DropDownList("IdSituacaoAvaliacao", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdSituacaoAvaliacao" })<br />
+                </div>
+            </div>
+        </div>
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
                         <div>
-                            @Html.Label("Processo Seletivo", htmlAttributes: new { @class = "control-label " })
-                            @Html.DropDownList("IdProcessoSeletivo", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProcessoSeletivo" })<br />
+                            @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
+                            @Html.DropDownList("IdProfessor", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProfessor" })<br />
                         </div>
                     </div>
                 </div>
-                @{
-                    if (ViewBag.IdUsuario != null && (ViewBag.IdUsuario.IdPerfil == (int)Dominio.Enums.Perfil.Administrador || ViewBag.IdUsuario.IdPerfil == (int)Dominio.Enums.Perfil.Secretaria))
-                    {
-                        <div class="col-md-3 col-sm-3">
-                            <div class="form-group">
-                                <div>
-                                    @Html.Label("Situação", htmlAttributes: new { @class = "control-label " })
-                                    @Html.DropDownList("IdSituacaoAvaliacao", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdSituacaoAvaliacao" })<br />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-3">
-                            <div class="form-group">
-                                <div>
-                                    @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
-                                    @Html.DropDownList("IdProfessor", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProfessor" })<br />
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        </fieldset>
-        <hr />
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <input type="submit" value="Pesquisar" class="btn btn-primary" />
-            </div>
+    }
+            }
         </div>
-        <hr />
-    
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Pesquisar" class="btn btn-primary" />
+        </div>
+    </div>
+    <hr />
+
 }
 <table id="dvData" class="table">
     <thead>
         <tr>
             @*<th>
-                @Html.Raw("Processo Seletivo")
-            </th>*@
+                    @Html.Raw("Processo Seletivo")
+                </th>*@
             <th>
                 @Html.Raw("Candidato")
             </th>
@@ -82,24 +82,10 @@
     <tbody>
         @foreach (var item in Model)
         {
-            string lCor = "color:black";
-            if (item.SituacaoAvaliacao.Equals("Pendente Etapa II Professor"))
-            {
-                lCor = "color:blue";
-            }
-            else if (item.SituacaoAvaliacao.Equals("Pendente Etapa III"))
-            {
-                lCor = "color:red";
-            }
-            else if (item.SituacaoAvaliacao.Equals("Concluída"))
-            {
-                lCor = "color:green";
-            }
-            
             <tr>
                 @*<td style="font-size:small">
-                    @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.ProcessoSeletivo.Titulo)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Candidato.Nome)
                 </td>
@@ -120,23 +106,23 @@
                 </td>
                 <td>
                     @{
-                        if (!item.Avaliacao.Any(x => x.Concluida == true))
-                        {
-                            @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
-                        }
-                        else
-                        {
-                            @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
-                        }
+            if (!item.Avaliacao.Any(x => x.Concluida == true))
+            {
+                @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
+            }
+            else
+            {
+                @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
+            }
 
-                        @*if (item.AvaliacaoConcluida != null && item.AvaliacaoConcluida.Concluida)
-                            {
-                                @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
-                            }
-                            else
-                            {
-                                @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
-                            }*@
+            @*if (item.AvaliacaoConcluida != null && item.AvaliacaoConcluida.Concluida)
+                {
+                    @Html.ActionLink(" ", "DetalhesAvaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes da Avaliação" })
+                }
+                else
+                {
+                    @Html.ActionLink(" ", "Avaliacao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Avaliar" })
+                }*@
                     }
 
                 </td>
