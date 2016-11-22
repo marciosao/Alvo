@@ -78,13 +78,13 @@ namespace Alvo.Controllers
         [HttpPost]
         public ActionResult Edit(UsuarioViewModel pUsuarioViewModel)
         {
-            if (ModelState.IsValid)
-            {
+            ////////if (ModelState.IsValid)
+            ////////{
                 var lUsuario = Mapper.Map<UsuarioViewModel, Usuario>(pUsuarioViewModel);
                 _usuarioAppServico.Update(lUsuario);
 
                 return RedirectToAction("Index");
-            }
+            ////////}
 
             ViewBag.IdPerfil = new SelectList(_perfilAppServico.ObtemTodos(), "Id", "Nome");
 

@@ -9,9 +9,12 @@ namespace Aplicacao.Interfaces
 
         void DistribuiAvaliacaoResponsavel(int pCandidatoProcessoSeletivo, int lIdProfessor);
 
+        IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor);
         IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int pIdProfessor, int pIdProcessoSeletivo, int pIdSituacaoAvaliacao, int pIdProfessorPesquisa);
 
         IEnumerable<CandidatoProcessoSeletivo> ObtemCandidatosClassificacao(int pIdProcessoSeletivo);
+
+        void AlterarDistribuicao(int p, int lIdProfessor);
     }
 }
 

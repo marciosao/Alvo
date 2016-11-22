@@ -5,6 +5,32 @@
     ViewBag.Title = "Distribuição";
 }
 <p>&nbsp;</p>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset id="fdsDistribuicao">
+        <legend>Filtro de Pesquisa</legend>
+        <div class="row">
+            <div class="col-md-5 col-sm-5">
+                <div class="form-group">
+                    <div>
+                        @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
+                        @Html.DropDownList("IdProfessor", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProfessor" })<br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Pesquisar" class="btn btn-primary" />
+        </div>
+    </div>
+    <hr />
+
+}
 <table id="dvData" class="table">
     <thead>
         <tr>
@@ -20,7 +46,10 @@
             <th>
                 @Html.DisplayName("RG")
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayName("Professor")
+            </th>
+            <th class="col-md-1 col-sm-1"></th>
         </tr>
     </thead>
     <tbody>
@@ -40,7 +69,14 @@
                     @Html.DisplayFor(modelItem => item.Candidato.RG)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Professor)
+                </td>
+                <td class="col-md-1 col-sm-1">
                     @Html.ActionLink(" ", "EditDistribuicao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-transfer", title = "Selecionar Professor, Área de Atuação" })
+                    @if (!string.IsNullOrEmpty(item.Professor) && !item.Professor.Equals("-"))
+                    {
+                        @Html.ActionLink(" ", "EdicaoDistribuicao", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Alterar Distribuição" })
+                    }
                     @*|@Html.ActionLink(" ", "Details", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-search", title = "Detalhes" })*@
                 </td>
             </tr>

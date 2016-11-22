@@ -32,6 +32,12 @@ namespace Dominio.Servicos
         {
             return _candidatoProcessoSeletivoRepositorio.ObtemCandidatosClassificacao(pIdProcessoSeletivo);
         }
+
+
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor)
+        {
+            return _candidatoProcessoSeletivoRepositorio.ObtemAvaliacoesPorProfessor(pIdProfessor);
+        }
     }                                                                              
 }                                                                                  
 

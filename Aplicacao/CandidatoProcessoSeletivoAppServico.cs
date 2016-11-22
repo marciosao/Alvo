@@ -70,6 +70,25 @@ namespace Aplicacao
         {
             return _candidatoProcessoSeletivoServico.ObtemCandidatosClassificacao(pIdProcessoSeletivo);
         }
+
+
+        public IEnumerable<CandidatoProcessoSeletivo> ObtemAvaliacoesPorProfessor(int? pIdProfessor)
+        {
+            return _candidatoProcessoSeletivoServico.ObtemAvaliacoesPorProfessor(pIdProfessor);
+        }
+
+
+        public void AlterarDistribuicao(int pIdCandidatoProcessoSeletivo, int pIdProfessor)
+        {
+            var lAvaliacao = _avaliacaoServico.ObtemAvaliacaoPorCandidatoProcesso(pIdCandidatoProcessoSeletivo);
+
+            if (lAvaliacao != null)
+            {
+                lAvaliacao.IdProfessor = pIdProfessor;
+
+                _avaliacaoServico.Update(lAvaliacao);
+            }
+        }
     }                                                                                    
 }                                                                                        
 

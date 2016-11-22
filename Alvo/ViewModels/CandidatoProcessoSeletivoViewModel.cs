@@ -76,5 +76,17 @@ namespace Alvo.ViewModels
                 return lRetorno;
             }
         }
+
+        public virtual string Professor
+        {
+            get
+            {
+                string lRetorno = string.Empty;
+
+                lRetorno = (this.Avaliacao.FirstOrDefault().IdProfessor != null) ? this.Avaliacao.FirstOrDefault().Usuario.Nome : "-";
+
+                return lRetorno;
+            }
+        }
      }
 }

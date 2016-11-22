@@ -378,6 +378,7 @@
     <Content Include="Views\Home\_Menu.cshtml" />
     <Content Include="Views\Shared\_Mensagem.cshtml" />
     <Content Include="Views\Home\Recuperar.cshtml" />
+    <Content Include="Views\Avaliacao\EdicaoDistribuicao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

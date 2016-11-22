@@ -42,15 +42,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Perfil.Nome)
             </td>
-            <td>
+            <td class="col-md-2 col-sm-2">
                 @{
-                    var CPF = string.Empty;
-                    CPF = String.Format(@"{0:000\.000\.000\-00}", Convert.ToInt64(item.CPF));
-                    @*@Html.DisplayFor(modelItem => item.CPF)*@
-                    
+        var CPF = string.Empty;
+        CPF = String.Format(@"{0:000\.000\.000\-00}", Convert.ToInt64(item.CPF));
+        @*@Html.DisplayFor(modelItem => item.CPF)*@
+
                     @Html.Raw(CPF)
                 }
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
@@ -58,9 +59,9 @@
                 @Html.DisplayFor(modelItem => item.DataCadastro)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
+                @Html.DisplayFor(modelItem => item.Situacao)
             </td>
-            <td>
+            <td class="col-md-1 col-sm-1">
                 @Html.ActionLink(" ", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-pencil", title = "Editar" }) |
                 @Html.ActionLink(" ", "Details", new { id = item.Id }, htmlAttributes: new { @class = "glyphicon glyphicon-list-alt", title = "Detalhes do Usuário" })
                 @*|@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@

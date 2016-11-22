@@ -83,6 +83,25 @@ namespace Alvo.Controllers
         public ActionResult Distribuicao()
         {
             var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemTodosSemAvaliacao());
+
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome");//Usuario com perfil de Professor
+
+            return View(candidatoProcessoSeletivoViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Distribuicao(FormCollection form)
+        {
+            int? lIdProfessor = null;
+            if (!string.IsNullOrEmpty(form["IdProfessor"]))
+            {
+                lIdProfessor = int.Parse(form["IdProfessor"]);
+            }
+
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<IEnumerable<CandidatoProcessoSeletivo>, IEnumerable<CandidatoProcessoSeletivoViewModel>>(_candidatoProcessoSeletivoAppServico.ObtemAvaliacoesPorProfessor(lIdProfessor));
+
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome", lIdProfessor);//Usuario com perfil de Professor
+
             return View(candidatoProcessoSeletivoViewModel);
         }
 
@@ -104,6 +123,29 @@ namespace Alvo.Controllers
             if (ModelState.IsValid)
             {
                 _candidatoProcessoSeletivoAppServico.DistribuiAvaliacaoResponsavel(pCandidatoProcessoSeletivo.Id, lIdProfessor);
+            }
+
+            return RedirectToAction("Distribuicao");
+        }
+
+        public ActionResult EdicaoDistribuicao(int id)
+        {
+            var candidatoProcessoSeletivo = _candidatoProcessoSeletivoAppServico.ObtemPorId(id);
+            var candidatoProcessoSeletivoViewModel = Mapper.Map<CandidatoProcessoSeletivo, CandidatoProcessoSeletivoViewModel>(candidatoProcessoSeletivo);
+
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome", (candidatoProcessoSeletivo.Avaliacao.FirstOrDefault().IdProfessor!=null)?candidatoProcessoSeletivo.Avaliacao.FirstOrDefault().IdProfessor:0);//Usuario com perfil de Professor
+
+            return View(candidatoProcessoSeletivoViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult EdicaoDistribuicao(CandidatoProcessoSeletivoViewModel pCandidatoProcessoSeletivo, FormCollection formulario)
+        {
+            int lIdProfessor = Convert.ToInt32(formulario["IdProfessor"]);
+
+            if (ModelState.IsValid)
+            {
+                _candidatoProcessoSeletivoAppServico.AlterarDistribuicao(pCandidatoProcessoSeletivo.Id, lIdProfessor);
             }
 
             return RedirectToAction("Distribuicao");

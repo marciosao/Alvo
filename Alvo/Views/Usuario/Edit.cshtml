@@ -36,7 +36,6 @@
             </div>
 
             <div class="col-md-3 col-sm-3">
-                @Html.ValidationMessageFor(model => model.Matricula, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div>
                         @Html.LabelFor(model => model.Matricula, htmlAttributes: new { @class = "control-label" })
@@ -56,7 +55,6 @@
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
-                @Html.ValidationMessageFor(model => model.Telefone1, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div>
                         @Html.LabelFor(model => model.Telefone1, htmlAttributes: new { @class = "control-label" })
@@ -65,7 +63,6 @@
                 </div>
             </div>
             <div class="col-md-2 col-sm-2">
-                @Html.ValidationMessageFor(model => model.Telefone2, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div>
                         @Html.LabelFor(model => model.Telefone2, htmlAttributes: new { @class = "control-label" })
@@ -74,7 +71,6 @@
                 </div>
             </div>
             <div class="col-md-1 col-sm-1">
-                @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div>
                         @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label" })
@@ -85,7 +81,7 @@
         </div>
         <div class="row">
             <div class="col-md-5 col-sm-5">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Perfil, "", new { @class = "text-danger" })
                 <div class="form-group">
                     <div>
                         @Html.Label("Perfil", htmlAttributes: new { @class = "control-label " })
@@ -95,11 +91,13 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <input type="submit" value="Confirmar" class="btn btn-primary" />
-                @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
-            </div>
+
+    </div>
+    <p>&nbsp;</p>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
         </div>
     </div>
 }

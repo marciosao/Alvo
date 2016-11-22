@@ -1,0 +1,182 @@
+﻿@model Alvo.ViewModels.CandidatoProcessoSeletivoViewModel
+@{
+    ViewBag.Modulo = "Avaliação";
+    ViewBag.Title = "Alterar Professor - Distribuição";
+}
+@*<p>&nbsp;</p>*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="form-horizontal">*@
+    <fieldset id="DadosCandidato">
+        <legend>Dados do Candidato</legend>
+        @*<div class="group background-cinza">*@
+            <div class="row">
+                <div class="col-md-5 col-sm-5">
+                    @Html.Label("Nome", htmlAttributes: new { @class = "control-label" })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.Nome)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    @Html.Label("CPF", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.CPF)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="form-group">
+                        @Html.Label("RG", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.RG)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="form-group">
+                        @Html.Label("Data de Nascimento", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.DataFormatada)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        @Html.Label("Telefone", htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.Telefone)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        @Html.Label("Celular", htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.Celular)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-5">
+                    <div class="form-group">
+                        @Html.Label("E-mail", htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.Email)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2 col-sm-2">
+                    <div class="form-group">
+                        @Html.Label("Cota de Negros?", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.CotaNegroFormatado)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    <div class="form-group">
+                        @Html.Label("Cota Indígena?", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.CotaIndigenaFormatado)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        @Html.Label("Necessidades especiais?", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.NecessidadesEspeciaisFormatado)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        @Html.Label("Tipo Necessidades especiais", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.TipoNecessidade)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        @Html.Label("Língua Estrangeira", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.LinguaEstrangeira)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        @Html.Label("Instituição", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.Instituicao)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group">
+                        @Html.Label("Curso", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.Candidato.Curso)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <div class="form-group">
+                        @Html.Label("Área de Concentração", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.AreaConcentracao.Nome)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        @Html.Label("Tema do Projeto", htmlAttributes: new { @class = "control-label " })
+                        <div>
+                            @Html.DisplayFor(model => model.TemaProjeto)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @*</div>*@
+    </fieldset>
+    <fieldset id="ProfessorResponsavel">
+        <legend>Professor responsável pela Avaliação</legend>
+        @*<div class="group background-cinza">*@
+            <div class="row">
+                <div class="col-md-5 col-sm-5">
+                    <div class="form-group">
+                        <div>
+                            @Html.Label("Professor", htmlAttributes: new { @class = "control-label " })
+                            @Html.DropDownList("IdProfessor", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProfessor" })<br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @*</div>*@
+    </fieldset>
+
+    @*</div>*@
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            @Html.ActionLink("Voltar", "Distribuicao", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
