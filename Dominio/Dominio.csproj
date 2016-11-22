@@ -124,6 +124,7 @@
     <Compile Include="Servicos\ServicoBase.cs" />
     <Compile Include="Servicos\TipoQuestaoServico.cs" />
     <Compile Include="Servicos\UsuarioServico.cs" />
+    <Compile Include="Util\Util.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

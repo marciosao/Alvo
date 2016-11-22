@@ -3,3 +3,10 @@ C:\Projetos\Alvo\Dominio\bin\Debug\Dominio.pdb
 C:\Projetos\Alvo\Dominio\obj\Debug\Dominio.csprojResolveAssemblyReference.cache
 C:\Projetos\Alvo\Dominio\obj\Debug\Dominio.dll
 C:\Projetos\Alvo\Dominio\obj\Debug\Dominio.pdb
+C:\inetpub\wwwroot\Alvo\Dominio\bin\Debug\Dominio.dll
+C:\inetpub\wwwroot\Alvo\Dominio\bin\Debug\Dominio.pdb
+C:\inetpub\wwwroot\Alvo\Dominio\bin\Debug\EntityFramework.dll
+C:\inetpub\wwwroot\Alvo\Dominio\bin\Debug\EntityFramework.xml
+C:\inetpub\wwwroot\Alvo\Dominio\obj\Debug\Dominio.csprojResolveAssemblyReference.cache
+C:\inetpub\wwwroot\Alvo\Dominio\obj\Debug\Dominio.dll
+C:\inetpub\wwwroot\Alvo\Dominio\obj\Debug\Dominio.pdb
