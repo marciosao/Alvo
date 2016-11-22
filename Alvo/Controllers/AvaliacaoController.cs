@@ -76,6 +76,32 @@ namespace Alvo.Controllers
         {
             var avaliacaoViewModel = Mapper.Map<IEnumerable<Avaliacao>, IEnumerable<AvaliacaoViewModel>>(_avaliacaoAppServico.ObtemCandidatosClassificacao(0));
 
+            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo");
+            ViewBag.IdAreaConcentracao = new SelectList(_areaConcentracaoAppServico.ObtemTodos(), "Id", "Nome");
+
+            return View(avaliacaoViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Classificacao(FormCollection form)
+        {
+            int lIdProcessoSeletivo = 0;
+            if (!string.IsNullOrEmpty(form["IdProcessoSeletivo"]))
+            {
+                lIdProcessoSeletivo = int.Parse(form["IdProcessoSeletivo"]);
+            }
+
+            int lIdAreaConcentracao = 0;
+            if (!string.IsNullOrEmpty(form["IdAreaConcentracao"]))
+            {
+                lIdAreaConcentracao = int.Parse(form["IdAreaConcentracao"]);
+            }
+
+            var avaliacaoViewModel = Mapper.Map<IEnumerable<Avaliacao>, IEnumerable<AvaliacaoViewModel>>(_avaliacaoAppServico.ObtemCandidatosClassificacao(lIdProcessoSeletivo, lIdAreaConcentracao));
+
+            ViewBag.IdProcessoSeletivo = new SelectList(_processoSeletivoAppServico.ObtemTodos(), "Id", "Titulo", lIdProcessoSeletivo);
+            ViewBag.IdAreaConcentracao = new SelectList(_areaConcentracaoAppServico.ObtemTodos(), "Id", "Nome", lIdAreaConcentracao);
+
             return View(avaliacaoViewModel);
         }
 

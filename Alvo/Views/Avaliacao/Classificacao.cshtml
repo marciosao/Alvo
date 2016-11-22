@@ -7,12 +7,35 @@
 @using (Html.BeginForm("Classificacao","Avaliacao"))
 {
     @Html.AntiForgeryToken()
-    @*<div class="row">
+    <fieldset id="fdsClassificacao">
+        <legend>Filtro de Pesquisa</legend>
+        <div class="row">
+            <div class="col-md-5 col-sm-5">
+                <div class="form-group">
+                    <div>
+                        @Html.Label("Processo Seletivo", htmlAttributes: new { @class = "control-label " })
+                        @Html.DropDownList("IdProcessoSeletivo", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdProcessoSeletivo" })<br />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5">
+                <div class="form-group">
+                    <div>
+                        @Html.Label("Área de Concentração", htmlAttributes: new { @class = "control-label " })
+                        @Html.DropDownList("IdAreaConcentracao", null, "Selecione", new { @class = "js-example-basic-single js-states form-control", @Name = "IdAreaConcentracao" })<br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
         <div class="col-md-12 col-sm-12">
             <input type="submit" value="Pesquisar" class="btn btn-primary" />
         </div>
-    </div>*@
-    <p>&nbsp;</p>
+    </div>
+    <hr />
+}    
     <table id="dvData" class="table">
         <thead>
             <tr>
@@ -93,4 +116,3 @@
             }
         </tbody>
     </table>
-}

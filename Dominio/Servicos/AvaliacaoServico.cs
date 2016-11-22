@@ -25,6 +25,11 @@ namespace Dominio.Servicos
         {
             return _avaliacaoRepositorio.ObtemCandidatosClassificacao(pIdProcessoSeletivo);
         }
+
+        public IEnumerable<Avaliacao> ObtemCandidatosClassificacao(int pIdProcessoSeletivo, int pIdAreaConcentracao)
+        {
+            return _avaliacaoRepositorio.ObtemCandidatosClassificacao(pIdProcessoSeletivo,pIdAreaConcentracao);
+        }
     }                                                                              
 }                                                                                  
 

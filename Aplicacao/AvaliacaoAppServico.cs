@@ -25,7 +25,6 @@ namespace Aplicacao
             _questaoServico = questaoServico;
         }
 
-
         public void GravarRespostasAvaliacao(Avaliacao lAvaliacao)
         {
             var lIdAvaliacao = _avaliacaoServico.ObtemPorId(lAvaliacao.Id);
@@ -126,12 +125,10 @@ namespace Aplicacao
             _avaliacaoServico.Update(lIdAvaliacao);
         }
 
-
         public Avaliacao ObtemAvaliacaoPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
         {
             return _avaliacaoServico.ObtemAvaliacaoPorCandidatoProcesso(pCandidatoProcessoSeletivo);
         }
-
 
         public IEnumerable<Avaliacao> ObtemCandidatosClassificacao(int pIdProcessoSeletivo)
         {
@@ -180,6 +177,11 @@ namespace Aplicacao
             }
 
             return lResultado;
+        }
+
+        public IEnumerable<Avaliacao> ObtemCandidatosClassificacao(int pIdProcessoSeletivo, int pIdAreaConcentracao)
+        {
+            return _avaliacaoServico.ObtemCandidatosClassificacao(pIdProcessoSeletivo, pIdAreaConcentracao);
         }
     }
 }
