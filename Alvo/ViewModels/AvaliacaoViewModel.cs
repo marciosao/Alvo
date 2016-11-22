@@ -19,6 +19,9 @@ namespace Alvo.ViewModels
         public int? IdSituacaoAvaliacao { get; set; }
         public decimal? NotaParcial { get; set; }
         public decimal? NotaFinal { get; set; }
+        public decimal? NotaEntrevista { get; set; }
+        public decimal? NotaProposta { get; set; }
+        public decimal? NotaLattes { get; set; }
         public bool Aprovado { get; set; }
         public bool Concluida { get; set; }
         public DateTime? DataAvaliacao { get; set; }

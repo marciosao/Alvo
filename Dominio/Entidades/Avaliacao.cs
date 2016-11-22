@@ -17,6 +17,9 @@ namespace Dominio.Entidades
         public int? IdSituacaoAvaliacao { get; set; }
         public Nullable<decimal> NotaParcial { get; set; }
         public Nullable<decimal> NotaFinal { get; set; }
+        public Nullable<decimal> NotaEntrevista { get; set; }
+        public Nullable<decimal> NotaProposta { get; set; }
+        public Nullable<decimal> NotaLattes { get; set; }
         public DateTime? DataAvaliacao { get; set; }
         public bool Aprovado { get; set; }
         public bool Concluida { get; set; }

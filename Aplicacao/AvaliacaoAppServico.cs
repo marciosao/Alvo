@@ -13,6 +13,10 @@ namespace Aplicacao
         private readonly IRespostaQuestaoServico _respostaQuestaoServico;
         private readonly IQuestaoServico _questaoServico;
 
+        private decimal gTotalEntrevista = 0;
+        private decimal gTotalPropostaTrabalho = 0;
+        private decimal gTotalCurriculoLattes = 0;
+
         public AvaliacaoAppServico(IAvaliacaoServico avaliacaoServico, IRespostaQuestaoServico respostaQuestaoServico, IQuestaoServico questaoServico)
             : base(avaliacaoServico)
         {
@@ -115,6 +119,10 @@ namespace Aplicacao
                 }
             }
 
+            lIdAvaliacao.NotaEntrevista = gTotalEntrevista;
+            lIdAvaliacao.NotaLattes = gTotalCurriculoLattes;
+            lIdAvaliacao.NotaProposta = gTotalPropostaTrabalho;
+
             _avaliacaoServico.Update(lIdAvaliacao);
         }
 
@@ -147,14 +155,17 @@ namespace Aplicacao
                     if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 1)//Grupo Proposta de Trabalho
                     {
                         lTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
+                        gTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
                     }
                     else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 2)//Grupo Avaliação Curriculo Lates
                     {
                         lTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
+                        gTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
                     }
                     else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 3)//Grupo Entrevista
                     {
                         lTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
+                        gTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
                     }
                 }
             }

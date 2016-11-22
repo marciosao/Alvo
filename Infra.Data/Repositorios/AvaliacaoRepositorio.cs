@@ -26,7 +26,11 @@ namespace Infra.Data.Repositorios
             var lAvaliacoes = Db.Avaliacao.ToList().Where(x =>
                                                               (lIdProcessoSeletivo == null || x.CandidatoProcessoSeletivo.IdProcessoSeletivo == lIdProcessoSeletivo) &&
                                                                x.Concluida == true)
-                                                    .OrderByDescending(o=>o.NotaFinal).ThenByDescending(t=>t.CandidatoProcessoSeletivo.IdProcessoSeletivo).ToList();
+                                                    .OrderByDescending(o=>o.NotaFinal)
+                                                    .ThenByDescending(t => t.NotaEntrevista)
+                                                    .ThenByDescending(t => t.NotaProposta)
+                                                    .ThenByDescending(t => t.NotaLattes)
+                                                    .ThenByDescending(t=>t.CandidatoProcessoSeletivo.IdProcessoSeletivo).ToList();
                                                     //.GroupBy(g=> g.CandidatoProcessoSeletivo.IdProcessoSeletivo).;
 
             return lAvaliacoes;
