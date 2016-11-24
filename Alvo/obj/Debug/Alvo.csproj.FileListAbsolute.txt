@@ -58,7 +58,6 @@ C:\Projetos\Alvo\Alvo\bin\Excel.pdb
 C:\Projetos\Alvo\Alvo\obj\Debug\Alvo.csprojResolveAssemblyReference.cache
 C:\Projetos\Alvo\Alvo\obj\Debug\Alvo.dll
 C:\Projetos\Alvo\Alvo\obj\Debug\Alvo.pdb
-C:\inetpub\wwwroot\Alvo\Alvo\obj\Debug\Alvo.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\Alvo\Alvo\bin\AutoMapper.Net4.dll
 C:\inetpub\wwwroot\Alvo\Alvo\bin\Alvo.dll.config
 C:\inetpub\wwwroot\Alvo\Alvo\bin\Alvo.dll
@@ -117,5 +116,6 @@ C:\inetpub\wwwroot\Alvo\Alvo\bin\System.Web.Optimization.xml
 C:\inetpub\wwwroot\Alvo\Alvo\bin\Antlr3.Runtime.pdb
 C:\inetpub\wwwroot\Alvo\Alvo\bin\Newtonsoft.Json.xml
 C:\inetpub\wwwroot\Alvo\Alvo\bin\Excel.pdb
+C:\inetpub\wwwroot\Alvo\Alvo\obj\Debug\Alvo.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\Alvo\Alvo\obj\Debug\Alvo.dll
 C:\inetpub\wwwroot\Alvo\Alvo\obj\Debug\Alvo.pdb

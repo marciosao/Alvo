@@ -2,7 +2,7 @@
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 @Html.ValidationMessage("Sucesso", new { @class = "text-success" })
 @Html.ValidationMessage("Error", new { @class = "text-danger" })
-<table class="table questoes" style="width:100%">
+<table class="table questoes" style="width:100%" id="tblQuestoesAvaliacao">
 @{
     int? lIdEtapaAtual = 0;
     int? lIdCategoriaAtual = 0;
@@ -171,7 +171,7 @@
                     <input type="hidden" id="TotalGeralPontosParcial" value=@lTotalGeralPontosParcial />
                 if (Model.Questao[i].IdEtapa != 3 && lIdSituacaoAvaliacao != 3)
                 {
-                    <tr name="QuestaoQuestionario" idquestao="@Model.Questao[i].Id" valorMaximo="@Model.Questao[i].ValorBarema">
+                    <tr name="QuestaoQuestionario" idquestao="@Model.Questao[i].Id" valorMaximo="@Model.Questao[i].ValorBarema" data-questao="">
                         <td style="font-size:small;height:auto">
                             @Html.DisplayFor(modelItem => Model.Questao[i].Descricao)
                         </td>
@@ -192,12 +192,12 @@
                                     if (lUsuario.Perfil.Id != (int)Dominio.Enums.Perfil.Secretaria && lUsuario.Perfil.Id != (int)Dominio.Enums.Perfil.Administrador)
                                     {
                                         @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })*@
-                                        @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")" } })
+                                        @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
                                     }
                                     else
                                     {
                                         @*@Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })*@
-                                        @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
+                                        @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = "form-control", @style = "text-align:right;font-size:medium;;background-color:#eeeeee;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")", @readonly = "readonly" } })
                                     }
                                 }
                             }
@@ -243,7 +243,7 @@
                             {
                                 if (Model.Questao[i].RespostaQuestao != null && Model.Questao[i].RespostaQuestao.Count > 0)
                                 {
-                                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")" } })
+                                    @Html.EditorFor(model => model.Questao[i].RespostaQuestao[0].ValorResposta, new { htmlAttributes = new { @class = lClassEtapa31, @style = "text-align:right;font-size:medium;width:60px", @Id = "txtNota-" + @Model.Questao[i].Id, @onkeyup = "AoDigitarNota(" + @Model.Questao[i].Id + ")", @onchange = "AoSairNota(" + @Model.Questao[i].Id + ")" } })
                                 }
                             }
 

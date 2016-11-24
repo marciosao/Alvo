@@ -159,7 +159,7 @@ namespace Alvo.Controllers
             var candidatoProcessoSeletivo = _candidatoProcessoSeletivoAppServico.ObtemPorId(id);
             var candidatoProcessoSeletivoViewModel = Mapper.Map<CandidatoProcessoSeletivo, CandidatoProcessoSeletivoViewModel>(candidatoProcessoSeletivo);
 
-            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome", (candidatoProcessoSeletivo.Avaliacao.FirstOrDefault().IdProfessor!=null)?candidatoProcessoSeletivo.Avaliacao.FirstOrDefault().IdProfessor:0);//Usuario com perfil de Professor
+            ViewBag.IdProfessor = new SelectList(_usuarioAppServico.ObtemUsuariosProfessores(), "Id", "Nome", (candidatoProcessoSeletivo.Avaliacao.FirstOrDefault().IdProfessor != null) ? candidatoProcessoSeletivo.Avaliacao.FirstOrDefault().IdProfessor : 0);//Usuario com perfil de Professor
 
             return View(candidatoProcessoSeletivoViewModel);
         }
@@ -267,7 +267,9 @@ namespace Alvo.Controllers
 
             ViewBag.IdSituacaoAvaliacao = lAvaliacao.SituacaoAvaliacao.Id;
             ViewBag.lParecerAvaliador = lAvaliacao.ParecerAvaliador;
-            ViewBag.ValorNota = 7; // Obter o cálculo da nota Parcial aqui //---------------------------------------------------------------------------
+
+            ViewBag.IdMediaParcial = _avaliacaoAppServico.CalculoMedias(lAvaliacao, "P");
+            ViewBag.IdMediaFinal = _avaliacaoAppServico.CalculoMedias(lAvaliacao, "F");
 
             var lQuestionario = Mapper.Map<Questionario, QuestionarioViewModel>(_questionarioAppServico.ObtemQuestionarioPorCandidatoProcesso(id));
 
@@ -353,10 +355,15 @@ namespace Alvo.Controllers
         [HttpPost]
         public ActionResult Avaliacao(AvaliacaoViewModel pAvaliacaoViewModel, FormCollection form)
         {
+            ////////if (Request.Form["btnConfirmar"] != null)
+            ////////{
+            ////////    string teste = "ghfghdfg";
+            ////////}
+
             Avaliacao lAvaliacao = new Avaliacao();
 
             lAvaliacao.Id = pAvaliacaoViewModel.Id;
-            if ((!string.IsNullOrEmpty(pAvaliacaoViewModel.ParecerAvaliador) && pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor)|| pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII)
+            if ((!string.IsNullOrEmpty(pAvaliacaoViewModel.ParecerAvaliador) && pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor) || pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII)
             {
                 lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
                 //}
@@ -395,15 +402,86 @@ namespace Alvo.Controllers
                     }
                 }
 
-                _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
+            ////////    _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
 
-                return RedirectToAction("Index");
+                if (Request.Form["btnConfirmar"] != null)
+                {
+                    _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao,false);
+                    return RedirectToAction("Avaliacao/" + lAvaliacao.Id, "Avaliacao");
+                }
+                else if (Request.Form["btnFinalizar"] != null)
+                {
+                    _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao, true);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+
+                ////////return RedirectToAction("Index");
                 //.Mensagem("Candidatos Importados com Sucesso.")
             }
             else
             {
                 return RedirectToAction("Avaliacao", "Avaliacao").Mensagem("Caro Professor, o Parecer do Avaliador é obrigatório.");
                 //return View().Mensagem("Caro Professor, o Parecer do Avaliador é obrigatório.");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmarAvaliacao(AvaliacaoViewModel pAvaliacaoViewModel, FormCollection form)
+        {
+            ////////Avaliacao lAvaliacao = new Avaliacao();
+
+            ////////lAvaliacao.Id = pAvaliacaoViewModel.Id;
+            if ((!string.IsNullOrEmpty(pAvaliacaoViewModel.ParecerAvaliador) && pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor) || pAvaliacaoViewModel.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII)
+            {
+            ////////    lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
+            ////////    //}
+
+            ////////    if (pAvaliacaoViewModel.Questao != null)
+            ////////    {
+            ////////        foreach (var item in pAvaliacaoViewModel.Questao)
+            ////////        {
+            ////////            foreach (var item2 in item.RespostaQuestao)
+            ////////            {
+            ////////                RespostaQuestao lResposta = new RespostaQuestao();
+            ////////                lResposta.Id = item2.Id;
+            ////////                lResposta.IdQuestao = item2.IdQuestao;
+            ////////                lResposta.ValorResposta = item2.ValorResposta;
+
+            ////////                if (item2.IdAvaliacao == lAvaliacao.Id)
+            ////////                {
+            ////////                    lResposta.IdAvaliacao = item2.IdAvaliacao;
+            ////////                }
+            ////////                else
+            ////////                {
+            ////////                    lResposta.IdAvaliacao = lAvaliacao.Id;
+            ////////                }
+
+            ////////                lAvaliacao.RespostaQuestao.Add(lResposta);
+            ////////            }
+            ////////        }
+            ////////    }
+            ////////    else
+            ////////    {
+            ////////        List<RespostaQuestao> lListaRespostaQuestao = RetornaQuestoesEtapaIII(form, lAvaliacao.Id);
+
+            ////////        foreach (var item2 in lListaRespostaQuestao)
+            ////////        {
+            ////////            lAvaliacao.RespostaQuestao.Add(item2);
+            ////////        }
+            ////////    }
+
+            ////////    _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
+
+                this.GravarAvaliacao(pAvaliacaoViewModel, form,false);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Avaliacao", "Avaliacao").Mensagem("Caro Professor, o Parecer do Avaliador é obrigatório.");
             }
         }
 
@@ -483,6 +561,59 @@ namespace Alvo.Controllers
             lListaRespostaQuestao.Add(lRespostaQuestao21);
 
             return lListaRespostaQuestao;
+        }
+
+        private void GravarAvaliacao(AvaliacaoViewModel pAvaliacaoViewModel, FormCollection form, bool pAvaliacaoFinalizada)
+        {
+            Avaliacao lAvaliacao = new Avaliacao();
+
+            lAvaliacao.Id = pAvaliacaoViewModel.Id;
+
+            lAvaliacao.ParecerAvaliador = pAvaliacaoViewModel.ParecerAvaliador.Trim();
+            //}
+
+            if (pAvaliacaoViewModel.Questao != null)
+            {
+                foreach (var item in pAvaliacaoViewModel.Questao)
+                {
+                    foreach (var item2 in item.RespostaQuestao)
+                    {
+                        RespostaQuestao lResposta = new RespostaQuestao();
+                        lResposta.Id = item2.Id;
+                        lResposta.IdQuestao = item2.IdQuestao;
+                        lResposta.ValorResposta = item2.ValorResposta;
+
+                        if (item2.IdAvaliacao == lAvaliacao.Id)
+                        {
+                            lResposta.IdAvaliacao = item2.IdAvaliacao;
+                        }
+                        else
+                        {
+                            lResposta.IdAvaliacao = lAvaliacao.Id;
+                        }
+
+                        lAvaliacao.RespostaQuestao.Add(lResposta);
+                    }
+                }
+            }
+            else
+            {
+                List<RespostaQuestao> lListaRespostaQuestao = RetornaQuestoesEtapaIII(form, lAvaliacao.Id);
+
+                foreach (var item2 in lListaRespostaQuestao)
+                {
+                    lAvaliacao.RespostaQuestao.Add(item2);
+                }
+            }
+
+            if (pAvaliacaoFinalizada)
+            {
+                _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao);
+            }
+            else
+            {
+                _avaliacaoAppServico.GravarRespostasAvaliacao(lAvaliacao,false);
+            }
         }
     }
 }

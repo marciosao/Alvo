@@ -125,6 +125,115 @@ namespace Aplicacao
             _avaliacaoServico.Update(lIdAvaliacao);
         }
 
+        public void GravarRespostasAvaliacao(Avaliacao lAvaliacao, bool pAvaliacaoFinalizada)
+        {
+            var lIdAvaliacao = _avaliacaoServico.ObtemPorId(lAvaliacao.Id);
+            decimal lNotaFinal = 0;
+            decimal lNotaParcial = 0;
+
+            bool lAvavaliacaoConcluida = true;
+
+            foreach (var lRowResposta in lAvaliacao.RespostaQuestao)
+            {
+                if (!string.IsNullOrEmpty(lRowResposta.ValorResposta))
+                {
+                    RespostaQuestao lResposta = _respostaQuestaoServico.ObtemPorQuestaoAvaliacao(lRowResposta.IdQuestao, lRowResposta.IdAvaliacao);
+
+                    if (lResposta == null)
+                    {
+                        lRowResposta.Questao = _questaoServico.ObtemQuestaoPorId(lRowResposta.IdQuestao);
+                    }
+                    else
+                    {
+                        lRowResposta.Questao = lResposta.Questao;
+                    }
+
+                    //descartando a Questão da resposta
+                    lRowResposta.Questao = null;
+
+                    if (lResposta == null || lResposta.Id == 0)
+                    {
+                        _respostaQuestaoServico.Add(lRowResposta);
+                    }
+                    else
+                    {
+                        lResposta.ValorResposta = lRowResposta.ValorResposta;
+                        _respostaQuestaoServico.Update(lResposta);
+                    }
+                }
+                else
+                {
+                    lAvavaliacaoConcluida = false;
+                }
+            }
+
+            lIdAvaliacao.ParecerAvaliador = lAvaliacao.ParecerAvaliador;
+            lIdAvaliacao.DataAvaliacao = DateTime.Now.Date;
+
+            //calculando a média parcial
+            lNotaParcial = this.CalculoMedias(lAvaliacao, "P");
+            lIdAvaliacao.NotaParcial = lNotaParcial;
+
+            //calculando a Média final
+            lNotaFinal = this.CalculoMedias(lAvaliacao, "F");
+
+            //Definindo a próxima Situação
+            if (lIdAvaliacao.SituacaoAvaliacao.Id == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIISecretaria)
+            {
+                lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor;
+            }
+            else if (lIdAvaliacao.SituacaoAvaliacao.Id == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor)
+            {
+                //Se for a avaliação do professor e o candidato não obteve a média suficiente para a entrevista, que é maior ou igual à 7, 
+                //a avaliação deve ser concluída e o candidato estará reprovado. Caso contrário o candidato passará pela próxima etapa que é a entrevista
+                if (lNotaParcial >= 7)
+                {
+                    if (pAvaliacaoFinalizada)
+                    {
+                        lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII;
+                    }
+                }
+                else
+                {
+                    if (pAvaliacaoFinalizada)
+                    {
+                        lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.Concluida;
+                        lIdAvaliacao.Concluida = true;
+                        lIdAvaliacao.Aprovado = false;
+                        lAvavaliacaoConcluida = true;
+                        lIdAvaliacao.NotaFinal = lNotaFinal;
+                    }
+                }
+
+            }
+            else if (lIdAvaliacao.SituacaoAvaliacao.Id == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII)
+            {
+                if (pAvaliacaoFinalizada)
+                {
+                    lIdAvaliacao.IdSituacaoAvaliacao = (int)Dominio.Enums.SiuacaoAvaliacao.Concluida;
+                    lIdAvaliacao.Concluida = true;
+                    lAvavaliacaoConcluida = true;
+                }
+
+                lIdAvaliacao.NotaFinal = lNotaFinal;
+
+                if (lNotaFinal >= 7)
+                {
+                    lIdAvaliacao.Aprovado = true;
+                }
+                else
+                {
+                    lIdAvaliacao.Aprovado = false;
+                }
+            }
+
+            lIdAvaliacao.NotaEntrevista = gTotalEntrevista;
+            lIdAvaliacao.NotaLattes = gTotalCurriculoLattes;
+            lIdAvaliacao.NotaProposta = gTotalPropostaTrabalho;
+
+            _avaliacaoServico.Update(lIdAvaliacao);
+
+        }
         public Avaliacao ObtemAvaliacaoPorCandidatoProcesso(int pCandidatoProcessoSeletivo)
         {
             return _avaliacaoServico.ObtemAvaliacaoPorCandidatoProcesso(pCandidatoProcessoSeletivo);
@@ -135,7 +244,7 @@ namespace Aplicacao
             return _avaliacaoServico.ObtemCandidatosClassificacao(pIdProcessoSeletivo);
         }
 
-        private decimal CalculoMedias(Avaliacao pAvaliacao, string pTipoMedia)
+        public decimal CalculoMedias(Avaliacao pAvaliacao, string pTipoMedia)
         {
             decimal lResultado = 0;
 

@@ -13,13 +13,14 @@
     @Html.AntiForgeryToken()
 
     <fieldset id="DadosCandidato">
-        @Html.HiddenFor(model=>model.Id)
+
+        @Html.HiddenFor(model => model.Id, new { @Id="IdAvaliacao",@Name="Id"})
         
-        @Html.HiddenFor(modelItem => Model.IdSituacaoAvaliacao)
+        @Html.HiddenFor(modelItem => Model.IdSituacaoAvaliacao, new { @Id = "IdSituacaoAvaliacao", @Name = "IdSituacaoAvaliacao" })
 
         @if (!string.IsNullOrEmpty(lParecerAvaliador))
         { 
-            @Html.HiddenFor(modelItem => Model.ParecerAvaliador)
+            @Html.HiddenFor(modelItem => Model.ParecerAvaliador, new { @Id = "ParecerAvaliador", @Name = "ParecerAvaliador" })
         }
         <legend>Dados do Candidato</legend>
         <div class="row">
@@ -117,16 +118,43 @@
         <legend>Questionário</legend>
         @Html.Partial("_Questoes", Model.Questionario)
     </fieldset>
+    <hr />
     <div class="row">
-        <div class="col-md-12 col-sm-12">
+        <div class="col-md-3 col-sm-3">
+            <div class="form-group">
+                @Html.Label("Média Parcial: ", htmlAttributes: new { @class = "control-label " }) <label id="IdMediaParcial">@ViewBag.IdMediaParcial</label>
+            </div>
+        </div>
+        @*<div class="col-md-3 col-sm-3">
+            <div class="form-group">
+                @Html.Label("Média Final: ", htmlAttributes: new { @class = "control-label " }) <label id="IdMediaFinal">@ViewBag.IdMediaFinal</label>
+
+            </div>
+        </div>*@
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
             @{
                 if (lUsuario != null && lUsuario.Perfil.Id == (int)Dominio.Enums.Perfil.Professor)
                 { 
-                    <input type="submit" value="Confirmar" class="btn btn-primary" />
+                    @*<input type="submit" value="Confirmar" class="btn btn-primary" />*@
+                @*@Html.ActionLink("Confirmar", "ConfirmarAvaliacao", "Avaliacao", null, new { @class = "btn btn-primary", @Id = "btnConfirmar", @onclick = "AoConfirmar()" })*@
+                    @*<input type="button" class="btn btn-primary" id="btnConfirmar" onclick="AoConfirmar()" value="Confirmar::">*@
+    <input type="submit" class="btn btn-primary" id="btnConfirmar" value="Confirmar::" name="btnConfirmar">
                 }
-            }
-            @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
+}
+                @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
         </div>
+        <div class="col-md-4 col-sm-4" style="text-align:right">
+            @{
+    if (lUsuario != null && lUsuario.Perfil.Id == (int)Dominio.Enums.Perfil.Professor)
+    {
+        <input type="submit" value="Finalizar Avaliação" class="btn btn-success" name="btnFinalizar" />
+    }
+            }
+        </div>
+
     </div>
 }
 
@@ -136,57 +164,47 @@
         var lSomatorioNota = 0;
         var lTotalGrupo1 = 0;
         var lTotalGrupo2 = 0;
+        ////////var lTotalGrupo3 = 0;
 
+        var lResultadoParcial = 0;
         var lResultadoFinal = 0;
 
         $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
             if ($(element).hasClass('questao')) {
+
+                
+
                 var lIdGrupo = $(element).attr('data-id-grupo');
 
                 var elFilho = $(element).children();
 
                 if (elFilho.val() != "") {
+                    var idQ = $(this).parent().attr('idquestao');
+                    $(this).parent().attr('data-questao', idQ + '-' + elFilho.val());
+
                     if (lIdGrupo == 1 || lIdGrupo == 2) {
 
                         if (lIdGrupo == 1) {
+                            $(element).attr('data-questao', elFilho.val());
                             lTotalGrupo1 += parseFloat(elFilho.val());
                         } else if (lIdGrupo == 2) {
                             lTotalGrupo2 += parseFloat(elFilho.val());
                         }
+                        ////////else if (lIdGrupo == 3) {
+                        ////////    lTotalGrupo3 += parseFloat(elFilho.val());
+                        ////////}
 
                         lSomatorioNota += parseFloat(elFilho.val());
 
-                        lResultadoFinal = ((lTotalGrupo1 * 7) + (lTotalGrupo2 * 3)) / 10;
+                        lResultadoParcial = ((lTotalGrupo1 * 7) + (lTotalGrupo2 * 3)) / 10;
+                        ////////lResultadoFinal = ((lTotalGrupo3 * 5) + (lTotalGrupo1 * 3) + (lTotalGrupo2 * 2)) / 10;
+
+                        $('#IdMediaParcial').text(lResultadoParcial);
+                        ////////$('#IdMediaFinal').text(lResultadoFinal);
                     }
                 }
-
-                var lTextEtapa3;
-                if (lResultadoFinal >= 7) {
-                    console.log("Média: " + lResultadoFinal);
-                    
-                    $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
-
-                        lTextEtapa3 = $(element).children();
-
-                        if (lTextEtapa3.hasClass('questaoEtapa31')) {
-                            lTextEtapa3.removeAttr('disabled');
-                        }
-                    });
-                } else{
-                    $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
-                        lTextEtapa3 = $(element).children();
-                        if (lTextEtapa3.hasClass('questaoEtapa31')) {
-
-                            $(element).val('');
-                            lTextEtapa3.attr('disabled', 'disabled');
-                        }
-                    })
-                }
-
             }
         });
-
-        // $(element).attr('disabled',false)
 
         $('#txtResultadoParcial').val(lSomatorioNota);
     }
@@ -212,6 +230,28 @@
                             //return false;
                         }
                     }
+    }
+
+    function AoConfirmar() {
+        ////////pAvaliacaoViewModel.Id;
+        ////////pAvaliacaoViewModel.ParecerAvaliador
+        ////////pAvaliacaoViewModel.IdSituacaoAvaliacao
+        var Id = $('#Id').val();
+        var ParecerAvaliador = $('#IdSituacaoAvaliacao').val();
+        var IdSituacaoAvaliacao = $('#ParecerAvaliador').val();
+
+        $("#tblQuestoesAvaliacao tr[data-questao]").each(function (index) {
+            
+            var lQuestao = $(this).data("questao").split("-");
+            var lIdQuestao = lQuestao[0];
+            var lValorResposta = lQuestao[1];
+
+            $('form').append("<input type='hidden' name='Questao[" + index + "].RespostaQuestao[0].IdQuestao' value='" + lIdQuestao + "' />");
+            $('form').append("<input type='hidden' name='Questao[" + index + "].RespostaQuestao[0].ValorResposta' value='" + lValorResposta + "' />");
+        });
+
+        $('form').attr('action', 'ConfirmarAvaliacao');
+        $('form').submit();
     }
 
 </script>
