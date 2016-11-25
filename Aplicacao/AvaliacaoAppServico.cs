@@ -261,17 +261,17 @@ namespace Aplicacao
                     if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 1)//Grupo Proposta de Trabalho
                     {
                         lTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
-                        gTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
+                        //gTotalPropostaTrabalho += decimal.Parse(lRowResposta.ValorResposta);
                     }
                     else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 2)//Grupo Avaliação Curriculo Lates
                     {
                         lTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
-                        gTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
+                        //gTotalCurriculoLattes += decimal.Parse(lRowResposta.ValorResposta);
                     }
                     else if (lRowResposta.Questao.CategoriaQuestao.IdGrupoQuestao == 3)//Grupo Entrevista
                     {
                         lTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
-                        gTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
+                        //gTotalEntrevista += decimal.Parse(lRowResposta.ValorResposta);
                     }
                 }
             }
@@ -284,6 +284,10 @@ namespace Aplicacao
             {
                 lResultado = ((lTotalEntrevista * 5) + (lTotalPropostaTrabalho * 3) + (lTotalCurriculoLattes * 2)) / 10;
             }
+
+            gTotalPropostaTrabalho = lTotalPropostaTrabalho;
+            gTotalCurriculoLattes = lTotalCurriculoLattes;
+            gTotalEntrevista = lTotalEntrevista;
 
             return lResultado;
         }

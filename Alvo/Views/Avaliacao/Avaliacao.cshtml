@@ -95,23 +95,66 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-2">
-                @Html.Label("Nota Parcial", htmlAttributes: new { @class = "control-label " })
-                <div class="form-group">
-                    <div>
-                        @Html.DisplayFor(model => model.NotaParcial)
+            @*<div class="col-md-2 col-sm-2">
+                    @Html.Label("Nota Parcial", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.NotaParcial)
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-2">
-                @Html.Label("Nota Final", htmlAttributes: new { @class = "control-label " })
-                <div class="form-group">
-                    <div>
-                        @Html.DisplayFor(model => model.NotaFinal)
+                <div class="col-md-2 col-sm-2">
+                    @Html.Label("Nota Final", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.NotaFinal)
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>*@
         </div>
+        <hr />
+        <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    @Html.Label("Proposta de Trabalho", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.NotaProposta)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    @Html.Label("Currículo Lattes", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.NotaLattes)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    @Html.Label("Entrevista", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.NotaEntrevista)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    @Html.Label("Nota Parcial", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.NotaParcial)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2">
+                    @Html.Label("Nota Final", htmlAttributes: new { @class = "control-label " })
+                    <div class="form-group">
+                        <div>
+                            @Html.DisplayFor(model => model.NotaFinal)
+                        </div>
+                    </div>
+                </div>
+            </div>
     </fieldset>
 
     <fieldset id="DadosQuestionario">
@@ -119,39 +162,47 @@
         @Html.Partial("_Questoes", Model.Questionario)
     </fieldset>
     <hr />
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-3 col-sm-3">
             <div class="form-group">
                 @Html.Label("Média Parcial: ", htmlAttributes: new { @class = "control-label " }) <label id="IdMediaParcial">@ViewBag.IdMediaParcial</label>
             </div>
         </div>
-        @*<div class="col-md-3 col-sm-3">
+        <div class="col-md-3 col-sm-3">
             <div class="form-group">
                 @Html.Label("Média Final: ", htmlAttributes: new { @class = "control-label " }) <label id="IdMediaFinal">@ViewBag.IdMediaFinal</label>
 
             </div>
-        </div>*@
+        </div>
     </div>
-    <hr />
+    <hr />*@
     <div class="row">
         <div class="col-md-8 col-sm-8">
             @{
                 if (lUsuario != null && lUsuario.Perfil.Id == (int)Dominio.Enums.Perfil.Professor)
                 { 
-                    @*<input type="submit" value="Confirmar" class="btn btn-primary" />*@
-                @*@Html.ActionLink("Confirmar", "ConfirmarAvaliacao", "Avaliacao", null, new { @class = "btn btn-primary", @Id = "btnConfirmar", @onclick = "AoConfirmar()" })*@
-                    @*<input type="button" class="btn btn-primary" id="btnConfirmar" onclick="AoConfirmar()" value="Confirmar::">*@
-    <input type="submit" class="btn btn-primary" id="btnConfirmar" value="Confirmar::" name="btnConfirmar">
+                        <input type="submit" class="btn btn-primary" id="btnConfirmar" value="Confirmar" name="btnConfirmar">
                 }
-}
+            }
                 @Html.ActionLink("Voltar", "Index", "", new { @class = "btn btn-primary" })
         </div>
         <div class="col-md-4 col-sm-4" style="text-align:right">
             @{
-    if (lUsuario != null && lUsuario.Perfil.Id == (int)Dominio.Enums.Perfil.Professor)
-    {
-        <input type="submit" value="Finalizar Avaliação" class="btn btn-success" name="btnFinalizar" />
-    }
+                //var lTextoBotao = string.Empty;
+                if (lUsuario != null && lUsuario.Perfil.Id == (int)Dominio.Enums.Perfil.Professor)
+                {
+                    if (Model.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIIProfessor)
+                    {
+                        //lTextoBotao = "Finalizar Etapa";
+                        <input type="submit" value="Finalizar Etapa" class="btn btn-success" name="btnFinalizar" />
+                    }
+                    else if (Model.IdSituacaoAvaliacao == (int)Dominio.Enums.SiuacaoAvaliacao.PendenteEtapaIII)
+                    {
+                        //lTextoBotao = "Finalizar Avaliação";
+                        <input type="submit" value="Finalizar Avaliação" class="btn btn-success" name="btnFinalizar" />
+                    }
+                    @*<input type="submit" value=@lTextoBotao class="btn btn-success" name="btnFinalizar" />*@
+                }
             }
         </div>
 
@@ -171,8 +222,6 @@
 
         $("tr[name='QuestaoQuestionario'] td").each(function (index, element) {
             if ($(element).hasClass('questao')) {
-
-                
 
                 var lIdGrupo = $(element).attr('data-id-grupo');
 
@@ -199,7 +248,7 @@
                         lResultadoParcial = ((lTotalGrupo1 * 7) + (lTotalGrupo2 * 3)) / 10;
                         ////////lResultadoFinal = ((lTotalGrupo3 * 5) + (lTotalGrupo1 * 3) + (lTotalGrupo2 * 2)) / 10;
 
-                        $('#IdMediaParcial').text(lResultadoParcial);
+                        ////////$('#IdMediaParcial').text(lResultadoParcial);
                         ////////$('#IdMediaFinal').text(lResultadoFinal);
                     }
                 }
@@ -233,9 +282,6 @@
     }
 
     function AoConfirmar() {
-        ////////pAvaliacaoViewModel.Id;
-        ////////pAvaliacaoViewModel.ParecerAvaliador
-        ////////pAvaliacaoViewModel.IdSituacaoAvaliacao
         var Id = $('#Id').val();
         var ParecerAvaliador = $('#IdSituacaoAvaliacao').val();
         var IdSituacaoAvaliacao = $('#ParecerAvaliador').val();

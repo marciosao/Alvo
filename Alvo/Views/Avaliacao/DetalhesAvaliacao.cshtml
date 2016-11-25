@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-2">
+            @*<div class="col-md-2 col-sm-2">
                 @Html.Label("Nota Parcial", htmlAttributes: new { @class = "control-label " })
                 <div class="form-group">
                     <div>
@@ -82,7 +82,7 @@
                         @Html.DisplayFor(model => model.NotaFinal)
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="col-md-2 col-sm-2">
                 @Html.Label("Situação", htmlAttributes: new { @class = "control-label " })
                 <div class="form-group">
@@ -96,6 +96,49 @@
                 <div class="form-group">
                     <div>
                         @Html.DisplayFor(model => model.Resultado)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                @Html.Label("Proposta de Trabalho", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaProposta)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Currículo Lattes", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaLattes)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Entrevista", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaEntrevista)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Nota Parcial", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaParcial)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                @Html.Label("Nota Final", htmlAttributes: new { @class = "control-label " })
+                <div class="form-group">
+                    <div>
+                        @Html.DisplayFor(model => model.NotaFinal)
                     </div>
                 </div>
             </div>
